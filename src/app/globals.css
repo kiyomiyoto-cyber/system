@@ -2,46 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Google Fonts ─────────────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cairo:wght@400;500;600;700&display=swap');
+/* ── Google Fonts: Plus Jakarta Sans (LTR) + Cairo (RTL) ──────────── */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 222.2 47% 11.2%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 222.2 47% 11.2%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 222.2 47% 11.2%;
+
+    /* Tracking blue #2563EB */
     --primary: 221.2 83.2% 53.3%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 214 100% 97%;
+    --secondary-foreground: 221.2 70% 26%;
+
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --accent: 214 100% 97%;
+    --accent-foreground: 221.2 70% 26%;
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
+
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
-    --sidebar: 220 14% 96%;
-    --sidebar-foreground: 222.2 84% 4.9%;
-    --sidebar-border: 214.3 31.8% 91.4%;
-    --sidebar-accent: 210 40% 92%;
-    --sidebar-accent-foreground: 222.2 47.4% 11.2%;
-    --font-inter: 'Inter', system-ui, sans-serif;
+    --radius: 0.75rem;
+
+    /* Delivery orange #F97316 — used for CTAs */
+    --cta: 21 90% 54%;
+    --cta-foreground: 0 0% 100%;
+
+    /* Brand tints for surfaces */
+    --brand-50: 214 100% 97%;
+    --brand-100: 214 95% 93%;
+
+    --sidebar: 214 100% 97%;
+    --sidebar-foreground: 221.2 70% 26%;
+    --sidebar-border: 214 60% 88%;
+    --sidebar-accent: 214 95% 93%;
+    --sidebar-accent-foreground: 221.2 83.2% 53.3%;
+
+    --font-jakarta: 'Plus Jakarta Sans', system-ui, sans-serif;
     --font-cairo: 'Cairo', system-ui, sans-serif;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 222.2 47% 8%;
     --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
+    --card: 222.2 47% 10%;
     --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
+    --popover: 222.2 47% 10%;
     --popover-foreground: 210 40% 98%;
     --primary: 217.2 91.2% 59.8%;
     --primary-foreground: 222.2 47.4% 11.2%;
@@ -56,7 +73,11 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 224.3 76.3% 48%;
-    --sidebar: 222.2 47.4% 11.2%;
+    --cta: 21 90% 54%;
+    --cta-foreground: 0 0% 100%;
+    --brand-50: 222.2 47% 12%;
+    --brand-100: 222.2 47% 16%;
+    --sidebar: 222.2 47% 10%;
     --sidebar-foreground: 210 40% 98%;
     --sidebar-border: 217.2 32.6% 17.5%;
     --sidebar-accent: 217.2 32.6% 20%;
@@ -76,8 +97,8 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-inter);
-    font-feature-settings: 'rlig' 1, 'calt' 1;
+    font-family: var(--font-jakarta);
+    font-feature-settings: 'rlig' 1, 'calt' 1, 'ss01' 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -90,17 +111,29 @@
 
   /* ── Scrollbar styling ────────────────────────────────────────── */
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-muted;
+    @apply bg-transparent;
   }
   ::-webkit-scrollbar-thumb {
     @apply bg-border rounded-full;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-muted-foreground;
+    @apply bg-muted-foreground/50;
+  }
+
+  /* ── Respect reduced motion ───────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
@@ -122,7 +155,22 @@
     min-height: 100svh;
   }
 
-  /* Status colors */
+  /* Delivery-orange CTA helper */
+  .btn-cta {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+    background-color: hsl(var(--cta));
+    color: hsl(var(--cta-foreground));
+  }
+  .btn-cta:hover {
+    background-color: hsl(var(--cta) / 0.92);
+  }
+
+  /* Soft brand surface */
+  .surface-brand {
+    background-color: hsl(var(--brand-50));
+  }
+
+  /* Status colors — shipment */
   .status-created { @apply bg-slate-100 text-slate-700; }
   .status-assigned { @apply bg-blue-100 text-blue-700; }
   .status-picked-up { @apply bg-indigo-100 text-indigo-700; }
@@ -138,4 +186,25 @@
   .invoice-paid { @apply bg-green-100 text-green-700; }
   .invoice-overdue { @apply bg-red-100 text-red-700; }
   .invoice-cancelled { @apply bg-gray-100 text-gray-500; }
+
+  /* Focus ring consistency */
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  }
+
+  /* Subtle in-motion bg for live indicators */
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .animate-shimmer {
+    background: linear-gradient(
+      110deg,
+      hsl(var(--muted)) 20%,
+      hsl(var(--border)) 40%,
+      hsl(var(--muted)) 60%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.6s linear infinite;
+  }
 }

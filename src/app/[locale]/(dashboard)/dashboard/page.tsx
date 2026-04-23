@@ -1,8 +1,7 @@
-import { Suspense } from 'react'
 import { getTranslations } from 'next-intl/server'
 import {
   Package, Truck, TrendingUp, DollarSign,
-  Clock, AlertTriangle, Plus, ArrowRight,
+  AlertTriangle, Plus, ArrowRight,
 } from 'lucide-react'
 import Link from 'next/link'
 import { getLocale } from 'next-intl/server'
@@ -11,12 +10,13 @@ import { getAuthenticatedUser } from '@/actions/auth'
 import { PageHeader } from '@/components/shared/page-header'
 import { KPICard } from '@/components/shared/kpi-card'
 import { ShipmentStatusBadge } from '@/components/shared/shipment-status-badge'
-import { formatMAD, formatDate, formatRelativeTime } from '@/lib/utils/formatters'
+import { Stagger, StaggerItem } from '@/components/motion/stagger'
+import { FadeIn } from '@/components/motion/fade-in'
+import { formatMAD } from '@/lib/utils/formatters'
 import type { ShipmentStatus } from '@/types/database.types'
 
 export default async function DashboardPage() {
-  const [t, tShipments, tDash, locale, user, supabase] = await Promise.all([
-    getTranslations('common'),
+  const [tShipments, tDash, locale, user, supabase] = await Promise.all([
     getTranslations('shipments'),
     getTranslations('dashboard'),
     getLocale(),
@@ -26,14 +26,12 @@ export default async function DashboardPage() {
 
   if (!user?.companyId) return null
 
-  // Fetch KPIs from view
   const { data: kpis } = await supabase
     .from('v_shipment_kpis')
     .select('*')
     .eq('company_id', user.companyId)
     .single()
 
-  // Fetch recent active shipments
   const { data: activeShipments } = await supabase
     .from('shipments')
     .select(`
@@ -48,7 +46,6 @@ export default async function DashboardPage() {
     .order('created_at', { ascending: false })
     .limit(8)
 
-  // Fetch overdue invoices count
   const { data: overdueInvoices } = await supabase
     .from('v_overdue_invoices')
     .select('id, invoice_number, client_name, balance_due, days_overdue')
@@ -67,7 +64,7 @@ export default async function DashboardPage() {
         action={
           <Link
             href={`/${locale}/shipments/new`}
-            className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow transition-colors hover:bg-primary/90"
+            className="btn-cta focus-ring"
           >
             <Plus className="h-4 w-4" />
             {tDash('newShipment')}
@@ -75,48 +72,60 @@ export default async function DashboardPage() {
         }
       />
 
-      {/* KPI Grid */}
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <KPICard
-          title={tDash('shipmentsToday')}
-          value={kpis?.shipments_today ?? 0}
-          subtitle={`${kpis?.shipments_this_week ?? 0} ${tDash('shipmentsThisWeek').toLowerCase()}`}
-          icon={Package}
-        />
-        <KPICard
-          title={tDash('activeShipments')}
-          value={kpis?.active_shipments ?? 0}
-          subtitle={`${kpis?.delivered_this_month ?? 0} ${tDash('deliveredThisMonth').toLowerCase()}`}
-          icon={Truck}
-          iconColor="text-blue-600"
-        />
-        <KPICard
-          title={tDash('onTimeRate')}
-          value={onTimeRate}
-          subtitle={tDash('shipmentsThisMonth')}
-          icon={TrendingUp}
-          iconColor="text-green-600"
-        />
-        <KPICard
-          title={tDash('revenueThisMonth')}
-          value={formatMAD(kpis?.revenue_this_month ?? 0)}
-          icon={DollarSign}
-          iconColor="text-emerald-600"
-        />
-      </div>
+      {/* KPI Grid — staggered entrance */}
+      <Stagger className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4" delayChildren={0.08}>
+        <StaggerItem>
+          <KPICard
+            title={tDash('shipmentsToday')}
+            value={kpis?.shipments_today ?? 0}
+            subtitle={`${kpis?.shipments_this_week ?? 0} ${tDash('shipmentsThisWeek').toLowerCase()}`}
+            icon={Package}
+          />
+        </StaggerItem>
+        <StaggerItem>
+          <KPICard
+            title={tDash('activeShipments')}
+            value={kpis?.active_shipments ?? 0}
+            subtitle={`${kpis?.delivered_this_month ?? 0} ${tDash('deliveredThisMonth').toLowerCase()}`}
+            icon={Truck}
+            iconColor="text-blue-600"
+            iconBg="bg-blue-100"
+          />
+        </StaggerItem>
+        <StaggerItem>
+          <KPICard
+            title={tDash('onTimeRate')}
+            value={onTimeRate}
+            subtitle={tDash('shipmentsThisMonth')}
+            icon={TrendingUp}
+            iconColor="text-green-600"
+            iconBg="bg-green-100"
+          />
+        </StaggerItem>
+        <StaggerItem>
+          <KPICard
+            title={tDash('revenueThisMonth')}
+            value={formatMAD(kpis?.revenue_this_month ?? 0)}
+            icon={DollarSign}
+            iconColor="text-[hsl(var(--cta))]"
+            iconBg="bg-[hsl(var(--cta))]/10"
+          />
+        </StaggerItem>
+      </Stagger>
 
       {/* Main content grid */}
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Active shipments table */}
-        <div className="lg:col-span-2">
-          <div className="rounded-xl border bg-card shadow-sm">
+        <FadeIn delay={0.2} className="lg:col-span-2">
+          <div className="rounded-xl border bg-card shadow-soft">
             <div className="flex items-center justify-between border-b px-5 py-4">
               <h2 className="font-semibold text-foreground">{tDash('recentShipments')}</h2>
               <Link
                 href={`/${locale}/shipments`}
-                className="flex items-center gap-1 text-sm text-primary hover:underline"
+                className="group inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
               >
-                {tDash('viewAll')} <ArrowRight className="h-3.5 w-3.5" />
+                {tDash('viewAll')}
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </div>
             <div className="overflow-x-auto">
@@ -124,15 +133,23 @@ export default async function DashboardPage() {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b bg-muted/40">
-                      <th className="px-4 py-3 text-start font-medium text-muted-foreground">{tShipments('reference')}</th>
-                      <th className="px-4 py-3 text-start font-medium text-muted-foreground">{tShipments('client')}</th>
-                      <th className="px-4 py-3 text-start font-medium text-muted-foreground">Trajet</th>
-                      <th className="px-4 py-3 text-start font-medium text-muted-foreground">{tShipments('status.label')}</th>
+                      <th className="px-4 py-3 text-start text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        {tShipments('reference')}
+                      </th>
+                      <th className="px-4 py-3 text-start text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        {tShipments('client')}
+                      </th>
+                      <th className="px-4 py-3 text-start text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Trajet
+                      </th>
+                      <th className="px-4 py-3 text-start text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        {tShipments('status.label')}
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y">
                     {activeShipments.map((s) => (
-                      <tr key={s.id} className="hover:bg-muted/30 transition-colors">
+                      <tr key={s.id} className="transition-colors hover:bg-muted/30">
                         <td className="px-4 py-3">
                           <Link
                             href={`/${locale}/shipments/${s.id}`}
@@ -145,7 +162,11 @@ export default async function DashboardPage() {
                           {(s.client as { business_name: string } | null)?.business_name ?? '—'}
                         </td>
                         <td className="px-4 py-3 text-sm text-muted-foreground">
-                          {s.pickup_city} → {s.delivery_city}
+                          <span className="inline-flex items-center gap-1.5">
+                            {s.pickup_city}
+                            <ArrowRight className="h-3 w-3 text-muted-foreground/60" />
+                            {s.delivery_city}
+                          </span>
                         </td>
                         <td className="px-4 py-3">
                           <ShipmentStatusBadge status={s.status as ShipmentStatus} size="sm" />
@@ -156,17 +177,19 @@ export default async function DashboardPage() {
                 </table>
               ) : (
                 <div className="flex flex-col items-center justify-center py-12 text-center">
-                  <Package className="mb-3 h-10 w-10 text-muted-foreground/40" />
+                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-muted">
+                    <Package className="h-5 w-5 text-muted-foreground" />
+                  </div>
                   <p className="text-sm text-muted-foreground">Aucune expédition en cours</p>
                 </div>
               )}
             </div>
           </div>
-        </div>
+        </FadeIn>
 
         {/* Overdue invoices */}
-        <div>
-          <div className="rounded-xl border bg-card shadow-sm">
+        <FadeIn delay={0.28}>
+          <div className="rounded-xl border bg-card shadow-soft">
             <div className="flex items-center gap-2 border-b px-5 py-4">
               <AlertTriangle className="h-4 w-4 text-amber-500" />
               <h2 className="font-semibold text-foreground">{tDash('overdueInvoices')}</h2>
@@ -182,7 +205,7 @@ export default async function DashboardPage() {
                   <Link
                     key={inv.id}
                     href={`/${locale}/invoices/${inv.id}`}
-                    className="flex items-start justify-between gap-3 px-5 py-3.5 hover:bg-muted/30 transition-colors"
+                    className="flex items-start justify-between gap-3 px-5 py-3.5 transition-colors hover:bg-muted/30"
                   >
                     <div className="min-w-0">
                       <p className="truncate text-sm font-medium text-foreground">
@@ -207,14 +230,15 @@ export default async function DashboardPage() {
               <div className="border-t px-5 py-3">
                 <Link
                   href={`/${locale}/invoices?status=overdue`}
-                  className="flex items-center gap-1 text-sm text-primary hover:underline"
+                  className="group inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
                 >
-                  {tDash('viewAll')} <ArrowRight className="h-3.5 w-3.5" />
+                  {tDash('viewAll')}
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                 </Link>
               </div>
             )}
           </div>
-        </div>
+        </FadeIn>
       </div>
     </div>
   )
