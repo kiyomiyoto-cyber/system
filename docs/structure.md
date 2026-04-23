@@ -1,0 +1,283 @@
+# Next.js Project Structure
+
+Generated for: TMS Logistique  
+Stack: Next.js 14 App Router · TypeScript · Tailwind · shadcn/ui · Supabase · next-intl
+
+```
+tms-logistique/
+│
+├── CLAUDE.md                          # AI assistant project rules (this repo's law)
+│
+├── .env.local                         # Local secrets — never commit
+├── .env.example                       # Template — commit this
+│
+├── next.config.ts
+├── tailwind.config.ts
+├── tsconfig.json                      # strict: true
+├── middleware.ts                      # next-intl routing + Supabase session refresh
+│
+├── supabase/
+│   ├── migrations/
+│   │   └── 20240101000000_initial_schema.sql
+│   ├── seed.sql                       # Dev seed data (company + super_admin user)
+│   └── config.toml                    # supabase CLI config
+│
+├── messages/                          # next-intl translation files (at root for next-intl v3)
+│   ├── fr.json
+│   └── ar.json
+│
+└── src/
+    │
+    ├── middleware.ts                  # (re-exported from root middleware.ts)
+    │
+    ├── i18n/
+    │   ├── config.ts                  # next-intl routing config (locales, defaultLocale)
+    │   └── request.ts                 # getRequestConfig — loads messages per locale
+    │
+    ├── types/
+    │   ├── database.types.ts          # AUTO-GENERATED: supabase gen types typescript --local
+    │   └── app.types.ts               # Hand-written domain types (ShipmentWithRelations, etc.)
+    │
+    ├── store/                         # Zustand (client-only, ephemeral UI state)
+    │   ├── auth-store.ts              # currentUser, companyId, role
+    │   └── ui-store.ts                # sidebar open, active modal, locale
+    │
+    ├── lib/
+    │   │
+    │   ├── supabase/
+    │   │   ├── client.ts              # createBrowserClient() — used in Client Components
+    │   │   ├── server.ts              # createServerClient() — used in Server Components & Actions
+    │   │   └── middleware.ts          # updateSession() — called by root middleware
+    │   │
+    │   ├── pricing/
+    │   │   └── calculator.ts          # lookupRates(), calculatePrice(), formatPriceSnapshot()
+    │   │
+    │   ├── pdf/
+    │   │   ├── invoice-document.tsx   # react-pdf <Document> component
+    │   │   └── generate-invoice.ts    # renderToBuffer() wrapper called by route handler
+    │   │
+    │   ├── notifications/
+    │   │   ├── index.ts               # NotificationService — routes to correct provider
+    │   │   ├── email-provider.ts      # Resend integration
+    │   │   ├── whatsapp-provider.ts   # Stub (logs + returns success until flag enabled)
+    │   │   └── templates/
+    │   │       ├── shipment-assigned.ts
+    │   │       ├── shipment-delivered.ts
+    │   │       ├── invoice-issued.ts
+    │   │       └── invoice-overdue.ts
+    │   │
+    │   ├── mapbox/
+    │   │   ├── geocoding.ts           # forwardGeocode(address): {lat, lng, formatted}
+    │   │   └── directions.ts          # getRouteDistance(from, to): {distance_km, duration_min}
+    │   │
+    │   └── utils/
+    │       ├── formatters.ts          # formatMAD(), formatDate(), formatDistance()
+    │       ├── validators.ts          # shared zod schemas (PhoneSchema, CINSchema, etc.)
+    │       └── logger.ts              # structured server-side logger (no PII)
+    │
+    ├── hooks/                         # TanStack Query hooks (Client Components only)
+    │   ├── use-shipments.ts           # useShipments(), useShipment(id), useShipmentKPIs()
+    │   ├── use-drivers.ts             # useDrivers(), useDriver(id), useDriverCurrentVehicle()
+    │   ├── use-clients.ts             # useClients(), useClient(id)
+    │   ├── use-vehicles.ts            # useVehicles(), useVehicle(id)
+    │   ├── use-invoices.ts            # useInvoices(), useInvoice(id), useOverdueInvoices()
+    │   └── use-realtime-shipments.ts  # Supabase Realtime subscription hook
+    │
+    ├── actions/                       # Next.js Server Actions (mutations only)
+    │   ├── auth.ts                    # signIn(), signOut(), getAuthenticatedUser()
+    │   ├── shipments.ts               # createShipment(), updateShipmentStatus(), assignDriver()
+    │   ├── drivers.ts                 # createDriver(), updateDriver(), toggleAvailability()
+    │   ├── clients.ts                 # createClient(), updateClient(), deactivateClient()
+    │   ├── vehicles.ts                # createVehicle(), assignVehicle(), updateVehicle()
+    │   ├── invoices.ts                # generateInvoice(), recordPayment(), generateMonthlyInvoices()
+    │   ├── pricing.ts                 # updatePricingDefaults(), createPricingContract()
+    │   ├── documents.ts               # uploadPODPhoto(), uploadSignature(), getSignedUrl()
+    │   └── notifications.ts           # sendNotification() — internal, called by other actions
+    │
+    ├── components/
+    │   │
+    │   ├── ui/                        # shadcn/ui components — DO NOT MODIFY
+    │   │   ├── button.tsx             # (generated by: npx shadcn@latest add button)
+    │   │   ├── input.tsx
+    │   │   ├── dialog.tsx
+    │   │   └── ...
+    │   │
+    │   ├── forms/                     # react-hook-form + zod forms
+    │   │   ├── shipment-form.tsx      # Create/edit shipment (dispatcher)
+    │   │   ├── client-form.tsx
+    │   │   ├── driver-form.tsx
+    │   │   ├── vehicle-form.tsx
+    │   │   ├── pricing-contract-form.tsx
+    │   │   ├── payment-form.tsx       # Record a payment against an invoice
+    │   │   └── pod-capture-form.tsx   # Driver: photo + signature upload
+    │   │
+    │   ├── maps/
+    │   │   ├── route-map.tsx          # Mapbox GL: shows pickup→delivery route
+    │   │   ├── geocoder-input.tsx     # Address input with autocomplete + lat/lng resolution
+    │   │   └── driver-location-pin.tsx
+    │   │
+    │   ├── tables/                    # TanStack Table wrappers
+    │   │   ├── shipments-table.tsx
+    │   │   ├── drivers-table.tsx
+    │   │   ├── clients-table.tsx
+    │   │   ├── invoices-table.tsx
+    │   │   └── vehicles-table.tsx
+    │   │
+    │   └── shared/                    # Domain UI components used across route groups
+    │       ├── shipment-status-badge.tsx    # Color-coded status chip (FR + AR labels)
+    │       ├── shipment-timeline.tsx        # Vertical status history list
+    │       ├── kpi-card.tsx                 # Dashboard KPI tile
+    │       ├── overdue-alert-banner.tsx
+    │       ├── vehicle-expiry-alert.tsx
+    │       ├── language-switcher.tsx        # FR ↔ AR toggle (also flips RTL)
+    │       ├── user-nav.tsx                 # Top-right avatar dropdown
+    │       └── page-header.tsx              # Title + breadcrumb + action button
+    │
+    └── app/
+        │
+        ├── globals.css                # Tailwind base + custom CSS variables
+        ├── layout.tsx                 # Root layout (no locale here — handled below)
+        │
+        └── [locale]/                  # next-intl dynamic locale segment
+            │
+            ├── layout.tsx             # Sets <html lang dir> + NextIntlClientProvider
+            │
+            ├── (auth)/                # Public routes — no auth required
+            │   ├── layout.tsx         # Centered card layout, no sidebar
+            │   └── login/
+            │       └── page.tsx       # Email + password login, role-based redirect
+            │
+            ├── (dashboard)/           # Protected: company_admin + dispatcher
+            │   ├── layout.tsx         # Sidebar nav + top bar + auth guard
+            │   │
+            │   ├── dashboard/
+            │   │   └── page.tsx       # KPI cards + active shipments table + charts
+            │   │
+            │   ├── shipments/
+            │   │   ├── page.tsx       # Paginated list with filters (status, date, client, driver)
+            │   │   ├── new/
+            │   │   │   └── page.tsx   # Create shipment form
+            │   │   └── [id]/
+            │   │       ├── page.tsx   # Detail: info + map + status timeline + POD
+            │   │       └── edit/
+            │   │           └── page.tsx
+            │   │
+            │   ├── clients/
+            │   │   ├── page.tsx
+            │   │   ├── new/page.tsx
+            │   │   └── [id]/
+            │   │       ├── page.tsx   # Client detail + shipment history + invoices + pricing contract
+            │   │       └── edit/page.tsx
+            │   │
+            │   ├── drivers/
+            │   │   ├── page.tsx       # Driver list with availability + stats
+            │   │   ├── new/page.tsx
+            │   │   └── [id]/
+            │   │       ├── page.tsx   # Driver profile + performance + assigned vehicle
+            │   │       └── edit/page.tsx
+            │   │
+            │   ├── vehicles/
+            │   │   ├── page.tsx       # Fleet list + expiry alerts
+            │   │   ├── new/page.tsx
+            │   │   └── [id]/
+            │   │       ├── page.tsx
+            │   │       └── edit/page.tsx
+            │   │
+            │   ├── invoices/
+            │   │   ├── page.tsx       # Invoice list with status filter + overdue banner
+            │   │   ├── [id]/
+            │   │   │   └── page.tsx   # Invoice detail + shipment lines + payment history
+            │   │   └── generate/
+            │   │       └── page.tsx   # Manual monthly invoice generation trigger
+            │   │
+            │   ├── reports/
+            │   │   └── page.tsx       # Revenue charts, on-time rate trends (Phase 9)
+            │   │
+            │   └── settings/
+            │       ├── page.tsx       # Company info + feature flags
+            │       ├── pricing/
+            │       │   └── page.tsx   # Default pricing + client contracts
+            │       └── notifications/
+            │           └── page.tsx   # Notification triggers + templates
+            │
+            ├── (driver)/              # Protected: driver role only — mobile-first
+            │   ├── layout.tsx         # Bottom tab nav + auth guard (driver only)
+            │   │
+            │   ├── my-shipments/
+            │   │   └── page.tsx       # List of assigned shipments (today first)
+            │   │
+            │   └── delivery/
+            │       └── [id]/
+            │           ├── page.tsx   # Shipment detail + status update buttons + POD capture
+            │           └── pod/
+            │               └── page.tsx  # Photo upload + signature canvas
+            │
+            └── (client)/              # Protected: client role only — read-only
+                ├── layout.tsx         # Minimal header + auth guard (client only)
+                │
+                ├── shipments/
+                │   ├── page.tsx       # Client's shipment list with status badges
+                │   └── [id]/
+                │       └── page.tsx   # Shipment detail + map + POD photos
+                │
+                └── invoices/
+                    ├── page.tsx       # Invoice list with payment status
+                    └── [id]/
+                        └── page.tsx   # Invoice detail + PDF download button
+
+        api/
+        └── invoices/
+            └── [id]/
+                └── pdf/
+                    └── route.ts       # GET → streams PDF (react-pdf renderToBuffer)
+```
+
+---
+
+## Key File Responsibilities
+
+### `middleware.ts` (root)
+Handles two concerns in order:
+1. `updateSession(request)` — refreshes Supabase auth cookie (prevents logout on page nav)
+2. next-intl locale routing — prepends `/fr` or `/ar` based on cookie/Accept-Language
+
+### `src/lib/supabase/server.ts`
+Creates a Supabase client with `createServerClient()` using Next.js cookies. Used in:
+- Server Components (page.tsx files)
+- Server Actions (`actions/*.ts`)
+- Route Handlers (`api/**`)
+
+The service role client (for admin operations like creating auth users) is a separate
+export: `createServiceClient()` — never imported in client components.
+
+### `src/actions/auth.ts` → `getAuthenticatedUser()`
+The single function all Server Actions call first. Returns `{ user, profile, companyId, role }`.
+Throws a redirect to `/login` if unauthenticated. Returns a 403-equivalent error object
+if the role is insufficient for the requested action.
+
+### `src/lib/pricing/calculator.ts`
+Pure functions — no Supabase calls. Takes rates as input, returns price breakdown.
+The action (`actions/pricing.ts`) fetches the rates; the calculator just computes.
+
+### `messages/fr.json` structure
+```json
+{
+  "nav": { "dashboard": "Tableau de bord", "shipments": "Expéditions", ... },
+  "shipments": {
+    "status": {
+      "created": "Créée",
+      "assigned": "Assignée",
+      "picked_up": "Ramassée",
+      "in_transit": "En transit",
+      "delivered": "Livrée",
+      "cancelled": "Annulée",
+      "failed": "Échouée"
+    },
+    "fields": { "reference": "Référence", "client": "Client", ... }
+  },
+  "invoices": { ... },
+  "drivers": { ... },
+  "errors": { "unauthorized": "Non autorisé", ... }
+}
+```
+`ar.json` mirrors the same key structure with Arabic values.
