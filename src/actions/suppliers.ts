@@ -11,7 +11,7 @@ import type { ActionResult } from '@/types/app.types'
 const READ_ROLES = ['super_admin', 'company_admin', 'dispatcher', 'comptable'] as const
 const WRITE_ROLES = ['super_admin', 'company_admin', 'dispatcher', 'comptable'] as const
 
-export const SUPPLIER_CATEGORIES = [
+const SUPPLIER_CATEGORIES = [
   'fuel',
   'parts',
   'garage',
