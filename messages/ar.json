@@ -1,16 +1,41 @@
 {
   "nav": {
+    "sectionOperations": "العمليات",
+    "sectionCommercial": "التجاري",
+    "sectionResources": "الموارد",
+    "sectionFinance": "المالية",
+    "sectionInsights": "التحليل",
     "dashboard": "لوحة التحكم",
-    "shipments": "الشحنات",
-    "clients": "العملاء",
+    "commandCenter": "مركز القيادة",
+    "shipments": "المهام",
+    "clients": "العملاء الصناعيون",
     "drivers": "السائقون",
     "vehicles": "المركبات",
+    "suppliers": "الموردون",
+    "macaronsPeages": "الملصقات والبوّابات",
     "invoices": "الفواتير",
     "reports": "التقارير",
+    "onboarding": "بدء الاستخدام",
     "settings": "الإعدادات",
     "myShipments": "شحناتي",
     "profile": "ملفي الشخصي",
-    "logout": "تسجيل الخروج"
+    "logout": "تسجيل الخروج",
+    "accounting": "المحاسبة",
+    "contracts": "عقود العملاء",
+    "recurring": "البرنامج الدوري",
+    "subcontracting": "المناولة",
+    "jit": "التسليم المضبوط (JIT)",
+    "freeZones": "المناطق الحرة",
+    "cmr": "بوليصات الشحن الدولية (CMR)",
+    "whatsapp": "واتساب",
+    "inbox": "صندوق الوارد",
+    "presence": "الحضور",
+    "viewAs": "عرض كـ",
+    "viewAsDriver": "عرض كسائق",
+    "viewAsClient": "عرض كعميل",
+    "viewAsDispatcher": "عرض كموزّع",
+    "viewAsComptable": "عرض كمحاسب",
+    "myAccount": "حسابي"
   },
   "common": {
     "save": "حفظ",
@@ -51,17 +76,47 @@
     "loginTitle": "تسجيل الدخول إلى حسابك",
     "loginSubtitle": "أدخل بياناتك للوصول إلى النظام",
     "email": "البريد الإلكتروني",
+    "emailPlaceholder": "name@entreprise.ma",
     "password": "كلمة المرور",
+    "passwordPlaceholder": "أدخل كلمة المرور",
     "showPassword": "إظهار كلمة المرور",
     "hidePassword": "إخفاء كلمة المرور",
     "submit": "تسجيل الدخول",
     "submitting": "جارٍ تسجيل الدخول...",
+    "rememberMe": "تذكّرني",
+    "forgotPassword": "هل نسيت كلمة المرور؟",
     "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
     "accountInactive": "الحساب معطل. تواصل مع المدير.",
-    "loginSuccess": "مرحبًا بك!"
+    "loginSuccess": "مرحبًا بك!",
+    "language": "اللغة",
+    "languageFr": "Français",
+    "languageAr": "العربية",
+    "needHelp": "تحتاج مساعدة؟",
+    "contactSupport": "تواصل مع الدعم",
+    "secureLogin": "اتصال مشفّر TLS",
+    "isoCompliance": "متوافق مع RGPD · مستضاف بالمغرب",
+    "tagline": "منصّة إدارة النقل",
+    "taglineAccent": "مصمَّمة للمغرب.",
+    "heroDescription": "الشحنات، السائقون، العملاء، الفواتير — كل العمليات اللوجستية في أداة واحدة، ثنائية اللغة FR / AR.",
+    "featureRealtimeTitle": "تتبّع لحظي",
+    "featureRealtimeDesc": "موقع مباشر للشحنات والسائقين على الخريطة.",
+    "featureSecureTitle": "أمان متعدد المستأجرين",
+    "featureSecureDesc": "كل ناقل معزول عبر Row-Level Security من Supabase.",
+    "featureBillingTitle": "فوترة آلية",
+    "featureBillingDesc": "إنشاء PDF، تجميع شهري، تذكيرات تلقائية.",
+    "statsShipments": "شحنة / شهر",
+    "statsOnTime": "تسليم في الوقت",
+    "statsCarriers": "ناقل نشط",
+    "trustedBy": "موثوق به من قِبل الناقلين المغاربة",
+    "liveTrackingBadge": "مباشر",
+    "copyrightSuffix": "الدار البيضاء، المغرب"
   },
   "dashboard": {
     "title": "لوحة التحكم",
+    "welcomeMorning": "صباح الخير",
+    "welcomeAfternoon": "مساء الخير",
+    "welcomeEvening": "مساء الخير",
+    "welcomeSubtitle": "هذه نظرة عامة على نشاط اليوم",
     "newShipment": "شحنة جديدة",
     "shipmentsToday": "شحنات اليوم",
     "shipmentsThisWeek": "هذا الأسبوع",
@@ -73,11 +128,91 @@
     "recentShipments": "شحنات حديثة",
     "overdueInvoices": "فواتير متأخرة",
     "noOverdueInvoices": "لا توجد فواتير متأخرة",
-    "viewAll": "عرض الكل"
+    "viewAll": "عرض الكل",
+    "statusBreakdown": "توزيع الشحنات حسب الحالة",
+    "noShipmentsYet": "لا توجد شحنات بعد",
+    "fleetSnapshot": "حالة الأسطول",
+    "driversAvailable": "السائقون المتاحون",
+    "driversBusy": "في مهمة",
+    "vehiclesActive": "المركبات النشطة",
+    "vehiclesInMaintenance": "في الصيانة",
+    "fleetUtilization": "نسبة الاستخدام",
+    "revenueTrend": "تطور الإيرادات",
+    "last7Days": "آخر 7 أيام",
+    "last30Days": "آخر 30 يوماً",
+    "totalThisPeriod": "إجمالي الفترة",
+    "vsLastPeriod": "مقارنة بالفترة السابقة",
+    "topClients": "أفضل العملاء هذا الشهر",
+    "noClientRevenue": "لا توجد فوترة هذا الشهر",
+    "shipmentsCount": "{count, plural, =0 {لا شحنات} one {شحنة #} other {# شحنات}}",
+    "quickStats": "نظرة سريعة",
+    "totalClients": "العملاء",
+    "totalDrivers": "السائقون",
+    "totalVehicles": "المركبات",
+    "pendingInvoices": "فواتير قيد الانتظار",
+    "activityFeed": "النشاط الأخير",
+    "noActivity": "لا يوجد نشاط حديث",
+    "activityCreated": "تم إنشاء {ref}",
+    "activityAssigned": "{ref} تم تعيينها إلى {driver}",
+    "activityPickedUp": "{ref} تم استلامها",
+    "activityInTransit": "{ref} في الطريق",
+    "activityDelivered": "{ref} تم تسليمها",
+    "activityFailed": "{ref} فشلت",
+    "activityCustoms": "{ref} في الجمارك",
+    "activityCancelled": "{ref} ملغاة",
+    "viewShipments": "الشحنات",
+    "viewClients": "العملاء",
+    "viewInvoices": "الفواتير",
+    "viewReports": "التقارير",
+    "trajet": "المسار",
+    "driver": "السائق",
+    "shipmentValue": "القيمة",
+    "alerts": {
+      "title": "{count, plural, =0 {لا توجد تنبيهات} one {# تنبيه حرج} other {# تنبيهات حرجة}}",
+      "lateJit": "{count, plural, =0 {لا توجد مهمة JIT متأخرة} one {# مهمة JIT متأخرة — التعرّض {exposure}} other {# مهام JIT متأخرة — التعرّض {exposure}}}",
+      "criticalJit": "{count, plural, =0 {0 مهمة} one {# مهمة JIT أقل من ساعة على الموعد} other {# مهام JIT أقل من ساعة على الموعد}}",
+      "customsIncomplete": "{count, plural, =0 {0 مهمة} one {# مهمة بملف جمركي ناقص} other {# مهام بملف جمركي ناقص}}"
+    },
+    "phaseC": {
+      "todayProgram": "برنامج اليوم",
+      "todayProgramSubtitle": "{done} مُسلَّمة · {inProgress} جارية",
+      "todayProgramEmpty": "لا توجد مهمة مبرمجة اليوم",
+      "activeMissions": "المهام النشطة",
+      "activeMissionsSubtitle": "{onTime} في الوقت · {delivered} مُسلَّمة هذا الشهر",
+      "subMargin": "هامش المناولة (الشهر)",
+      "subMarginSubtitle": "{pct}٪ على {count, plural, =0 {0 مهمة} one {# مهمة} other {# مهام}}",
+      "subMarginEmpty": "لا مناولة هذا الشهر",
+      "monthRevenue": "رقم الأعمال (الشهر)",
+      "monthRevenueVsLast": "{pct}٪ من هدف الشهر السابق ({last})",
+      "monthRevenueNoBaseline": "أول شهر — لا توجد مرجعية",
+      "activeSubcontracts": "المناولة الجارية",
+      "activeSubcontractsEmpty": "لا توجد مهمة مناوَلة جارية",
+      "subStatus": {
+        "sent": "مُرسلة",
+        "accepted": "مقبولة",
+        "in_progress": "في الطريق"
+      },
+      "subCost": "التكلفة {value}",
+      "subMarginRow": "الهامش {value}"
+    }
   },
   "shipments": {
     "title": "الشحنات",
+    "subtitle": "تتبّع وإدارة جميع شحناتك بنظرة واحدة",
+    "stats": {
+      "total": "إجمالي الشحنات",
+      "totalSubtitle": "كل الفترات",
+      "inTransit": "قيد التنفيذ",
+      "inTransitSubtitle": "للتسليم اليوم",
+      "deliveredMonth": "المسلَّمة (الشهر)",
+      "deliveredSubtitle": "{rate}% في الوقت",
+      "revenueMonth": "إيرادات (الشهر)",
+      "revenueSubtitle": "{count, plural, =0 {لا تسليمات} one {# تسليم} other {# تسليمات}}"
+    },
+    "filterCount": "{count, plural, =0 {0} one {1} other {#}}",
+    "noResults": "لا توجد شحنات تطابق الفلاتر",
     "newShipment": "شحنة جديدة",
+    "exportExcel": "تصدير Excel",
     "createShipment": "إنشاء الشحنة",
     "createdWithRef": "تم إنشاء الشحنة {ref}",
     "backToList": "رجوع إلى القائمة",
@@ -156,6 +291,28 @@
   },
   "clients": {
     "title": "العملاء",
+    "subtitle": "محفظة عملائك وشروطهم التجارية",
+    "stats": {
+      "total": "العملاء",
+      "totalSubtitle": "{count, plural, =0 {لا يوجد عملاء} one {# إجمالاً} other {# إجمالاً}}",
+      "active": "النشطون (30 يومًا)",
+      "activeSubtitle": "بنشاط حديث",
+      "topRevenue": "أفضل عميل",
+      "topRevenueSubtitle": "هذا الشهر",
+      "avgPaymentTerms": "متوسط الأجل",
+      "avgPaymentTermsSubtitle": "أيام السداد"
+    },
+    "filter": {
+      "all": "الكل",
+      "perShipment": "بالشحنة",
+      "monthlyGrouped": "شهري"
+    },
+    "card": {
+      "shipmentsThisMonth": "{count, plural, =0 {لا شحنات} one {# شحنة هذا الشهر} other {# شحنات هذا الشهر}}",
+      "noActivity": "لا نشاط هذا الشهر",
+      "viewProfile": "عرض الملف"
+    },
+    "noResults": "لا يوجد عميل يطابق بحثك",
     "newClient": "عميل جديد",
     "edit": "تعديل",
     "businessName": "اسم الشركة",
@@ -186,6 +343,24 @@
   },
   "drivers": {
     "title": "السائقون",
+    "subtitle": "سائقوك وأداؤهم",
+    "stats": {
+      "total": "إجمالي السائقين",
+      "totalSubtitle": "{count, plural, =0 {لا أحد} one {# سائق} other {# سائقين}}",
+      "available": "المتاحون",
+      "availableSubtitle": "جاهزون للانطلاق",
+      "avgOnTime": "متوسط الالتزام",
+      "avgOnTimeSubtitle": "كل السائقين",
+      "avgRating": "متوسط التقييم",
+      "avgRatingSubtitle": "رضا العملاء"
+    },
+    "filter": {
+      "all": "الكل",
+      "available": "المتاحون",
+      "busy": "في مهمة",
+      "search": "ابحث عن سائق..."
+    },
+    "noResults": "لا يوجد سائق يطابق الفلاتر",
     "newDriver": "سائق جديد",
     "edit": "تعديل",
     "fullName": "الاسم الكامل",
@@ -221,6 +396,24 @@
   },
   "vehicles": {
     "title": "المركبات",
+    "subtitle": "أسطولك وحالته",
+    "stats": {
+      "total": "إجمالي المركبات",
+      "totalSubtitle": "النشطة في الخدمة",
+      "available": "المتاحة",
+      "availableSubtitle": "جاهزة للتحميل",
+      "documentsExpiring": "مستندات تنتهي",
+      "documentsExpiringSubtitle": "خلال 60 يومًا",
+      "totalCapacity": "السعة الإجمالية",
+      "totalCapacitySubtitle": "الحمولة المجمعة"
+    },
+    "filter": {
+      "all": "الكل",
+      "available": "المتاحة",
+      "expiring": "مستندات منتهية",
+      "search": "ابحث (اللوحة، الماركة)..."
+    },
+    "noResults": "لا توجد مركبة تطابق الفلاتر",
     "newVehicle": "مركبة جديدة",
     "edit": "تعديل",
     "plateNumber": "رقم اللوحة",
@@ -259,6 +452,22 @@
   },
   "invoices": {
     "title": "الفواتير",
+    "subtitle": "إدارة الفوترة ومتابعة المقبوضات",
+    "exportExcel": "تصدير Excel",
+    "stats": {
+      "totalRevenue": "إجمالي المُفوتر (الشهر)",
+      "totalRevenueSubtitle": "{count, plural, =0 {لا فواتير} one {# فاتورة صادرة} other {# فواتير صادرة}}",
+      "outstanding": "المستحقات",
+      "outstandingSubtitle": "{count, plural, =0 {لا فواتير} one {# قيد الانتظار} other {# قيد الانتظار}}",
+      "overdue": "متأخرة",
+      "overdueSubtitle": "{count, plural, =0 {كل شيء مسدد} one {# للمتابعة} other {# للمتابعة}}",
+      "paid": "المُحصَّل (الشهر)",
+      "paidSubtitle": "{count, plural, =0 {لا مدفوعات} one {# دفعة مستلمة} other {# دفعات مستلمة}}"
+    },
+    "filter": {
+      "search": "ابحث برقم أو عميل..."
+    },
+    "noResults": "لا توجد فاتورة تطابق الفلاتر",
     "backToList": "رجوع إلى القائمة",
     "number": "الرقم",
     "client": "العميل",
@@ -341,6 +550,7 @@
       "super_admin": "مدير عام",
       "company_admin": "مدير الشركة",
       "dispatcher": "موزع",
+      "comptable": "محاسب",
       "driver": "سائق",
       "client": "عميل"
     },
@@ -372,12 +582,22 @@
     "totalRevenue": "إجمالي الإيرادات",
     "avgDistance": "متوسط المسافة",
     "onTimeRate": "نسبة الالتزام",
-    "driverLeaderboard": "ترتيب السائقين",
+    "driverPerformance": "أداء السائقين",
     "driver": "السائق",
     "deliveries": "التسليمات",
     "rating": "التقييم",
     "totalKm": "إجمالي الكم",
-    "noData": "لا توجد بيانات"
+    "noData": "لا توجد بيانات",
+    "monthRevenue": "إيرادات الشهر",
+    "monthShipments": "شحنات الشهر",
+    "activeFleet": "الأسطول النشط",
+    "topClients": "أفضل العملاء",
+    "topClientsSubtitle": "{count, plural, =0 {لا بيانات} one {# عميل} other {# عملاء}}",
+    "noTopClients": "لا فوترة مسجلة",
+    "fleetUtilization": "استخدام الأسطول",
+    "rank": "#",
+    "noActivity": "لا نشاط بعد",
+    "performanceLeaders": "أفضل السائقين"
   },
   "driver": {
     "myShipments": "شحناتي",
@@ -408,5 +628,1713 @@
     "minLength": "الحد الأدنى {min} أحرف",
     "maxLength": "الحد الأقصى {max} حرفًا",
     "phone": "رقم هاتف غير صالح"
+  },
+  "contracts": {
+    "list": {
+      "title": "عقود العملاء",
+      "subtitle": "شبكات أسعار متفاوض عليها لكل عميل صناعي",
+      "newButton": "عقد جديد",
+      "empty": "لا توجد عقود مسجلة",
+      "emptyHint": "أنشئ عقدًا لتثبيت شروط الأسعار مع عميل.",
+      "emptyAction": "إنشاء أول عقد",
+      "summary": "من {start} إلى {end} · {terms} يومًا · {billing}",
+      "openEnded": "غير محدد",
+      "activeTitle": "نشط",
+      "draftTitle": "مسودات",
+      "expiredTitle": "منتهية",
+      "cancelledTitle": "ملغاة",
+      "expiringSoon": "قارب على الانتهاء",
+      "noResults": "لا يوجد عقد يطابق الفلاتر",
+      "search": "ابحث عن عقد أو عميل...",
+      "filterAll": "الكل",
+      "indefinitePeriod": "بدون تاريخ انتهاء",
+      "daysRemaining": "{days, plural, =0 {ينتهي اليوم} one {# يوم متبقٍ} other {# أيام متبقية}}",
+      "expiredAgo": "{days, plural, one {منتهٍ منذ # يوم} other {منتهٍ منذ # أيام}}",
+      "termsDays": "{days} يومًا",
+      "elapsed": "{pct}% منقضٍ"
+    },
+    "stats": {
+      "active": "العقود النشطة",
+      "activeSubtitle": "سارية المفعول",
+      "expiringSoon": "تنتهي قريبًا",
+      "expiringSoonSubtitle": "خلال 30 يومًا",
+      "draft": "مسودات",
+      "draftSubtitle": "للإكمال",
+      "totalClients": "عملاء بعقود",
+      "totalClientsSubtitle": "{count, plural, =0 {لا يوجد} one {# عميل} other {# عملاء}}"
+    },
+    "new": {
+      "title": "عقد عميل جديد",
+      "subtitle": "حدد الشروط العامة قبل شبكة الأسعار"
+    },
+    "detail": {
+      "title": "العقد",
+      "subtitle": "من {start} إلى {end}",
+      "backToList": "العودة إلى العقود",
+      "info": "الشروط العامة"
+    },
+    "form": {
+      "client": "العميل",
+      "clientRequired": "العميل مطلوب",
+      "contractNumber": "رقم العقد",
+      "signedDate": "تاريخ التوقيع",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء",
+      "endDateHint": "اتركه فارغًا لعقد غير محدد المدة",
+      "paymentTerms": "أجل الأداء",
+      "immediate": "نقدًا",
+      "billingMode": "طريقة الفوترة",
+      "autoRenewal": "تجديد تلقائي",
+      "status": "الحالة",
+      "notes": "ملاحظات",
+      "created": "تم إنشاء العقد",
+      "updated": "تم تحديث العقد"
+    },
+    "status": {
+      "active": "نشط",
+      "draft": "مسودة",
+      "expired": "منتهي",
+      "cancelled": "ملغى"
+    },
+    "billing": {
+      "per_shipment": "حسب الشحنة",
+      "monthly_grouped": "مجمعة شهريًا"
+    },
+    "vehicle": {
+      "motorcycle": "دراجة نارية",
+      "van": "شاحنة صغيرة",
+      "pickup": "بيكاب",
+      "truck": "شاحنة"
+    },
+    "grid": {
+      "title": "شبكة الأسعار",
+      "subtitle": "السعر الأساسي لكل محور + الزيادات المتفاوض عليها",
+      "addRule": "إضافة قاعدة",
+      "editRule": "تعديل القاعدة",
+      "empty": "لا توجد قواعد سعرية. أضف المحاور المتفاوض عليها (طنجة ↔ القنيطرة، إلخ).",
+      "customs": "منطقة حرة",
+      "surchargeSummary": "ليل +{night}% · ع.أ +{weekend}% · مستعجل +{urgent}% · انتظار {waiting}/س",
+      "saved": "تم حفظ القاعدة",
+      "deleted": "تم حذف القاعدة",
+      "confirmDelete": "حذف قاعدة « {route} » ؟",
+      "routeRequired": "عنوان المحور مطلوب",
+      "fields": {
+        "routeLabel": "عنوان المحور",
+        "pickupCity": "مدينة التحميل",
+        "deliveryCity": "مدينة التسليم",
+        "vehicleType": "نوع المركبة (اختياري)",
+        "basePrice": "السعر الأساسي (درهم)",
+        "surcharges": "الزيادات التعاقدية",
+        "night": "ليل",
+        "weekend": "عطلة الأسبوع",
+        "urgent": "استعجال",
+        "waiting": "انتظار",
+        "customsZone": "يستلزم مرورًا بمنطقة حرة / جمارك",
+        "notes": "ملاحظات"
+      }
+    }
+  },
+  "blTemplates": {
+    "card": {
+      "title": "نماذج سند التسليم",
+      "subtitle": "حقول مخصصة يطلبها هذا العميل (PO، الدفعة، الرصيف، الموعد، EDI…)",
+      "manage": "إدارة النماذج",
+      "empty": "لا يوجد نموذج. أنشئ نموذجًا لتكييف سند التسليم مع متطلبات العميل الصناعية.",
+      "defaultBadge": "افتراضي"
+    },
+    "page": {
+      "title": "نماذج سند التسليم — {client}",
+      "subtitle": "حدد الحقول المطبوعة والمسجلة على سند تسليم هذا العميل.",
+      "backToContract": "العودة إلى العقد"
+    },
+    "manager": {
+      "templatesHeading": "النماذج",
+      "addTemplate": "جديد",
+      "noTemplates": "لا يوجد نموذج لهذا العميل.",
+      "fieldCount": "{count, plural, =0 {لا حقول} one {# حقل} other {# حقول}}",
+      "defaultBadge": "افتراضي",
+      "pickTemplate": "اختر نموذجًا لإدارة حقوله.",
+      "firstTemplate": "إنشاء أول نموذج لـ {client}",
+      "fieldsHeading": "حقول السند",
+      "addField": "إضافة حقل",
+      "noFields": "لا يوجد حقل. أضف المراجع التي يطلبها هذا العميل (PO Number، Part Number، إلخ).",
+      "setDefault": "تعيين افتراضي",
+      "isDefault": "النموذج الافتراضي",
+      "renameTemplate": "إعادة تسمية",
+      "deleteTemplate": "حذف",
+      "editField": "تعديل الحقل",
+      "deleteField": "حذف الحقل",
+      "moveUp": "أعلى",
+      "moveDown": "أسفل",
+      "requiredBadge": "مطلوب",
+      "hiddenBadge": "مخفي",
+      "placeholderLabel": "نص توضيحي",
+      "optionsLabel": "خيارات",
+      "confirmDeleteTemplate": "حذف نموذج « {name} » مع كل حقوله ؟",
+      "confirmDeleteField": "حذف الحقل « {label} » ؟",
+      "templateDeleted": "تم حذف النموذج",
+      "fieldDeleted": "تم حذف الحقل",
+      "defaultUpdated": "تم تحديث النموذج الافتراضي"
+    },
+    "dialog": {
+      "newTemplate": "نموذج سند تسليم جديد",
+      "editTemplate": "تعديل النموذج",
+      "templateName": "اسم النموذج",
+      "templateNamePlaceholder": "سند قياسي، سند تصدير، …",
+      "notes": "ملاحظات",
+      "isDefault": "تعيين كنموذج افتراضي لهذا العميل",
+      "isDefaultHint": "يُطبَّق النموذج الافتراضي تلقائيًا على كل شحنة جديدة لهذا العميل.",
+      "nameRequired": "الاسم مطلوب",
+      "templateCreated": "تم إنشاء النموذج",
+      "templateUpdated": "تم تحديث النموذج",
+      "newField": "حقل جديد",
+      "editField": "تعديل الحقل",
+      "fieldLabel": "العنوان الظاهر",
+      "fieldLabelPlaceholder": "رقم الطلبية (PO)",
+      "fieldKey": "المفتاح التقني",
+      "fieldKeyHint": "معرّف داخلي يخزَّن في القاعدة. حروف صغيرة، أرقام، شرطات سفلية. يُولَّد آليًا من العنوان.",
+      "fieldType": "النوع",
+      "placeholder": "نص توضيحي",
+      "defaultValue": "القيمة الافتراضية",
+      "selectOptions": "خيارات القائمة",
+      "selectOptionsPlaceholder": "خيار في كل سطر",
+      "selectOptionsHint": "خيار في كل سطر. على الأقل خيار واحد.",
+      "helpText": "نص المساعدة",
+      "isRequired": "حقل إجباري",
+      "isVisible": "ظاهر على السند",
+      "labelRequired": "العنوان مطلوب",
+      "keyInvalid": "مفتاح غير صالح. حروف صغيرة، أرقام و _ فقط؛ يبدأ بحرف.",
+      "keyDuplicate": "هذا المفتاح موجود في هذا النموذج.",
+      "optionsRequired": "أضف خيارًا واحدًا على الأقل.",
+      "fieldCreated": "تمت إضافة الحقل",
+      "fieldUpdated": "تم تحديث الحقل"
+    },
+    "fieldType": {
+      "text": "نص",
+      "number": "رقم",
+      "date": "تاريخ",
+      "time": "ساعة",
+      "textarea": "نص طويل",
+      "select": "قائمة"
+    }
+  },
+  "recurring": {
+    "page": {
+      "title": "البرنامج الدوري",
+      "subtitle": "خطّط للمهمات الأسبوعية (TESCA الإثنين/الأربعاء/الجمعة، SAGE يوميًا، إلخ). تُنشئ مهمة الكرون يوم الجمعة 18:00 شحنات الأسبوع المقبل تلقائيًا.",
+      "cronInfo": "كرون: الجمعة 18:00 ← الأسبوع المقبل",
+      "automationActive": "الأتمتة مفعّلة",
+      "automationPaused": "الأتمتة متوقفة"
+    },
+    "stats": {
+      "active": "البرامج النشطة",
+      "activeOf": "من {total}",
+      "weeklyMissions": "مهمات / أسبوع",
+      "weeklyMissionsSubtitle": "{shipments, plural, =0 {لا شحنات} one {# شحنة مخططة} other {# شحنات مخططة}}",
+      "nextGeneration": "التوليد القادم",
+      "nextGenerationDays": "{days, plural, =0 {اليوم} one {بعد # يوم} other {بعد # أيام}}",
+      "lastGeneration": "آخر توليد",
+      "lastGenerationNever": "لم يُنفّذ بعد",
+      "lastGenerationCount": "{count, plural, =0 {0 شحنة} one {# شحنة أُنشئت} other {# شحنات أُنشئت}}",
+      "covered": "العملاء المغطّون",
+      "coveredSubtitle": "{count, plural, =0 {لا عملاء} one {# عميل} other {# عملاء}}",
+      "totalGenerated": "إجمالي المُولَّد"
+    },
+    "filter": {
+      "all": "الكل",
+      "active": "نشط",
+      "paused": "موقوف",
+      "search": "ابحث عن برنامج..."
+    },
+    "preview": {
+      "title": "معاينة الأسبوع المقبل",
+      "subtitle": "من {start} إلى {end} · {count, plural, =0 {لا مهمات مخططة} one {# مهمة} other {# مهمات}}",
+      "noMission": "—",
+      "today": "اليوم",
+      "tomorrow": "غدًا",
+      "moreCount": "+{count} أخرى",
+      "totalDay": "{count, plural, =0 {0 مهمة} one {# مهمة} other {# مهمات}}",
+      "exportCsv": "تصدير (CSV)"
+    },
+    "list": {
+      "heading": "البرامج",
+      "newSchedule": "برنامج جديد",
+      "generateNow": "توليد الأسبوع المقبل",
+      "empty": "لا يوجد برنامج دوري",
+      "emptyHint": "أنشئ برنامجًا لأتمتة المهمات المتكرّرة (محاور طنجة ↔ القنيطرة، إلخ).",
+      "emptyAction": "إنشاء أول برنامج",
+      "lastGenerated": "آخر توليد: حتى {date} · {count, plural, =0 {لم تُنشأ شحنات} one {# شحنة أُنشئت} other {# شحنات أُنشئت}}",
+      "neverGenerated": "لم يُولَّد بعد",
+      "validUntil": "ساري حتى {date}",
+      "validForever": "بدون تاريخ انتهاء",
+      "schedulesPerWeek": "{count, plural, =0 {لا مهمات} one {# مهمة/أسبوع} other {# مهمات/أسبوع}}",
+      "noResults": "لا يوجد برنامج يطابق بحثك"
+    },
+    "card": {
+      "active": "نشط",
+      "paused": "موقوف",
+      "everyWeek": "كل أسبوع",
+      "perWeek": "/أسبوع",
+      "deliveryIn": "+{hours}س بعد التحميل",
+      "noDeliveryTime": "وقت تسليم حر"
+    },
+    "badges": {
+      "paused": "موقوف"
+    },
+    "actions": {
+      "edit": "تعديل",
+      "delete": "حذف",
+      "pause": "إيقاف مؤقت",
+      "resume": "تفعيل"
+    },
+    "toast": {
+      "created": "تم إنشاء البرنامج",
+      "updated": "تم تحديث البرنامج",
+      "deleted": "تم حذف البرنامج",
+      "activated": "تمت إعادة تفعيل البرنامج",
+      "deactivated": "تم إيقاف البرنامج مؤقتًا",
+      "generated": "{count, plural, =0 {لا شحنات جديدة (محدّث مسبقًا)} one {# شحنة أُنشئت} other {# شحنات أُنشئت}}"
+    },
+    "confirmDelete": "حذف برنامج « {name} » ؟ المهمات التي أُنشئت سابقًا تبقى سليمة.",
+    "day": {
+      "mon": "إثن",
+      "tue": "ثلا",
+      "wed": "أرب",
+      "thu": "خمي",
+      "fri": "جمع",
+      "sat": "سبت",
+      "sun": "أحد"
+    },
+    "vehicleType": {
+      "motorcycle": "دراجة نارية",
+      "van": "شاحنة صغيرة",
+      "pickup": "بيكاب",
+      "truck": "شاحنة"
+    },
+    "dialog": {
+      "newTitle": "برنامج دوري جديد",
+      "editTitle": "تعديل البرنامج",
+      "client": "العميل",
+      "name": "اسم البرنامج",
+      "namePlaceholder": "TESCA إثن/أرب/جمع صباحًا",
+      "days": "أيام الأسبوع",
+      "pickupTime": "ساعة التحميل",
+      "deliveryOffset": "مهلة التسليم (س)",
+      "deliveryOffsetHint": "مثال: 2.5 = +2س30. فارغ = بدون ساعة تسليم محدّدة.",
+      "vehicleType": "نوع المركبة (تفضيل)",
+      "pickup": "التحميل",
+      "delivery": "التسليم",
+      "address": "العنوان",
+      "city": "المدينة",
+      "contactName": "اسم جهة الاتصال",
+      "contactPhone": "هاتف جهة الاتصال",
+      "driver": "السائق الافتراضي",
+      "driverNone": "بدون (يُعيَّن يدويًا)",
+      "driverHint": "إذا حُدِّد، تُنشأ الشحنة مباشرة بحالة « معيَّنة ».",
+      "vehicle": "المركبة الافتراضية",
+      "validFrom": "ساري المفعول من",
+      "validTo": "ساري المفعول حتى",
+      "validToHint": "فارغ = بدون تاريخ انتهاء",
+      "isActive": "فعّال (يولّد مهمات)",
+      "notes": "ملاحظات",
+      "clientRequired": "العميل مطلوب",
+      "nameRequired": "الاسم مطلوب",
+      "daysRequired": "اختر يومًا واحدًا على الأقل",
+      "offsetInvalid": "مهلة تسليم غير صالحة"
+    }
+  },
+  "onboarding": {
+    "page": {
+      "title": "بدء الاستخدام",
+      "subtitle": "أعدّ أساسيات الشركة في بضع خطوات.",
+      "progress": "{done} / {total} خطوات"
+    },
+    "progress": {
+      "label": "التقدّم",
+      "allDone": "🎉 اكتمل الإعداد"
+    },
+    "step": {
+      "number": "الخطوة {n}",
+      "action": "إعداد",
+      "company": {
+        "title": "معلومات الشركة",
+        "description": "الاسم القانوني، العنوان، ICE، slug — تُستخدم في جميع الفواتير و CMR.",
+        "todo": "إكمال الملف",
+        "done": "اكتمل ملف الشركة"
+      },
+      "drivers": {
+        "title": "السائقون",
+        "description": "أضف السائقين الدائمين.",
+        "todo": "أضف سائقًا واحدًا على الأقل",
+        "done": "{count, plural, one {# سائق} other {# سائقون}}"
+      },
+      "vehicles": {
+        "title": "المركبات",
+        "description": "شاحنات ومقطورات الأسطول.",
+        "todo": "أضف مركبة واحدة على الأقل",
+        "done": "{count, plural, one {# مركبة} other {# مركبات}}"
+      },
+      "clients": {
+        "title": "العملاء الصناعيون",
+        "description": "TESCA، SAGE، ERT، COBA، DUTCHER.",
+        "todo": "أضف عميلًا واحدًا على الأقل",
+        "done": "{count, plural, one {# عميل} other {# عملاء}}"
+      },
+      "contracts": {
+        "title": "عقود العملاء",
+        "description": "التسعير لكل عميل (الرسوم الثابتة، الكيلومترات، الزيادات).",
+        "todo": "أنشئ عقدًا واحدًا على الأقل",
+        "done": "{count, plural, one {# عقد} other {# عقود}}"
+      },
+      "suppliers": {
+        "title": "الموردون",
+        "description": "الوقود، الورشة، التأمين، الإطارات.",
+        "todo": "أضف الموردين الدائمين",
+        "done": "{count, plural, one {# مورّد} other {# موردون}}"
+      },
+      "macarons": {
+        "title": "الملصقات والبوّابات (اختياري)",
+        "description": "بطاقات Jawaz / Pass+ وملصقات المركبات.",
+        "todo": "أعدّ إذا كنت تستخدم Jawaz",
+        "done": ""
+      }
+    },
+    "completed": {
+      "title": "ممتاز، اكتمل الإعداد!",
+      "subtitle": "الحساب جاهز. أنشئ أول مهمة من لوحة التحكم.",
+      "cta": "الذهاب إلى لوحة التحكم"
+    }
+  },
+  "macaronsPeages": {
+    "page": {
+      "title": "الملصقات والبوّابات",
+      "subtitle": "بطاقات Jawaz / Pass+، معاملات البوّابات والملصقات السنوية.",
+      "lowBalance": "{count, plural, one {# بطاقة تحت الحد} other {# بطاقات تحت الحد}}",
+      "expiringSoon": "{count, plural, one {# ملصق للتجديد خلال 30 يومًا} other {# ملصقات للتجديد خلال 30 يومًا}}"
+    },
+    "tabs": {
+      "passes": "البطاقات ({count})",
+      "tolls": "البوّابات ({count})",
+      "vignettes": "الملصقات ({count})"
+    },
+    "actions": {
+      "newPass": "بطاقة جديدة",
+      "newVignette": "ملصق جديد",
+      "recordToll": "تسجيل"
+    },
+    "provider": {
+      "jawaz": "Jawaz",
+      "passplus": "Pass+",
+      "autre": "أخرى"
+    },
+    "tollKind": {
+      "crossing": "عبور",
+      "top_up": "تعبئة",
+      "adjustment": "تعديل"
+    },
+    "vignetteKind": {
+      "annual": "ملصق سنوي",
+      "technical_inspection": "الفحص التقني",
+      "insurance": "تأمين",
+      "tax_disc": "ضريبة",
+      "other": "أخرى"
+    },
+    "passes": {
+      "empty": "لا توجد بطاقات مسجّلة. أنشئ بطاقة للبدء.",
+      "lowBalanceLabel": "تحت الحد ({threshold})"
+    },
+    "tolls": {
+      "empty": "لا توجد معاملات مسجّلة.",
+      "col": {
+        "date": "التاريخ",
+        "vehicle": "المركبة",
+        "kind": "النوع",
+        "station": "المحطة",
+        "amount": "المبلغ",
+        "reference": "المرجع"
+      }
+    },
+    "vignettes": {
+      "empty": "لا توجد ملصقات مسجّلة.",
+      "expiresOn": "ينتهي في:",
+      "daysLeft": "{days, plural, =0 {ينتهي اليوم} one {ينتهي خلال # يوم} other {ينتهي خلال # أيام}}",
+      "expiredAgo": "منتهٍ منذ {days} يومًا"
+    },
+    "passDialog": {
+      "titleNew": "بطاقة جديدة",
+      "titleEdit": "تعديل البطاقة",
+      "field": {
+        "vehicle": "المركبة",
+        "provider": "المزوّد",
+        "tagNumber": "رقم البطاقة",
+        "threshold": "الحد الأدنى (MAD)",
+        "isActive": "بطاقة نشطة"
+      },
+      "toast": {
+        "created": "تم إنشاء البطاقة",
+        "updated": "تم تحديث البطاقة",
+        "failed": "تعذّر الحفظ"
+      }
+    },
+    "tollDialog": {
+      "title": "تسجيل معاملة",
+      "currentBalance": "الرصيد الحالي",
+      "field": {
+        "kind": "النوع",
+        "occurredAt": "التاريخ / الوقت",
+        "amount": "المبلغ (MAD)",
+        "station": "المحطة / الموقع",
+        "stationPlaceholder": "مثال: تيط مليل",
+        "reference": "المرجع"
+      },
+      "actions": {
+        "confirm": "تسجيل"
+      },
+      "toast": {
+        "recorded": "تم تسجيل المعاملة",
+        "failed": "فشل"
+      }
+    },
+    "vignetteDialog": {
+      "titleNew": "ملصق جديد",
+      "titleEdit": "تعديل الملصق",
+      "field": {
+        "vehicle": "المركبة",
+        "kind": "النوع",
+        "issuedAt": "تاريخ الإصدار",
+        "expiresAt": "تاريخ الانتهاء",
+        "reference": "المرجع",
+        "amount": "المبلغ (MAD)"
+      },
+      "toast": {
+        "created": "تم تسجيل الملصق",
+        "updated": "تم تحديث الملصق",
+        "failed": "تعذّر الحفظ"
+      }
+    }
+  },
+  "suppliers": {
+    "page": {
+      "title": "مركز الموردين",
+      "subtitle": "دليل الموردين (وقود، قطع، ورشة، تأمين) ومتابعة الفواتير.",
+      "outstanding": "{count, plural, =0 {تم تسوية الكل} one {# فاتورة مستحقة · {total}} other {# فواتير مستحقة · {total}}}"
+    },
+    "tabs": {
+      "directory": "الدليل ({count})",
+      "invoices": "الفواتير ({count})"
+    },
+    "categories": {
+      "fuel": "وقود",
+      "parts": "قطع غيار",
+      "garage": "ورشة / صيانة",
+      "tires": "إطارات",
+      "insurance": "تأمين",
+      "telecom": "اتصالات",
+      "office": "مكتب",
+      "cleaning": "تنظيف",
+      "other": "أخرى"
+    },
+    "actions": {
+      "newSupplier": "مورّد جديد",
+      "newInvoice": "فاتورة جديدة",
+      "recordPayment": "دفع"
+    },
+    "directory": {
+      "empty": "لا يوجد موردون. أضف موردًا للبدء.",
+      "invoicesCount": "{count, plural, =0 {لا فواتير} one {# فاتورة} other {# فواتير}}"
+    },
+    "invoices": {
+      "empty": "لا توجد فواتير موردين مسجّلة.",
+      "col": {
+        "number": "الرقم",
+        "supplier": "المورّد",
+        "issued": "الإصدار",
+        "due": "الاستحقاق",
+        "total": "الإجمالي",
+        "balance": "الرصيد",
+        "status": "الحالة"
+      },
+      "status": {
+        "unpaid": "غير مدفوعة",
+        "partially_paid": "جزئية",
+        "paid": "مدفوعة",
+        "overdue": "متأخرة",
+        "cancelled": "ملغاة"
+      }
+    },
+    "editor": {
+      "titleNew": "مورّد جديد",
+      "titleEdit": "تعديل المورّد",
+      "field": {
+        "name": "الاسم",
+        "category": "الفئة",
+        "contactName": "جهة الاتصال",
+        "contactPhone": "الهاتف",
+        "whatsapp": "واتساب",
+        "email": "البريد",
+        "city": "المدينة",
+        "ice": "ICE",
+        "paymentTerms": "مهلة الدفع (أيام)",
+        "isActive": "مورّد نشط"
+      },
+      "toast": {
+        "created": "تم إنشاء المورّد",
+        "updated": "تم تحديث المورّد",
+        "failed": "تعذّر الحفظ"
+      }
+    },
+    "invoiceEditor": {
+      "title": "فاتورة مورّد جديدة",
+      "field": {
+        "supplier": "المورّد",
+        "invoiceNumber": "رقم الفاتورة",
+        "issuedAt": "تاريخ الإصدار",
+        "dueDate": "تاريخ الاستحقاق",
+        "totalExclTax": "المجموع قبل الضريبة (MAD)",
+        "vatAmount": "الضريبة (MAD)"
+      },
+      "toast": {
+        "created": "تم تسجيل الفاتورة",
+        "failed": "تعذّر الحفظ"
+      }
+    },
+    "paymentDialog": {
+      "title": "تسجيل دفعة",
+      "balanceDue": "الرصيد المتبقّي",
+      "field": {
+        "amount": "المبلغ (MAD)",
+        "paidAt": "تاريخ الدفع",
+        "method": "الطريقة",
+        "reference": "المرجع",
+        "referencePlaceholder": "مثال: رقم شيك، تحويل…"
+      },
+      "method": {
+        "cash": "نقدًا",
+        "transfer": "تحويل",
+        "check": "شيك",
+        "card": "بطاقة"
+      },
+      "actions": {
+        "confirm": "تسجيل الدفعة"
+      },
+      "toast": {
+        "recorded": "تم تسجيل الدفعة",
+        "failed": "تعذّر التسجيل"
+      }
+    }
+  },
+  "inbox": {
+    "page": {
+      "title": "صندوق الوارد",
+      "subtitle": "جميع الاتصالات الصادرة — واتساب، البريد، الإشعارات.",
+      "unreadBadge": "{count, plural, =0 {تمت قراءة الكل} one {# غير مقروء} other {# غير مقروءة}}"
+    },
+    "filters": {
+      "searchPlaceholder": "ابحث عن مستلم أو محتوى…",
+      "kind": {
+        "all": "الكل",
+        "whatsapp_out": "واتساب",
+        "notification_out": "إشعارات"
+      },
+      "audience": {
+        "all": "الكل",
+        "driver": "السائق",
+        "client": "العميل",
+        "subcontractor": "المناول",
+        "internal": "داخلي"
+      },
+      "unreadOnly": "غير المقروءة",
+      "shown": "{shown} / {total}"
+    },
+    "actions": {
+      "markAllRead": "تحديد الكل كمقروء"
+    },
+    "list": {
+      "empty": "لا توجد رسائل تطابق الفلاتر."
+    },
+    "detail": {
+      "empty": "اختر رسالة لعرض التفاصيل.",
+      "occurredAt": "تاريخ الإرسال:",
+      "status": "الحالة:",
+      "errorTitle": "فشل الإرسال",
+      "viewShipment": "عرض المهمّة",
+      "viewInvoice": "عرض الفاتورة",
+      "markingRead": "جاري التحديد…"
+    },
+    "status": {
+      "sent": "تم الإرسال",
+      "pending": "قيد الانتظار",
+      "failed": "فشل",
+      "skipped": "متجاهل"
+    },
+    "error": {
+      "loadFailed": "تعذّر تحميل صندوق الوارد"
+    },
+    "toast": {
+      "markFailed": "تعذّر التحديد",
+      "markAllFailed": "تعذّر التحديد الجماعي",
+      "markedAll": "تم تحديد {count} رسالة كمقروءة"
+    }
+  },
+  "whatsapp": {
+    "page": {
+      "title": "واتساب",
+      "subtitle": "نماذج رسائل قابلة لإعادة الاستخدام وسجل الإرسالات.",
+      "templateCount": "{count, plural, =0 {لا توجد نماذج نشطة} one {# نموذج نشط} other {# نماذج نشطة}}"
+    },
+    "tabs": {
+      "templates": "النماذج ({count})",
+      "log": "السجل ({count})"
+    },
+    "audience": {
+      "driver": "السائق",
+      "client": "العميل",
+      "subcontractor": "المناول",
+      "internal": "داخلي"
+    },
+    "actions": {
+      "newTemplate": "نموذج جديد"
+    },
+    "templates": {
+      "empty": "لا توجد نماذج. أنشئ نموذجًا للبدء.",
+      "inactive": "معطّل"
+    },
+    "log": {
+      "empty": "لا توجد إرسالات مسجّلة.",
+      "viewShipment": "عرض المهمّة",
+      "col": {
+        "sentAt": "تاريخ الإرسال",
+        "audience": "الجمهور",
+        "recipient": "المستلم",
+        "template": "النموذج",
+        "sentBy": "بواسطة",
+        "shipment": "المهمّة"
+      }
+    },
+    "button": {
+      "send": "واتساب"
+    },
+    "dialog": {
+      "title": "إرسال رسالة واتساب",
+      "subtitle": "الجمهور: {audience}. ستُفتح الرسالة في تطبيق واتساب لديك.",
+      "field": {
+        "template": "النموذج",
+        "phone": "رقم المستلم",
+        "phoneInvalid": "الرقم قصير جدًا",
+        "recipientName": "الاسم (اختياري)",
+        "recipientNamePlaceholder": "مثال: السيد بناني",
+        "body": "نص الرسالة",
+        "bodyPlaceholder": "اختر نموذجًا أو اكتب رسالتك…",
+        "bodyHint": "تبقى المتغيرات {{var}} غير المحلولة كما هي.",
+        "refreshFromTemplate": "إعادة التوليد من النموذج"
+      },
+      "actions": {
+        "openWhatsapp": "فتح واتساب",
+        "back": "رجوع",
+        "confirmSent": "تم الإرسال"
+      },
+      "confirm": {
+        "title": "تأكيد الإرسال",
+        "subtitle": "تم فتح واتساب في علامة تبويب جديدة. أكّد الإرسال لتسجيل العملية.",
+        "toLabel": "إلى:"
+      },
+      "templates": {
+        "empty": "لا توجد نماذج متاحة لهذا الجمهور."
+      },
+      "toast": {
+        "sent": "تم تسجيل الإرسال",
+        "loadTemplatesFailed": "فشل تحميل النماذج",
+        "logFailed": "فشل تسجيل الإرسال"
+      },
+      "error": {
+        "renderFailed": "فشل توليد الرسالة"
+      }
+    },
+    "editor": {
+      "titleNew": "نموذج جديد",
+      "titleEdit": "تعديل النموذج",
+      "subtitle": "يتم استبدال المتغيرات {{var}} عند الإرسال.",
+      "field": {
+        "key": "المفتاح",
+        "keyHint": "مُعرّف داخلي (a-z، 0-9، _).",
+        "name": "الاسم",
+        "namePlaceholder": "مثال: تنبيه تأخير JIT",
+        "audience": "الجمهور",
+        "isActive": "التفعيل",
+        "active": "نشط",
+        "disabled": "معطّل",
+        "body": "نص الرسالة",
+        "placeholders": "المتغيرات المتاحة:"
+      },
+      "confirmDelete": "حذف هذا النموذج؟ تبقى الإرسالات السابقة مسجّلة.",
+      "toast": {
+        "created": "تم إنشاء النموذج",
+        "updated": "تم تحديث النموذج",
+        "deleted": "تم حذف النموذج",
+        "saveFailed": "تعذّر الحفظ",
+        "deleteFailed": "تعذّر الحذف"
+      }
+    }
+  },
+  "commandCenter": {
+    "page": {
+      "title": "مركز القيادة",
+      "subtitle": "عرض تشغيلي في الوقت الفعلي: المهام الجارية، الفريق في الخدمة، التنبيهات الحرجة.",
+      "live": "مباشر"
+    },
+    "pulse": {
+      "activeMissions": "قيد التنفيذ",
+      "onDuty": "في الخدمة",
+      "alerts": "تنبيهات",
+      "delivered": "سُلّمت اليوم",
+      "lastRefresh": "آخر تحديث {ago}",
+      "live": "مباشر",
+      "paused": "متوقّف",
+      "refresh": "تحديث"
+    },
+    "alerts": {
+      "title": "تنبيهات حرجة",
+      "late": "{count, plural, one {# مهمة متأخّرة} other {# مهام متأخّرة}} · تعرّض {exposure}",
+      "critical": "{count, plural, one {# مهمة حرجة (≤1 س)} other {# مهام حرجة (≤1 س)}}",
+      "customs": "{count, plural, one {# ملف جمركي ناقص} other {# ملفات جمركية ناقصة}}"
+    },
+    "kanban": {
+      "assigned": "موكَلة",
+      "picked_up": "مُحمَّلة",
+      "in_transit": "في الطريق",
+      "customs_clearance": "التخليص الجمركي",
+      "deliveredToday": "سُلّمت اليوم",
+      "empty": "لا توجد مهام",
+      "emptyDelivered": "لا توجد عمليات تسليم اليوم"
+    },
+    "card": {
+      "noDriver": "بدون سائق",
+      "callDriver": "الاتصال بالسائق",
+      "whatsappDriver": "إرسال رسالة واتساب للسائق"
+    },
+    "deadline": {
+      "late": "تأخير {mins} د",
+      "in": "خلال {mins} د"
+    },
+    "delivered": {
+      "lateBy": "+{mins} د",
+      "onTime": "في الوقت"
+    },
+    "drivers": {
+      "title": "السائقون",
+      "viewAll": "الكل",
+      "empty": "لا يوجد سائقون نشطون",
+      "onDutyIdle": "في الخدمة · متفرّغ",
+      "unavailable": "غير متاح",
+      "offDuty": "خارج الخدمة",
+      "call": "اتصال",
+      "whatsapp": "واتساب"
+    },
+    "activity": {
+      "title": "النشاط الأخير",
+      "empty": "لا يوجد نشاط حديث"
+    },
+    "timeline": {
+      "title": "برنامج اليوم",
+      "subtitle": "{count, plural, =0 {لا توجد مهام مبرمجة} one {# مهمة} other {# مهام}}",
+      "empty": "لا توجد مهام مبرمجة اليوم",
+      "now": "الآن",
+      "legend": {
+        "scheduled": "مبرمجة",
+        "past": "منقضية",
+        "delivered": "سُلِّمت",
+        "failed": "فشلت"
+      }
+    },
+    "relative": {
+      "justNow": "للتوّ",
+      "minutesAgo": "قبل {n} د",
+      "hoursAgo": "قبل {n} س",
+      "daysAgo": "قبل {n} ي"
+    }
+  },
+  "jit": {
+    "page": {
+      "title": "التسليم المضبوط (JIT)",
+      "subtitle": "تتبّع المهام JIT الصارمة (TESCA، SAGE): عدّاد تنازلي مباشر، التعرّض المالي وسجل الغرامات.",
+      "strictClients": "{count, plural, =0 {لا يوجد عميل صارم} one {# عميل صارم} other {# عملاء صارمون}}",
+      "exportExcel": "تصدير Excel"
+    },
+    "stats": {
+      "lateNow": "متأخّر الآن",
+      "lateNowSubtitle": "تجاوز موعد التسليم",
+      "critical": "حرج + تنبيهات",
+      "criticalSubtitle": "≤ 4 س قبل الموعد",
+      "exposureNow": "التعرّض الفوري",
+      "exposureNowSubtitle": "غرامات مكتسَبة",
+      "exposureNowEmpty": "لا توجد غرامة جارية",
+      "last30d": "غرامات 30 يوماً",
+      "last30dSubtitle": "مهام JIT مُسلَّمة حديثًا"
+    },
+    "tabs": {
+      "atRisk": "تحت المخاطر",
+      "recent": "سجل 30 يومًا",
+      "clients": "سياسات العملاء"
+    },
+    "banner": {
+      "title": "{count, plural, =0 {لا توجد مهمة متأخرة} one {# مهمة متأخرة!} other {# مهام متأخرة!}}",
+      "subtitle": "إجراء فوري: اتصل بالسائق، أبلغ العميل، فاوض على الغرامة قبل التسليم."
+    },
+    "refreshInfo": "تحديث آلي كل دقيقة",
+    "exposureSnapshot": "التعرّض الحالي: {value}",
+    "table": {
+      "shipment": "المهمة",
+      "client": "العميل",
+      "deadline": "موعد التسليم",
+      "actual": "تسليم فعلي",
+      "countdown": "حالة الموعد",
+      "exposure": "التعرّض",
+      "penalty": "الغرامة",
+      "lateness": "التأخر",
+      "minutesLate": "{count, plural, =0 {في الموعد} one {+# دقيقة} other {+# دقيقة}}",
+      "onTime": "في الموعد",
+      "totalPenalty30d": "إجمالي 30 يومًا",
+      "policy": "السياسة",
+      "penaltyRate": "{amount}/سا",
+      "penaltyPerHour": "غرامة/ساعة",
+      "tolerance": "التسامح",
+      "minutesGrace": "{count, plural, =0 {0 دقيقة سماح} one {# دقيقة سماح} other {# دقيقة سماح}}",
+      "strict": "صارم (JIT)",
+      "flexible": "مرن",
+      "status": "الحالة"
+    },
+    "shipmentStatus": {
+      "created": "مُنشأة",
+      "assigned": "مُعيَّنة",
+      "picked_up": "مُستلَمة",
+      "in_transit": "في الطريق",
+      "customs_clearance": "إجراءات جمركية",
+      "delivered": "مُسلَّمة",
+      "failed": "فشل",
+      "cancelled": "ملغاة"
+    },
+    "countdown": {
+      "in": "خلال {delta}",
+      "late": "{delta} تأخّر",
+      "none": "—"
+    },
+    "actions": {
+      "editPolicy": "تعديل",
+      "save": "حفظ",
+      "cancel": "إلغاء"
+    },
+    "toast": {
+      "clientUpdated": "تم تحديث سياسة العميل"
+    },
+    "empty": {
+      "atRiskTitle": "لا توجد مهمة JIT تحت المخاطر",
+      "atRiskSubtitle": "كل المواعيد تحت السيطرة.",
+      "recent": "لا توجد مهمة JIT سُلِّمت خلال آخر 30 يومًا."
+    },
+    "dialog": {
+      "title": "سياسة JIT",
+      "strict": "تفعيل الوضع الصارم (JIT)",
+      "strictHint": "كل شحنة لهذا العميل ستلتقط موعدًا = وقت التسليم المتوقع. تُطبَّق غرامة آليًا بعد فترة السماح.",
+      "penaltyPerHour": "غرامة لكل ساعة (درهم)",
+      "tolerance": "السماح (دقائق)",
+      "snapshotNote": "الشحنات المنشأة سابقًا تحتفظ بسياستها الأصلية — السياسة الجديدة تنطبق فقط على المهمات الجديدة."
+    }
+  },
+  "freeZones": {
+    "page": {
+      "title": "المناطق الحرة والجمارك",
+      "subtitle": "إدارة إجراءات DUM، BAE، T1، EUR1، CMR لطنجة المتوسط، AFZ القنيطرة، Mid Atlantic Logistics. ارفع الوثائق، تابع المطابقة.",
+      "zonesCount": "{count, plural, =0 {لا منطقة نشطة} one {# منطقة نشطة} other {# مناطق نشطة}}"
+    },
+    "stats": {
+      "zones": "المناطق الحرة",
+      "zonesSubtitle": "المهيّأة لهذا المستأجر",
+      "shipmentsTouchingFz": "المهام المرتبطة",
+      "shipmentsTouchingFzSubtitle": "منطقة واحدة على الأقل (تحميل / تسليم)",
+      "compliant": "مهام مطابقة",
+      "compliantSubtitle": "كل الوثائق المطلوبة مرفوعة",
+      "incomplete": "مهام ناقصة",
+      "incompleteSubtitle": "{partial} جزئية · {missing} بدون أي وثيقة"
+    },
+    "banner": {
+      "title": "{count, plural, =0 {لا توجد مهمة ناقصة} one {# مهمة بملف جمركي ناقص} other {# مهام بملف جمركي ناقص}}",
+      "subtitle": "ارفع الوثائق المفقودة (DUM، BAE، T1، EUR1، CMR) قبل المرور الجمركي لتفادي الحظر والغرامة."
+    },
+    "tabs": {
+      "shipments": "المهام",
+      "zones": "مرجع المناطق",
+      "matrix": "مصفوفة الإلزام"
+    },
+    "compliance": {
+      "complete": "ملف كامل",
+      "partial": "ملف جزئي",
+      "missing": "ملف فارغ",
+      "no_requirement": "لا توجد متطلبات"
+    },
+    "zoneLabels": {
+      "pickup": "تحميل",
+      "delivery": "تسليم"
+    },
+    "noRequirement": "لا توجد وثيقة مطلوبة لهذه المنطقة.",
+    "requiredChecklist": "الوثائق المطلوبة",
+    "customsOffice": "مكتب الجمارك",
+    "table": {
+      "zone": "المنطقة"
+    },
+    "actions": {
+      "upload": "رفع",
+      "view": "عرض",
+      "delete": "حذف",
+      "cancel": "إلغاء",
+      "addRequirement": "تعليم كمطلوب",
+      "removeRequirement": "إزالة الإلزام"
+    },
+    "toast": {
+      "uploaded": "تم رفع الوثيقة",
+      "deleted": "تم حذف الوثيقة",
+      "matrixUpdated": "تم تحديث المصفوفة"
+    },
+    "confirmDelete": "حذف هذه الوثيقة؟",
+    "empty": {
+      "shipments": "لا توجد مهمة تعبر منطقة حرة حاليًا.",
+      "zones": "لا توجد منطقة حرة مهيّأة."
+    },
+    "dialog": {
+      "uploadTitle": "رفع {code}",
+      "file": "الملف",
+      "fileHint": "PDF أو JPG أو PNG أو WEBP — 10 م.ب كحد أقصى",
+      "documentNumber": "رقم الوثيقة",
+      "documentDate": "تاريخ الوثيقة",
+      "notes": "ملاحظات"
+    }
+  },
+  "cmr": {
+    "page": {
+      "title": "بوليصات الشحن الدولية CMR",
+      "subtitle": "توليد آلي لوثائق CMR من المهام الدولية (اتفاقية جنيف 1956). 24 حقلًا قانونيًا، PDF رسمي، أرشفة خاصة.",
+      "internationalEnabled": "الوضع الدولي مفعَّل",
+      "internationalDisabled": "الوضع الدولي معطَّل"
+    },
+    "stats": {
+      "draft": "مسودات",
+      "draftSubtitle": "بانتظار الإكمال والإصدار",
+      "issued": "صادرة",
+      "issuedSubtitle": "PDF مولَّد، بانتظار التوقيع",
+      "signed": "موقَّعة",
+      "signedSubtitle": "موافَق عليها من جميع الأطراف",
+      "eligible": "مهام مؤهَّلة",
+      "eligibleSubtitle": "دولية بدون CMR"
+    },
+    "flagDisabled": {
+      "title": "الوضع الدولي معطَّل",
+      "subtitle": "وحدة CMR قابلة للوصول لكن العلم NEXT_PUBLIC_INTERNATIONAL_ENABLED على false. الوثائق الموجودة مرئية ؛ لتفعيل التدفق الكامل، بدّل العلم في .env.local."
+    },
+    "search": "بحث (رقم CMR، المرسِل، المرسَل إليه، المهمة...)",
+    "filter": {
+      "all": "الكل"
+    },
+    "status": {
+      "draft": "مسودة",
+      "issued": "صادرة",
+      "signed": "موقَّعة",
+      "cancelled": "ملغاة"
+    },
+    "table": {
+      "cmrNumber": "رقم CMR",
+      "status": "الحالة",
+      "shipment": "المهمة",
+      "route": "المسار",
+      "parties": "الأطراف",
+      "from": "من",
+      "to": "إلى",
+      "consigneeMissing": "بانتظار التعبئة",
+      "charges": "الرسوم بدون ضريبة",
+      "actions": ""
+    },
+    "actions": {
+      "newCmr": "CMR جديدة",
+      "viewPdf": "عرض PDF",
+      "generatePdf": "إصدار PDF",
+      "cancel": "إلغاء",
+      "create": "إنشاء CMR",
+      "confirmCancel": "تأكيد الإلغاء",
+      "close": "إغلاق"
+    },
+    "toast": {
+      "created": "تم إنشاء CMR {number} — معبَّأة من المهمة",
+      "alreadyExists": "توجد CMR مسبقًا لهذه المهمة ({number})",
+      "pdfGenerated": "تم إصدار PDF — تتحول الحالة إلى «صادرة»",
+      "cancelled": "تم إلغاء CMR"
+    },
+    "empty": {
+      "title": "لا توجد CMR مسجلة",
+      "subtitle": "اختر مهمة دولية لتوليد أول CMR — الـ 24 حقلًا تُملأ آليًا من الشحنة والعميل والشركة.",
+      "filtered": "لا نتائج",
+      "adjustFilters": "وسّع الفلاتر أو غيّر الحالة المختارة."
+    },
+    "dialog": {
+      "createTitle": "بوليصة شحن CMR جديدة",
+      "createDescription": "تُملأ CMR آليًا من المهمة والعميل والشركة. يمكنك تعديل كل حقل قبل الإصدار.",
+      "eligibleShipment": "مهمة دولية",
+      "eligibleHint": "تظهر فقط المهام بدون CMR. ⚠ = مهمة غير معلَّمة دولية.",
+      "cancelTitle": "إلغاء CMR {number}",
+      "cancelDescription": "CMR الملغاة تُحفَظ للتدقيق لكن لم تعد سارية. لإعادة الإصدار، أنشئ CMR جديدة على نفس المهمة بعد الإلغاء.",
+      "cancelReason": "سبب الإلغاء",
+      "cancelReasonPlaceholder": "مثلاً: خطأ في المرسَل إليه، إعادة إسناد المهمة..."
+    }
+  },
+  "subcontracting": {
+    "page": {
+      "title": "المناولة",
+      "subtitle": "إدارة المهام المسندة إلى الناقلين الشركاء: أوامر المهام، تتبع الهامش والحالة.",
+      "partnerCount": "{count, plural, =0 {لا يوجد شريك نشط} one {شريك نشط واحد} other {# شركاء نشطون}}"
+    },
+    "tabs": {
+      "missions": "المهام المُناوَلة",
+      "partners": "الشركاء"
+    },
+    "stats": {
+      "activePartners": "الشركاء النشطون",
+      "outOfTotal": "من أصل {total}",
+      "openMissions": "مهام جارية",
+      "openMissionsSubtitle": "مُرسلة، مقبولة أو في الطريق",
+      "totalCost": "تكلفة المناولة",
+      "totalCostSubtitle": "{count, plural, =0 {لا يوجد مهام} one {# مهمة} other {# مهام}}",
+      "totalMargin": "الهامش الإجمالي",
+      "totalMarginPct": "متوسط الهامش {pct}٪",
+      "totalMarginEmpty": "لا يوجد مهام بعد"
+    },
+    "search": "بحث...",
+    "table": {
+      "missionOrder": "رقم أمر المهمة",
+      "shipment": "الشحنة",
+      "partner": "المناوِل",
+      "cost": "التكلفة (بدون ضريبة)",
+      "sale": "البيع (بدون ضريبة)",
+      "margin": "الهامش (بدون ضريبة)",
+      "status": "الحالة",
+      "actions": "",
+      "sentOn": "أُرسل في {date}"
+    },
+    "status": {
+      "draft": "مسودة",
+      "sent": "مُرسلة",
+      "accepted": "مقبولة",
+      "in_progress": "في الطريق",
+      "completed": "مكتملة",
+      "cancelled": "ملغاة"
+    },
+    "actions": {
+      "newMission": "مهمة جديدة",
+      "newPartner": "شريك جديد",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "send": "إرسال",
+      "generatePdf": "توليد PDF",
+      "viewPdf": "عرض PDF",
+      "changeStatus": "تغيير الحالة",
+      "save": "حفظ",
+      "cancel": "إلغاء",
+      "create": "إنشاء المهمة",
+      "close": "إغلاق"
+    },
+    "toast": {
+      "partnerCreated": "تم إنشاء الشريك",
+      "partnerUpdated": "تم تحديث الشريك",
+      "partnerDeleted": "تم حذف الشريك",
+      "missionCreated": "تم إنشاء المهمة — أمر {number}",
+      "missionUpdated": "تم تحديث المهمة",
+      "missionSent": "تم إرسال أمر المهمة",
+      "pdfGenerated": "تم توليد PDF",
+      "status": {
+        "sent": "تم تحديد المهمة كمُرسلة",
+        "accepted": "تم قبول المهمة",
+        "in_progress": "المهمة في الطريق",
+        "completed": "اكتملت المهمة",
+        "cancelled": "أُلغيت المهمة"
+      }
+    },
+    "confirmDelete": "حذف الشريك «{name}» ؟",
+    "empty": {
+      "missions": "لا توجد مهام مُناوَلة بعد.",
+      "partners": "لا يوجد شركاء مسجلون. أنشئ مناوِلاً لإسناد مهمة إليه."
+    },
+    "partner": {
+      "paymentTerms": "الدفع خلال {days} يومًا"
+    },
+    "vehicleType": {
+      "motorcycle": "دراجة نارية",
+      "van": "شاحنة صغيرة",
+      "pickup": "بيكاب",
+      "truck": "شاحنة"
+    },
+    "dialog": {
+      "newPartner": "شريك جديد",
+      "editPartner": "تعديل الشريك",
+      "newMission": "مهمة مُناوَلة جديدة",
+      "editMission": "تعديل المهمة {number}",
+      "editMissionShipment": "الشحنة: {ref}",
+      "name": "التسمية التجارية",
+      "legalForm": "الشكل القانوني",
+      "ice": "ICE",
+      "iceHint": "15 رقمًا",
+      "rcNumber": "رقم السجل التجاري",
+      "contactName": "اسم جهة الاتصال",
+      "contactPhone": "الهاتف",
+      "contactEmail": "البريد الإلكتروني",
+      "whatsappPhone": "واتساب",
+      "address": "العنوان",
+      "city": "المدينة",
+      "vehicleTypes": "أنواع المركبات",
+      "serviceAreas": "المناطق المخدومة",
+      "serviceAreasHint": "مفصولة بفواصل",
+      "capacityKg": "السعة (كغ)",
+      "rating": "التقييم",
+      "paymentTermsDays": "مهلة الدفع (أيام)",
+      "bankName": "البنك",
+      "bankIban": "IBAN",
+      "notes": "ملاحظات",
+      "internalNotes": "ملاحظات داخلية",
+      "internalNotesHint": "غير مدرجة في PDF",
+      "notesHint": "تظهر في أمر المهمة",
+      "isActive": "نشط",
+      "shipment": "الشحنة المراد مناولتها",
+      "partner": "المناوِل",
+      "cost": "التكلفة بدون ضريبة (درهم)",
+      "salePrice": "سعر البيع بدون ضريبة",
+      "estimatedMargin": "الهامش المقدر",
+      "missionRequiredFields": "اختر شحنة ومناوِلاً.",
+      "noPartners": "لا يوجد شريك نشط. أنشئ مناوِلاً أولاً.",
+      "sendTitle": "إرسال أمر المهمة {number}",
+      "sendDescription": "يُعاد توليد PDF من البيانات الحالية، ثم يُرسل إلى المناوِل. تتحول الحالة إلى «مُرسلة».",
+      "channel": "القناة",
+      "channelOptions": {
+        "email": "البريد الإلكتروني",
+        "whatsapp": "واتساب"
+      },
+      "emailRecipient": "عنوان البريد الإلكتروني",
+      "whatsappRecipient": "رقم واتساب",
+      "whatsappWarning": "إرسال واتساب معطّل في MVP — تُسجَّل الرسالة فقط. فعِّل WHATSAPP_ENABLED للتشغيل الفعلي."
+    }
+  },
+  "accounting": {
+    "page": {
+      "title": "المحاسبة",
+      "subtitle": "وثائق الإثبات، الضريبة على القيمة المضافة، الأجور وتحضير الملف الشهري"
+    },
+    "kpi": {
+      "documentsThisMonth": "وثائق الإثبات هذا الشهر",
+      "pendingCount": "{count, plural, one {# قيد الانتظار} other {# قيد الانتظار}}",
+      "allValidated": "كل شيء مصادق عليه",
+      "treasury": "الخزينة المقدرة",
+      "treasurySubtitle": "مقبوضات {inflow} · مصروفات {outflow}",
+      "vatToPay": "ض.ق.م المستحقة",
+      "vatSubtitle": "محصلة {collected} · قابلة للحسم {deductible}",
+      "lastClosing": "آخر إقفال",
+      "lastClosingSubtitle": "تم إرسال الملف الشهري",
+      "lastClosingSentTo": "أرسل إلى {email}"
+    },
+    "pending": {
+      "title": "وثائق الإثبات قيد المصادقة",
+      "empty": "لا توجد وثائق قيد الانتظار. كل شيء على ما يرام.",
+      "capturedBy": "مسحت من طرف {name} {when}",
+      "unknown": "—"
+    },
+    "actions": {
+      "validate": "مصادقة",
+      "validated": "تم المصادقة على الوثيقة",
+      "reject": "رفض",
+      "rejected": "تم رفض الوثيقة",
+      "complete": "إتمام",
+      "completed": "تم إتمام الوثيقة"
+    },
+    "reject": {
+      "title": "رفض هذه الوثيقة",
+      "subtitle": "سيُرسل السبب إلى الشخص الذي مسح الوثيقة.",
+      "placeholder": "مثلاً: الصورة غير واضحة، المبلغ غير صحيح، الفاتورة ناقصة…"
+    },
+    "complete": {
+      "title": "إتمام الوثيقة",
+      "amountHt": "المبلغ بدون ضريبة",
+      "vatAmount": "مبلغ الضريبة",
+      "vatRate": "نسبة الضريبة (%)",
+      "supplierName": "المورد",
+      "supplierIce": "ICE المورد",
+      "documentDate": "تاريخ الوثيقة",
+      "paymentMethod": "طريقة الأداء",
+      "notes": "ملاحظات"
+    },
+    "paymentMethods": {
+      "cash": "نقدًا",
+      "transfer": "تحويل",
+      "check": "شيك",
+      "card": "بطاقة"
+    },
+    "recap": {
+      "title": "ملخص الشهر الجاري",
+      "subtitle": "ملخص مؤقت — سيُجمد عند الإقفال الشهري.",
+      "expenses": "المصروفات",
+      "revenue": "المداخيل",
+      "empty": "لا توجد مصروفات مسجلة هذا الشهر.",
+      "docsCount": "{count, plural, one {# وثيقة} other {# وثائق}}",
+      "totalExpenses": "إجمالي المصروفات",
+      "revenueExclTax": "رقم المعاملات بدون ضريبة",
+      "vatCollected": "ض.ق.م المحصلة",
+      "revenueInclTax": "رقم المعاملات شامل الضريبة"
+    },
+    "audit": {
+      "title": "نشاط المحاسبة",
+      "subtitle": "جميع الإجراءات مسجلة",
+      "empty": "لا يوجد نشاط مسجل حتى الآن.",
+      "unknownActor": "النظام",
+      "actions": {
+        "create": "مسح",
+        "validate": "صادق على",
+        "reject": "رفض",
+        "complete": "أتم",
+        "update": "عدل",
+        "send": "أرسل",
+        "archive": "أرشف",
+        "delete": "حذف"
+      },
+      "entities": {
+        "accounting_document": "وثيقة إثبات",
+        "monthly_dossier": "ملف شهري",
+        "tax_declaration": "تصريح ضريبي",
+        "payroll_data": "كشف راتب",
+        "accountant_profile": "الملف المحاسبي",
+        "subcontracted_mission": "مهمة مُناوَلة",
+        "subcontractor": "مناوِل",
+        "client_jit_policy": "سياسة JIT لعميل",
+        "shipment_customs_document": "وثيقة جمركية",
+        "free_zone": "منطقة حرة",
+        "customs_document_type": "نوع وثيقة جمركية",
+        "recurring_schedule": "برنامج دوري"
+      },
+      "viewFullFeed": "عرض السجل الكامل"
+    },
+    "fab": {
+      "label": "مسح وثيقة إثبات"
+    },
+    "quickAction": {
+      "tva": {
+        "title": "تحضير تصريح ض.ق.م",
+        "subtitle": "شهري — أجل الإيداع 20 من الشهر الموالي"
+      },
+      "cnssIr": {
+        "title": "CNSS والضريبة على الدخل",
+        "subtitle": "كشوف شهرية CNSS (9) + IR (نهاية الشهر)"
+      },
+      "paie": {
+        "title": "أجور السائقين",
+        "subtitle": "تحضير والمصادقة على الأجور الشهرية"
+      },
+      "dossiers": {
+        "title": "الملفات الشهرية",
+        "subtitle": "ملخص PDF + إرسال للمحاسب"
+      },
+      "accountant": {
+        "title": "محاسبي",
+        "subtitle": "بيانات الاتصال + طريقة التسليم المفضلة"
+      }
+    },
+    "dossiers": {
+      "title": "الملفات المحاسبية الشهرية",
+      "subtitle": "ملخص تلقائي لكل شهر للإرسال إلى المحاسب",
+      "empty": "لم يتم إنشاء أي ملف بعد",
+      "emptyHint": "اضغط \"إنشاء\" لتوليد ملف الشهر السابق.",
+      "generateButton": "إنشاء ملف {period}",
+      "summary": "{revenue} رقم المعاملات · {expenses} مصروفات · {vat} ض.ق.م · {docs} وثيقة",
+      "sentInfo": "أرسل إلى {email} {when}",
+      "backToList": "العودة إلى القائمة",
+      "status": {
+        "in_progress": "قيد الإعداد",
+        "ready": "جاهز للإرسال",
+        "sent": "أرسل",
+        "closed_by_accountant": "مغلق"
+      },
+      "method": {
+        "email": "بريد إلكتروني",
+        "usb": "مفتاح USB",
+        "paper": "ورق",
+        "portal": "بوابة"
+      },
+      "detail": {
+        "title": "ملف {period}",
+        "generatedAt": "تم إنشاؤه {when}",
+        "notGenerated": "لم يتم إنشاؤه بعد",
+        "regenerate": "إعادة الإنشاء",
+        "downloadPdf": "تنزيل PDF",
+        "sendByEmail": "إرسال إلى {email}",
+        "resendByEmail": "إعادة الإرسال بالبريد",
+        "confirmResend": "إعادة إرسال هذا الملف إلى المحاسب؟",
+        "configureAccountant": "ضبط البريد الإلكتروني للمحاسب",
+        "sentTitle": "تم إرسال الملف",
+        "sentBody": "أرسل إلى {email} في {date} ({method})",
+        "revenue": "رقم المعاملات",
+        "expenses": "المصروفات",
+        "margin": "الهامش الإجمالي",
+        "vatToPay": "ض.ق.م المستحقة",
+        "estimated": "مقدر",
+        "htShort": "ب.ض",
+        "ttcShort": "ش.ض",
+        "payrollTitle": "أجور السائقين المصادق عليها",
+        "payrollSubtitle": "لقطة من كشوف الأجور المدرجة في هذا الملف",
+        "payrollGross": "إجمالي الكتلة الأجرية",
+        "payrollNet": "صافي الكتلة الأجرية",
+        "employerCost": "إجمالي كلفة المشغل",
+        "docsCount": "{count, plural, one {# وثيقة مدرجة} other {# وثائق مدرجة}}"
+      }
+    },
+    "settings": {
+      "title": "محاسبي",
+      "subtitle": "بيانات المحاسب الخارجي وتفضيلات الإرسال",
+      "saved": "تم حفظ الإعدادات",
+      "nameRequired": "اسم المحاسب مطلوب",
+      "fields": {
+        "accountantName": "اسم المحاسب",
+        "cabinetName": "المكتب",
+        "email": "البريد الإلكتروني",
+        "emailHint": "يستخدم للإرسال التلقائي للملف الشهري",
+        "phone": "الهاتف",
+        "whatsapp": "واتساب",
+        "method": "طريقة الإرسال المفضلة",
+        "billingTerms": "شروط الفوترة",
+        "billingTermsPlaceholder": "مثلاً: 1500 درهم/شهر جزافي",
+        "notes": "ملاحظات"
+      }
+    },
+    "paie": {
+      "title": "أجور السائقين",
+      "subtitle": "الفترة: {period}",
+      "loadError": "تعذر تحميل بيانات الأجور لهذه الفترة.",
+      "noDrivers": "لا يوجد سائقون نشطون. أضف سائقيك الأجراء لتحضير الأجور.",
+      "advancesAuto": "سلف مكتشفة: {amount}",
+      "saved": "تم حفظ السطر",
+      "saveLine": "حفظ هذا السطر",
+      "validateAll": "المصادقة على أجور الشهر",
+      "validated": "{count, plural, one {تمت المصادقة على # سطر} other {تمت المصادقة على # أسطر}}",
+      "confirmValidate": "مصادقة جميع الأسطر المسودة؟ ستجمد المبالغ وتدرج في الملف الشهري.",
+      "allValidated": "تمت المصادقة على الأجور بالفعل لهذه الفترة.",
+      "status": {
+        "draft": "مسودة",
+        "validated": "مصادق عليه",
+        "paid": "مؤدى"
+      },
+      "fields": {
+        "baseSalary": "الراتب الأساسي (درهم)",
+        "bonuses": "علاوات + ساعات إضافية (درهم)",
+        "deductions": "اقتطاعات / سلف (درهم)",
+        "overtimeHours": "ساعات إضافية",
+        "workingDays": "أيام العمل"
+      },
+      "calc": {
+        "gross": "الإجمالي",
+        "cnssEmp": "CNSS أجير",
+        "amoEmp": "AMO أجير",
+        "ir": "ضريبة الدخل",
+        "cnssEmployer": "CNSS مشغل",
+        "amoEmployer": "AMO مشغل",
+        "familyAllowance": "تعويضات عائلية",
+        "employerCost": "كلفة المشغل"
+      },
+      "totals": {
+        "title": "مجاميع الشهر",
+        "gross": "مجموع الإجمالي",
+        "cnss": "مجموع CNSS الأجير",
+        "amo": "مجموع AMO الأجير",
+        "ir": "مجموع IR المقتطع",
+        "deductions": "مجموع الاقتطاعات",
+        "employerCost": "إجمالي كلفة المشغل",
+        "netToPay": "صافي الواجب أداؤه"
+      }
+    },
+    "cnssIr": {
+      "title": "CNSS والضريبة على الدخل للأجراء",
+      "subtitle": "الفترة: {period}",
+      "noDrivers": "لا يوجد سائقون نشطون. أضف سائقيك الأجراء لتحضير التصاريح.",
+      "provisionalNotice": "احتسابات مؤقتة بناءً على الراتب الشهري المرجعي للسائقين. المبالغ النهائية ستستخرج من الأجور المصادق عليها (COMPTA-5).",
+      "driver": "السائق",
+      "gross": "الإجمالي",
+      "net": "الصافي",
+      "total": "المجموع",
+      "deadline": "أجل الإيداع: {date}",
+      "urgent": "الأجل في {days, plural, one {# يوم} other {# أيام}}",
+      "overdue": "التصريح متأخر",
+      "cnss": {
+        "title": "CNSS — الضمان الاجتماعي",
+        "subtitle": "كشف يودع قبل 9 من الشهر الموالي",
+        "employeeShare": "حصة الأجير",
+        "employerShare": "حصة المشغل",
+        "amoEmployee": "AMO أجير",
+        "amoEmployer": "AMO مشغل",
+        "monthlyDue": "مجموع الواجب أداؤه لـ CNSS",
+        "markDeclared": "تأشير CNSS كمصرح به",
+        "markDeclaredSubtitle": "أدخل مرجع CNSS بعد إيداع الكشف. المبلغ: {amount}."
+      },
+      "ir": {
+        "title": "الضريبة على الدخل — الاقتطاع من المصدر",
+        "subtitle": "تحول للخزينة قبل نهاية الشهر الموالي",
+        "taxable": "الصافي الخاضع للضريبة",
+        "amount": "IR المقتطع",
+        "monthlyDue": "مجموع IR الواجب تحويله",
+        "markDeclared": "تأشير IR كمصرح به",
+        "markDeclaredSubtitle": "أدخل مرجع DGI بعد التحويل للخزينة. المبلغ: {amount}."
+      }
+    },
+    "tva": {
+      "title": "التصريح الشهري للضريبة على القيمة المضافة",
+      "subtitle": "الفترة: {period}",
+      "backToAccounting": "الرجوع إلى المحاسبة",
+      "loadError": "تعذر احتساب ض.ق.م لهذه الفترة.",
+      "collected": "ض.ق.م المحصلة",
+      "deductible": "ض.ق.م القابلة للحسم",
+      "toPay": "ض.ق.م المستحقة",
+      "collectedTitle": "ض.ق.م المحصلة — على المبيعات",
+      "collectedSubtitle": "جميع الفواتير الصادرة هذا الشهر (دون الملغاة)",
+      "deductibleTitle": "ض.ق.م القابلة للحسم — على المشتريات",
+      "deductibleSubtitle": "الوثائق المصادق عليها في الفئات القابلة للحسم",
+      "noInvoices": "لا توجد فواتير صادرة في هذه الفترة.",
+      "noDeductible": "لا توجد وثائق قابلة للحسم في هذه الفترة.",
+      "invoiceRef": "فاتورة",
+      "client": "العميل",
+      "amountHt": "بدون ضريبة",
+      "vatAmount": "ض.ق.م",
+      "ttc": "شامل الضريبة",
+      "category": "الفئة",
+      "docs": "وثائق",
+      "deadline": "أجل DGI: {date}",
+      "deadlineWas": "تجاوز الأجل في {date}",
+      "urgent": "الأجل في {days, plural, one {# يوم} other {# أيام}}",
+      "overdue": "التصريح متأخر",
+      "markDeclared": "تأشير كمصرح به",
+      "markDeclaredSubtitle": "أدخل مرجع DGI بعد إيداع التصريح. المبلغ المحتسب: {amount}.",
+      "declarationRef": "مرجع DGI",
+      "declarationDate": "تاريخ التصريح",
+      "amountPaid": "المبلغ المؤدى (إن أدي)",
+      "paymentDate": "تاريخ الأداء",
+      "notes": "ملاحظات",
+      "refRequired": "مرجع DGI مطلوب.",
+      "declared": "تم تسجيل تصريح ض.ق.م",
+      "declaredOn": "صرح به في {date} · المرجع: {ref}",
+      "status": {
+        "pending": "في انتظار التصريح",
+        "declared": "صرح به — في انتظار الأداء",
+        "paid": "صرح به وأدي",
+        "overdue": "متأخر"
+      }
+    },
+    "dialog": {
+      "title": "وثيقة إثبات جديدة"
+    },
+    "takePhoto": "التقاط صورة",
+    "orPickFile": "أو اختر ملفًا (JPEG, PNG, PDF)",
+    "save": "حفظ",
+    "captured": "تم تسجيل وثيقة الإثبات",
+    "quick": {
+      "tangerMed": "رسوم طنجة المتوسط",
+      "fuel": "وقود"
+    },
+    "fields": {
+      "category": "النوع",
+      "amountTtc": "المبلغ شامل الضريبة",
+      "vehicle": "المركبة المعنية",
+      "vehicleNone": "بدون مركبة"
+    },
+    "categories": {
+      "invoice_client": "فاتورة عميل",
+      "invoice_supplier": "فاتورة مورد",
+      "fuel_receipt": "وقود",
+      "toll_receipt": "رسوم طريق",
+      "maintenance_receipt": "صيانة",
+      "driver_advance": "سلفة سائق",
+      "salary_slip": "كشف راتب",
+      "cnss_payment": "أداء CNSS",
+      "ir_payment": "أداء الضريبة على الدخل",
+      "phone_internet": "اتصالات",
+      "office_rent": "كراء المكتب",
+      "insurance": "تأمين",
+      "bank_statement": "كشف حساب",
+      "bank_fee": "مصاريف بنكية",
+      "other": "آخر"
+    },
+    "errors": {
+      "fileRequired": "يرجى إرفاق صورة أو ملف PDF لوثيقة الإثبات",
+      "categoryRequired": "اختر نوع وثيقة الإثبات",
+      "amountRequired": "أدخل المبلغ شامل الضريبة",
+      "fileTooLarge": "الملف كبير جدًا (الحد 10 ميغابايت)",
+      "fileType": "صيغة غير مدعومة. استعمل JPEG أو PNG أو WebP أو PDF."
+    }
+  },
+  "viewAsBanner": {
+    "label": "معاينة بصفة {role}",
+    "back": "العودة إلى حسابي"
+  },
+  "workSessions": {
+    "page": {
+      "title": "الحضور وسجل العمل",
+      "description": "تسجيل الدخول والخروج وملاحظات أعضاء الفريق.",
+      "historyTitle": "السجل الكامل"
+    },
+    "checkIn": {
+      "title": "ابدأ يوم عملك",
+      "subtitle": "تسجيل الدخول مخصص للأعضاء الموجودين في المكتب.",
+      "officeFallbackLabel": "المكتب",
+      "viewOnMap": "عرض",
+      "refresh": "تحديث",
+      "submit": "تسجيل الدخول",
+      "submitting": "جارٍ الحفظ…",
+      "toastSuccess": "تم تسجيل الدخول",
+      "toastSuccessDescription": "يوم عمل سعيد!",
+      "toastError": "تعذر تسجيل الدخول"
+    },
+    "checkOut": {
+      "title": "تسجيل الخروج — نهاية اليوم",
+      "subtitle": "قيّم يومك قبل المغادرة.",
+      "productivity": "الإنتاجية",
+      "motivation": "التحفيز",
+      "blockers": "العوائق",
+      "blockersPlaceholder": "لا شيء للإبلاغ…",
+      "notes": "ملاحظات (اختياري)",
+      "submit": "تأكيد تسجيل الخروج",
+      "submitting": "جارٍ الحفظ…",
+      "toastSuccess": "تم تسجيل الخروج",
+      "toastSuccessDescription": "إلى اللقاء!",
+      "toastError": "تعذر تسجيل الخروج"
+    },
+    "widget": {
+      "title": "تسجيل الخروج اليومي",
+      "subtitle": "أكمل قبل المغادرة.",
+      "expandedHeader": "نهاية اليوم",
+      "cta": "تسجيل الخروج",
+      "required": "إلزامي",
+      "beforeLeaving": "قبل المغادرة",
+      "collapse": "تصغير"
+    },
+    "geo": {
+      "locating": "جارٍ التحقق من موقعك…",
+      "denied": "اسمح بالوصول إلى الموقع لتتمكن من تسجيل الدخول.",
+      "deniedTitle": "تم رفض الموقع الجغرافي",
+      "unavailable": "تعذر تحديد موقعك.",
+      "unavailableTitle": "الموقع غير متاح",
+      "unsupported": "لا يدعم هذا المتصفح تحديد الموقع الجغرافي.",
+      "insideTitle": "أنت داخل المكتب",
+      "insideDescription": "على بُعد {distance} م من النقطة المرجعية · دقة ±{accuracy} م.",
+      "outsideTitle": "خارج المكتب",
+      "outsideDescription": "أنت على بُعد ~{distance} م من المكتب. تسجيل الدخول مسموح به فقط في نطاق {radius} م.",
+      "geofenceMissingTitle": "المكتب غير معدّ",
+      "geofenceMissingDescription": "يرجى من المسؤول تحديد موقع المكتب في الإعدادات."
+    },
+    "presence": {
+      "title": "الحضور — آخر 24 ساعة",
+      "subtitle": "تسجيلات دخول الفريق منذ الأمس",
+      "viewAll": "السجل الكامل",
+      "empty": "لا توجد تسجيلات دخول خلال آخر 24 ساعة.",
+      "error": "خطأ: {message}",
+      "stats": {
+        "sessions": "الجلسات",
+        "uniqueMembers": "{count, plural, =0 {لا أعضاء} one {# عضو} other {# أعضاء}}",
+        "activeNow": "نشطون الآن",
+        "working": "في العمل حاليًا",
+        "avgDuration": "متوسط المدة",
+        "perSession": "لكل جلسة",
+        "blockers": "العوائق",
+        "toReview": "للمراجعة"
+      },
+      "row": {
+        "unknown": "عضو",
+        "inProgress": "جارٍ",
+        "prod": "إنتاج",
+        "motiv": "تحفيز",
+        "blocker": "عائق",
+        "ok": "تم"
+      }
+    },
+    "admin": {
+      "empty": "لم يُسجَّل أي دخول بعد.",
+      "error": "خطأ: {message}",
+      "memberCount": "{count, plural, =0 {لا أعضاء} one {# عضو} other {# أعضاء}}",
+      "cols": {
+        "member": "العضو",
+        "workHours": "ساعات العمل",
+        "feedback": "الملاحظات",
+        "notes": "ملاحظات",
+        "blockers": "عائق"
+      },
+      "row": {
+        "unknown": "عضو",
+        "inProgress": "جارٍ",
+        "prod": "إنتاج",
+        "motiv": "تحفيز",
+        "yes": "نعم",
+        "no": "لا"
+      }
+    }
+  },
+  "audit": {
+    "page": {
+      "title": "نشاط المحاسبة",
+      "subtitle": "سجل زمني لكل الإجراءات المالية — من فعل ماذا، متى، من أين.",
+      "superAdminBadge": "عرض super_admin · جميع الشركات",
+      "tenantScopedBadge": "نطاق الشركة"
+    },
+    "stats": {
+      "today": "اليوم",
+      "last7d": "آخر 7 أيام",
+      "distinctActors": "أعداد المنفذين",
+      "externalAccountant": "محاسب خارجي"
+    },
+    "filters": {
+      "title": "مرشحات",
+      "all": "الكل",
+      "entity": "الكيان",
+      "action": "الإجراء",
+      "actor": "المنفذ",
+      "from": "من",
+      "to": "إلى",
+      "apply": "تطبيق",
+      "reset": "إعادة تعيين"
+    },
+    "actions": {
+      "create": "أنشأ",
+      "update": "عدّل",
+      "validate": "صادق على",
+      "reject": "رفض",
+      "complete": "أتم",
+      "send": "أرسل",
+      "archive": "أرشف",
+      "delete": "حذف"
+    },
+    "entities": {
+      "accounting_document": "وثيقة إثبات",
+      "monthly_dossier": "ملف شهري",
+      "tax_declaration": "تصريح ضريبي",
+      "payroll_data": "كشف راتب",
+      "accountant_profile": "الملف المحاسبي",
+      "subcontracted_mission": "مهمة مُناوَلة",
+      "subcontractor": "مناوِل",
+      "client_jit_policy": "سياسة JIT لعميل",
+      "shipment_customs_document": "وثيقة جمركية",
+      "free_zone": "منطقة حرة",
+      "customs_document_type": "نوع وثيقة جمركية",
+      "recurring_schedule": "برنامج دوري"
+    },
+    "diff": {
+      "title": "الحقول المعدّلة",
+      "noChanges": "لا توجد حقول مسجّلة (إجراء بدون فروقات)."
+    },
+    "meta": {
+      "ip": "عنوان IP",
+      "userAgent": "العميل",
+      "entityId": "معرّف الكيان",
+      "auditId": "معرّف السجل"
+    },
+    "empty": {
+      "title": "لا يوجد نشاط مسجل",
+      "subtitle": "ستظهر إجراءات المحاسبة هنا بمجرد قيام مستخدم بأي عملية.",
+      "filtered": "لا نتائج بهذه المرشحات — أعد التعيين أو وسّع الفترة."
+    },
+    "unknownActor": "النظام",
+    "rowsCap": "{count, plural, =0 {لا أسطر} one {سطر واحد} other {# أسطر}} معروضة · حد أقصى 500 · علامة «{navAccountingLabel}»"
   }
 }

@@ -1,11 +1,12 @@
 'use server'
 
+import { cache } from 'react'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import type { AuthUser, ActionResult } from '@/types/app.types'
 import { logger } from '@/lib/utils/logger'
 
-export async function getAuthenticatedUser(): Promise<AuthUser | null> {
+const _getAuthenticatedUser = cache(async (): Promise<AuthUser | null> => {
   const supabase = await createClient()
 
   const { data: { user }, error } = await supabase.auth.getUser()
@@ -31,6 +32,10 @@ export async function getAuthenticatedUser(): Promise<AuthUser | null> {
     avatarUrl: profile.avatar_url,
     isActive: profile.is_active,
   }
+})
+
+export async function getAuthenticatedUser(): Promise<AuthUser | null> {
+  return _getAuthenticatedUser()
 }
 
 export async function requireAuth(allowedRoles?: string[]): Promise<AuthUser> {
@@ -43,7 +48,7 @@ export async function requireAuth(allowedRoles?: string[]): Promise<AuthUser> {
   if (allowedRoles && !allowedRoles.includes(user.role)) {
     // Redirect to role-appropriate home
     if (user.role === 'driver') redirect('/fr/my-shipments')
-    if (user.role === 'client') redirect('/fr/shipments')
+    if (user.role === 'client') redirect('/fr/portal/shipments')
     redirect('/fr/login')
   }
 
@@ -78,8 +83,8 @@ export async function signIn(
     return { data: null, error: 'Ce compte est désactivé. Contactez votre administrateur.' }
   }
 
-  // Update last_login_at
-  await supabase
+  // Fire-and-forget — don't make the user wait for this round-trip.
+  void supabase
     .from('users')
     .update({ last_login_at: new Date().toISOString() })
     .eq('id', data.user.id)

@@ -18,39 +18,41 @@ export default async function MyShipmentsPage() {
 
   if (!user) return null
 
-  // Get driver record for this user
-  const { data: driver } = await supabase
-    .from('drivers')
-    .select('id')
-    .eq('user_id', user.id)
-    .eq('company_id', user.companyId)
-    .single()
+  const isAdminPreview = user.role !== 'driver'
+
+  // Get driver record for this user (only when the user is actually a driver)
+  const { data: driver } = isAdminPreview
+    ? { data: null as { id: string } | null }
+    : await supabase
+        .from('drivers')
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('company_id', user.companyId)
+        .single()
 
   const activeStatuses: ShipmentStatus[] = ['assigned', 'picked_up', 'in_transit']
   const doneStatuses: ShipmentStatus[] = ['delivered', 'failed']
 
+  const baseActive = supabase
+    .from('shipments')
+    .select('id, reference, status, pickup_city, pickup_address, delivery_city, delivery_address, delivery_scheduled_at, created_at')
+    .eq('company_id', user.companyId)
+    .in('status', activeStatuses)
+    .is('deleted_at', null)
+    .order('delivery_scheduled_at', { ascending: true })
+
+  const baseDone = supabase
+    .from('shipments')
+    .select('id, reference, status, pickup_city, delivery_city, delivery_scheduled_at, created_at')
+    .eq('company_id', user.companyId)
+    .in('status', doneStatuses)
+    .is('deleted_at', null)
+    .order('created_at', { ascending: false })
+    .limit(20)
+
   const [{ data: active }, { data: done }] = await Promise.all([
-    driver
-      ? supabase
-          .from('shipments')
-          .select('id, reference, status, pickup_city, pickup_address, delivery_city, delivery_address, delivery_scheduled_at, created_at')
-          .eq('driver_id', driver.id)
-          .eq('company_id', user.companyId)
-          .in('status', activeStatuses)
-          .is('deleted_at', null)
-          .order('delivery_scheduled_at', { ascending: true })
-      : { data: [] },
-    driver
-      ? supabase
-          .from('shipments')
-          .select('id, reference, status, pickup_city, delivery_city, delivery_scheduled_at, created_at')
-          .eq('driver_id', driver.id)
-          .eq('company_id', user.companyId)
-          .in('status', doneStatuses)
-          .is('deleted_at', null)
-          .order('created_at', { ascending: false })
-          .limit(20)
-      : { data: [] },
+    isAdminPreview ? baseActive : driver ? baseActive.eq('driver_id', driver.id) : Promise.resolve({ data: [] }),
+    isAdminPreview ? baseDone : driver ? baseDone.eq('driver_id', driver.id) : Promise.resolve({ data: [] }),
   ])
 
   return (

@@ -1,9 +1,11 @@
+/* ── Google Fonts: Plus Jakarta Sans (LTR) + Cairo (RTL) ──────────── */
+/* @import must come before @tailwind directives to satisfy CSS spec
+   (matters for Turbopack's stricter parser). */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* ── Google Fonts: Plus Jakarta Sans (LTR) + Cairo (RTL) ──────────── */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {

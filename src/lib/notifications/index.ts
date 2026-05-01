@@ -3,11 +3,14 @@ import { WhatsappProvider } from './whatsapp-provider'
 import { createServiceClient } from '@/lib/supabase/server'
 import { logger } from '@/lib/utils/logger'
 
+export type NotificationAudience = 'driver' | 'dispatcher' | 'admin' | 'client'
+
 export interface NotificationPayload {
   to: string
   subject?: string
   body: string
   channel: 'email' | 'whatsapp'
+  audience: NotificationAudience
   metadata?: Record<string, unknown>
 }
 

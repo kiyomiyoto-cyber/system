@@ -15,6 +15,20 @@ import {
   FileText,
   BarChart3,
   Settings,
+  Calculator,
+  FileSignature,
+  CalendarClock,
+  Handshake,
+  Zap,
+  ClipboardCheck,
+  Globe2,
+  ScrollText,
+  Radio,
+  MessageCircle,
+  Inbox,
+  Building2,
+  CreditCard,
+  ClipboardList,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -23,22 +37,50 @@ import type { AuthUser } from '@/types/app.types'
 
 export type NavIconKey =
   | 'dashboard'
+  | 'commandCenter'
   | 'shipments'
   | 'clients'
   | 'drivers'
   | 'vehicles'
   | 'invoices'
+  | 'accounting'
+  | 'contracts'
+  | 'recurring'
+  | 'subcontracting'
+  | 'jit'
+  | 'freeZones'
+  | 'cmr'
+  | 'whatsapp'
+  | 'inbox'
+  | 'suppliers'
+  | 'macaronsPeages'
+  | 'onboarding'
   | 'reports'
+  | 'presence'
   | 'settings'
 
 const ICONS: Record<NavIconKey, LucideIcon> = {
   dashboard: LayoutDashboard,
+  commandCenter: Radio,
   shipments: Package,
   clients: Users,
   drivers: Truck,
   vehicles: Car,
   invoices: FileText,
+  accounting: Calculator,
+  contracts: FileSignature,
+  recurring: CalendarClock,
+  subcontracting: Handshake,
+  jit: Zap,
+  freeZones: Globe2,
+  cmr: ScrollText,
+  whatsapp: MessageCircle,
+  inbox: Inbox,
+  suppliers: Building2,
+  macaronsPeages: CreditCard,
+  onboarding: ClipboardList,
   reports: BarChart3,
+  presence: ClipboardCheck,
   settings: Settings,
 }
 

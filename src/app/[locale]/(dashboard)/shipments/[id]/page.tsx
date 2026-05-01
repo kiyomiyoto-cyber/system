@@ -9,6 +9,7 @@ import { ShipmentStatusBadge } from '@/components/shared/shipment-status-badge'
 import { ShipmentTimeline } from '@/components/shared/shipment-timeline'
 import { RouteMap } from '@/components/maps/route-map'
 import { AssignDriverPanel } from './assign-driver-panel'
+import { WhatsappSendButton } from '@/components/whatsapp/whatsapp-send-button'
 import { formatMAD, formatDate, formatDateTime, formatDistance, formatWeight } from '@/lib/utils/formatters'
 import type { ShipmentStatus } from '@/types/database.types'
 
@@ -68,7 +69,19 @@ export default async function ShipmentDetailPage({
             {shipment.pickup_city} → {shipment.delivery_city}
           </h1>
         </div>
-        <ShipmentStatusBadge status={shipment.status} size="lg" />
+        <div className="flex items-center gap-2">
+          {driver && (
+            <WhatsappSendButton
+              context={{ kind: 'shipment', shipmentId: shipment.id, audience: 'driver' }}
+            />
+          )}
+          {client && (
+            <WhatsappSendButton
+              context={{ kind: 'shipment', shipmentId: shipment.id, audience: 'client' }}
+            />
+          )}
+          <ShipmentStatusBadge status={shipment.status} size="lg" />
+        </div>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">

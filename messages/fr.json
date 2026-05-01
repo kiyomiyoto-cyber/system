@@ -1,16 +1,41 @@
 {
   "nav": {
+    "sectionOperations": "Opérations",
+    "sectionCommercial": "Commercial",
+    "sectionResources": "Ressources",
+    "sectionFinance": "Finance",
+    "sectionInsights": "Analyse",
     "dashboard": "Tableau de bord",
-    "shipments": "Expéditions",
-    "clients": "Clients",
+    "commandCenter": "Centre de commandement",
+    "shipments": "Missions",
+    "clients": "Clients industriels",
     "drivers": "Chauffeurs",
     "vehicles": "Véhicules",
+    "suppliers": "Fournisseurs",
+    "macaronsPeages": "Macarons & péages",
     "invoices": "Factures",
     "reports": "Rapports",
+    "onboarding": "Mise en route",
     "settings": "Paramètres",
     "myShipments": "Mes livraisons",
     "profile": "Mon profil",
-    "logout": "Se déconnecter"
+    "logout": "Se déconnecter",
+    "accounting": "Comptabilité",
+    "contracts": "Contrats clients",
+    "recurring": "Programme récurrent",
+    "subcontracting": "Sous-traitance",
+    "jit": "Flux tendu (JIT)",
+    "freeZones": "Zones franches",
+    "cmr": "Lettres de voiture (CMR)",
+    "whatsapp": "WhatsApp",
+    "inbox": "Boîte de réception",
+    "presence": "Présence",
+    "viewAs": "Voir comme",
+    "viewAsDriver": "Vue chauffeur",
+    "viewAsClient": "Vue client",
+    "viewAsDispatcher": "Vue dispatcher",
+    "viewAsComptable": "Vue comptable",
+    "myAccount": "Mon compte"
   },
   "common": {
     "save": "Enregistrer",
@@ -51,17 +76,47 @@
     "loginTitle": "Connexion à votre compte",
     "loginSubtitle": "Entrez vos identifiants pour accéder au TMS",
     "email": "Adresse email",
+    "emailPlaceholder": "nom@entreprise.ma",
     "password": "Mot de passe",
+    "passwordPlaceholder": "Saisissez votre mot de passe",
     "showPassword": "Afficher le mot de passe",
     "hidePassword": "Masquer le mot de passe",
     "submit": "Se connecter",
     "submitting": "Connexion...",
+    "rememberMe": "Rester connecté",
+    "forgotPassword": "Mot de passe oublié ?",
     "invalidCredentials": "Email ou mot de passe incorrect",
     "accountInactive": "Compte désactivé. Contactez votre administrateur.",
-    "loginSuccess": "Bienvenue !"
+    "loginSuccess": "Bienvenue !",
+    "language": "Langue",
+    "languageFr": "Français",
+    "languageAr": "العربية",
+    "needHelp": "Besoin d'aide ?",
+    "contactSupport": "Contacter le support",
+    "secureLogin": "Connexion chiffrée TLS",
+    "isoCompliance": "Conforme RGPD · Hébergé au Maroc",
+    "tagline": "La plateforme de gestion du transport",
+    "taglineAccent": "pensée pour le Maroc.",
+    "heroDescription": "Expéditions, chauffeurs, clients, factures — tout votre flux logistique en un seul outil, bilingue FR / AR.",
+    "featureRealtimeTitle": "Suivi temps réel",
+    "featureRealtimeDesc": "Localisation live des expéditions et chauffeurs sur la carte.",
+    "featureSecureTitle": "Sécurité multi-tenant",
+    "featureSecureDesc": "Chaque transporteur isolé par Row-Level Security Supabase.",
+    "featureBillingTitle": "Facturation automatique",
+    "featureBillingDesc": "Génération PDF, groupage mensuel, relances automatisées.",
+    "statsShipments": "Expéditions / mois",
+    "statsOnTime": "Livraisons à l'heure",
+    "statsCarriers": "Transporteurs actifs",
+    "trustedBy": "Approuvé par les transporteurs marocains",
+    "liveTrackingBadge": "En direct",
+    "copyrightSuffix": "Casablanca, Maroc"
   },
   "dashboard": {
     "title": "Tableau de bord",
+    "welcomeMorning": "Bonjour",
+    "welcomeAfternoon": "Bon après-midi",
+    "welcomeEvening": "Bonsoir",
+    "welcomeSubtitle": "Voici l'état de votre activité aujourd'hui",
     "newShipment": "Nouvelle expédition",
     "shipmentsToday": "Expéditions aujourd'hui",
     "shipmentsThisWeek": "cette semaine",
@@ -73,11 +128,91 @@
     "recentShipments": "Expéditions récentes",
     "overdueInvoices": "Factures en retard",
     "noOverdueInvoices": "Aucune facture en retard",
-    "viewAll": "Voir tout"
+    "viewAll": "Voir tout",
+    "statusBreakdown": "Répartition par statut",
+    "noShipmentsYet": "Aucune expédition pour le moment",
+    "fleetSnapshot": "État de la flotte",
+    "driversAvailable": "Chauffeurs disponibles",
+    "driversBusy": "en mission",
+    "vehiclesActive": "Véhicules actifs",
+    "vehiclesInMaintenance": "en maintenance",
+    "fleetUtilization": "Taux d'utilisation",
+    "revenueTrend": "Évolution du chiffre d'affaires",
+    "last7Days": "7 derniers jours",
+    "last30Days": "30 derniers jours",
+    "totalThisPeriod": "Total période",
+    "vsLastPeriod": "vs période précédente",
+    "topClients": "Top clients du mois",
+    "noClientRevenue": "Aucune facturation ce mois",
+    "shipmentsCount": "{count, plural, =0 {aucune expédition} one {# expédition} other {# expéditions}}",
+    "quickStats": "Aperçu rapide",
+    "totalClients": "Clients",
+    "totalDrivers": "Chauffeurs",
+    "totalVehicles": "Véhicules",
+    "pendingInvoices": "Factures en attente",
+    "activityFeed": "Activité récente",
+    "noActivity": "Aucune activité récente",
+    "activityCreated": "{ref} créée",
+    "activityAssigned": "{ref} affectée à {driver}",
+    "activityPickedUp": "{ref} récupérée",
+    "activityInTransit": "{ref} en transit",
+    "activityDelivered": "{ref} livrée",
+    "activityFailed": "{ref} échouée",
+    "activityCustoms": "{ref} en douane",
+    "activityCancelled": "{ref} annulée",
+    "viewShipments": "Expéditions",
+    "viewClients": "Clients",
+    "viewInvoices": "Factures",
+    "viewReports": "Rapports",
+    "trajet": "Trajet",
+    "driver": "Chauffeur",
+    "shipmentValue": "Valeur",
+    "alerts": {
+      "title": "{count, plural, =0 {Aucune alerte} one {# alerte critique} other {# alertes critiques}}",
+      "lateJit": "{count, plural, =0 {Aucune mission JIT en retard} one {# mission JIT en retard — exposition {exposure}} other {# missions JIT en retard — exposition {exposure}}}",
+      "criticalJit": "{count, plural, =0 {0 mission} one {# mission JIT à moins d'1 h de la deadline} other {# missions JIT à moins d'1 h de la deadline}}",
+      "customsIncomplete": "{count, plural, =0 {0 mission} one {# mission avec dossier douanier incomplet} other {# missions avec dossier douanier incomplet}}"
+    },
+    "phaseC": {
+      "todayProgram": "Programme du jour",
+      "todayProgramSubtitle": "{done} livrées · {inProgress} en cours",
+      "todayProgramEmpty": "Aucune mission planifiée aujourd'hui",
+      "activeMissions": "Missions actives",
+      "activeMissionsSubtitle": "{onTime} à l'heure · {delivered} livrées ce mois",
+      "subMargin": "Marge sous-traitance (mois)",
+      "subMarginSubtitle": "{pct}% sur {count, plural, =0 {0 mission} one {# mission} other {# missions}}",
+      "subMarginEmpty": "Aucune sous-traitance ce mois",
+      "monthRevenue": "Chiffre d'affaires (mois)",
+      "monthRevenueVsLast": "{pct}% de l'objectif M-1 ({last})",
+      "monthRevenueNoBaseline": "Premier mois — pas de référence",
+      "activeSubcontracts": "Sous-traitance en cours",
+      "activeSubcontractsEmpty": "Aucune mission sous-traitée en cours",
+      "subStatus": {
+        "sent": "Envoyée",
+        "accepted": "Acceptée",
+        "in_progress": "En route"
+      },
+      "subCost": "Coût {value}",
+      "subMarginRow": "Marge {value}"
+    }
   },
   "shipments": {
     "title": "Expéditions",
+    "subtitle": "Suivez et gérez toutes vos expéditions en un coup d'œil",
+    "stats": {
+      "total": "Total expéditions",
+      "totalSubtitle": "toutes périodes confondues",
+      "inTransit": "En cours",
+      "inTransitSubtitle": "à livrer aujourd'hui",
+      "deliveredMonth": "Livrées (mois)",
+      "deliveredSubtitle": "{rate}% à l'heure",
+      "revenueMonth": "Chiffre d'affaires (mois)",
+      "revenueSubtitle": "{count, plural, =0 {aucune livraison} one {# livraison} other {# livraisons}}"
+    },
+    "filterCount": "{count, plural, =0 {0} one {1} other {#}}",
+    "noResults": "Aucune expédition ne correspond aux filtres",
     "newShipment": "Nouvelle expédition",
+    "exportExcel": "Exporter Excel",
     "createShipment": "Créer l'expédition",
     "createdWithRef": "Expédition {ref} créée",
     "backToList": "Retour à la liste",
@@ -156,6 +291,28 @@
   },
   "clients": {
     "title": "Clients",
+    "subtitle": "Votre portefeuille clients et leurs conditions commerciales",
+    "stats": {
+      "total": "Clients",
+      "totalSubtitle": "{count, plural, =0 {aucun client} one {# au total} other {# au total}}",
+      "active": "Actifs (30j)",
+      "activeSubtitle": "avec activité récente",
+      "topRevenue": "Top client",
+      "topRevenueSubtitle": "ce mois",
+      "avgPaymentTerms": "Délai moyen",
+      "avgPaymentTermsSubtitle": "jours de paiement"
+    },
+    "filter": {
+      "all": "Tous",
+      "perShipment": "Par expédition",
+      "monthlyGrouped": "Mensuel"
+    },
+    "card": {
+      "shipmentsThisMonth": "{count, plural, =0 {aucune expédition} one {# expédition ce mois} other {# expéditions ce mois}}",
+      "noActivity": "Pas d'activité ce mois",
+      "viewProfile": "Voir le profil"
+    },
+    "noResults": "Aucun client ne correspond à votre recherche",
     "newClient": "Nouveau client",
     "edit": "Modifier",
     "businessName": "Raison sociale",
@@ -186,6 +343,24 @@
   },
   "drivers": {
     "title": "Chauffeurs",
+    "subtitle": "Vos chauffeurs et leurs performances",
+    "stats": {
+      "total": "Total chauffeurs",
+      "totalSubtitle": "{count, plural, =0 {aucun} one {# chauffeur} other {# chauffeurs}}",
+      "available": "Disponibles",
+      "availableSubtitle": "prêts à partir",
+      "avgOnTime": "Taux à l'heure moyen",
+      "avgOnTimeSubtitle": "tous chauffeurs confondus",
+      "avgRating": "Note moyenne",
+      "avgRatingSubtitle": "satisfaction client"
+    },
+    "filter": {
+      "all": "Tous",
+      "available": "Disponibles",
+      "busy": "En mission",
+      "search": "Rechercher un chauffeur..."
+    },
+    "noResults": "Aucun chauffeur ne correspond aux filtres",
     "newDriver": "Nouveau chauffeur",
     "edit": "Modifier",
     "fullName": "Nom complet",
@@ -221,6 +396,24 @@
   },
   "vehicles": {
     "title": "Véhicules",
+    "subtitle": "Votre flotte et son état",
+    "stats": {
+      "total": "Total véhicules",
+      "totalSubtitle": "actifs en service",
+      "available": "Disponibles",
+      "availableSubtitle": "prêts à charger",
+      "documentsExpiring": "Documents expirant",
+      "documentsExpiringSubtitle": "sous 60 jours",
+      "totalCapacity": "Capacité totale",
+      "totalCapacitySubtitle": "tonnage cumulé"
+    },
+    "filter": {
+      "all": "Tous",
+      "available": "Disponibles",
+      "expiring": "Documents expirants",
+      "search": "Rechercher (plaque, marque)..."
+    },
+    "noResults": "Aucun véhicule ne correspond aux filtres",
     "newVehicle": "Nouveau véhicule",
     "edit": "Modifier",
     "plateNumber": "Plaque d'immatriculation",
@@ -259,6 +452,22 @@
   },
   "invoices": {
     "title": "Factures",
+    "subtitle": "Gérez votre facturation et suivez les encaissements",
+    "exportExcel": "Exporter Excel",
+    "stats": {
+      "totalRevenue": "Total facturé (mois)",
+      "totalRevenueSubtitle": "{count, plural, =0 {aucune facture} one {# facture émise} other {# factures émises}}",
+      "outstanding": "Encours total",
+      "outstandingSubtitle": "{count, plural, =0 {aucune facture} one {# en attente} other {# en attente}}",
+      "overdue": "En retard",
+      "overdueSubtitle": "{count, plural, =0 {tout est à jour} one {# à relancer} other {# à relancer}}",
+      "paid": "Encaissé (mois)",
+      "paidSubtitle": "{count, plural, =0 {aucun paiement} one {# paiement reçu} other {# paiements reçus}}"
+    },
+    "filter": {
+      "search": "Rechercher par numéro ou client..."
+    },
+    "noResults": "Aucune facture ne correspond aux filtres",
     "backToList": "Retour à la liste",
     "number": "Numéro",
     "client": "Client",
@@ -342,6 +551,7 @@
       "super_admin": "Super admin",
       "company_admin": "Administrateur",
       "dispatcher": "Dispatcher",
+      "comptable": "Comptable",
       "driver": "Chauffeur",
       "client": "Client"
     },
@@ -373,12 +583,22 @@
     "totalRevenue": "Chiffre d'affaires total",
     "avgDistance": "Distance moyenne",
     "onTimeRate": "Taux à l'heure",
-    "driverLeaderboard": "Classement chauffeurs",
+    "driverPerformance": "Performance chauffeurs",
     "driver": "Chauffeur",
     "deliveries": "Livraisons",
     "rating": "Note",
     "totalKm": "Kilométrage",
-    "noData": "Aucune donnée disponible"
+    "noData": "Aucune donnée disponible",
+    "monthRevenue": "CA du mois",
+    "monthShipments": "Expéditions du mois",
+    "activeFleet": "Flotte active",
+    "topClients": "Top clients",
+    "topClientsSubtitle": "{count, plural, =0 {aucune donnée} one {# client} other {# clients}}",
+    "noTopClients": "Aucune facturation enregistrée",
+    "fleetUtilization": "Utilisation de la flotte",
+    "rank": "#",
+    "noActivity": "Aucune activité encore",
+    "performanceLeaders": "Top chauffeurs"
   },
   "driver": {
     "myShipments": "Mes livraisons",
@@ -409,5 +629,1713 @@
     "minLength": "Au moins {min} caractères",
     "maxLength": "Maximum {max} caractères",
     "phone": "Numéro de téléphone invalide"
+  },
+  "contracts": {
+    "list": {
+      "title": "Contrats clients",
+      "subtitle": "Grilles de prix négociées par client industriel",
+      "newButton": "Nouveau contrat",
+      "empty": "Aucun contrat enregistré",
+      "emptyHint": "Créez un contrat pour formaliser les conditions de prix avec un client.",
+      "emptyAction": "Créer le premier contrat",
+      "summary": "Du {start} au {end} · {terms} jours · {billing}",
+      "openEnded": "Indéterminé",
+      "activeTitle": "Actifs",
+      "draftTitle": "Brouillons",
+      "expiredTitle": "Expirés",
+      "cancelledTitle": "Annulés",
+      "expiringSoon": "Expire bientôt",
+      "noResults": "Aucun contrat ne correspond aux filtres",
+      "search": "Rechercher un contrat ou un client...",
+      "filterAll": "Tous",
+      "indefinitePeriod": "Sans date de fin",
+      "daysRemaining": "{days, plural, =0 {expire aujourd'hui} one {# jour restant} other {# jours restants}}",
+      "expiredAgo": "{days, plural, one {expiré depuis # jour} other {expirés depuis # jours}}",
+      "termsDays": "{days} j",
+      "elapsed": "{pct}% écoulé"
+    },
+    "stats": {
+      "active": "Contrats actifs",
+      "activeSubtitle": "en vigueur",
+      "expiringSoon": "Expirent bientôt",
+      "expiringSoonSubtitle": "sous 30 jours",
+      "draft": "Brouillons",
+      "draftSubtitle": "à finaliser",
+      "totalClients": "Clients sous contrat",
+      "totalClientsSubtitle": "{count, plural, =0 {aucun} one {# client} other {# clients}}"
+    },
+    "new": {
+      "title": "Nouveau contrat client",
+      "subtitle": "Définir les conditions générales avant la grille tarifaire"
+    },
+    "detail": {
+      "title": "Contrat",
+      "subtitle": "Du {start} au {end}",
+      "backToList": "Retour aux contrats",
+      "info": "Conditions générales"
+    },
+    "form": {
+      "client": "Client",
+      "clientRequired": "Client requis",
+      "contractNumber": "N° de contrat",
+      "signedDate": "Date de signature",
+      "startDate": "Date de début",
+      "endDate": "Date de fin",
+      "endDateHint": "Laisser vide pour un contrat à durée indéterminée",
+      "paymentTerms": "Délai de paiement",
+      "immediate": "Comptant",
+      "billingMode": "Mode de facturation",
+      "autoRenewal": "Renouvellement automatique",
+      "status": "Statut",
+      "notes": "Notes",
+      "created": "Contrat créé",
+      "updated": "Contrat mis à jour"
+    },
+    "status": {
+      "active": "Actif",
+      "draft": "Brouillon",
+      "expired": "Expiré",
+      "cancelled": "Annulé"
+    },
+    "billing": {
+      "per_shipment": "Par expédition",
+      "monthly_grouped": "Groupée mensuellement"
+    },
+    "vehicle": {
+      "motorcycle": "Moto",
+      "van": "Camionnette",
+      "pickup": "Pickup",
+      "truck": "Camion"
+    },
+    "grid": {
+      "title": "Grille tarifaire",
+      "subtitle": "Prix de base par axe + suppléments négociés",
+      "addRule": "Ajouter une règle",
+      "editRule": "Modifier la règle",
+      "empty": "Aucune règle de prix. Ajoutez les axes négociés (Tanger ↔ Kénitra, etc.).",
+      "customs": "Zone franche",
+      "surchargeSummary": "Nuit +{night}% · WE +{weekend}% · Urgent +{urgent}% · Attente {waiting}/h",
+      "saved": "Règle enregistrée",
+      "deleted": "Règle supprimée",
+      "confirmDelete": "Supprimer la règle « {route} » ?",
+      "routeRequired": "Libellé de l'axe requis",
+      "fields": {
+        "routeLabel": "Libellé de l'axe",
+        "pickupCity": "Ville de chargement",
+        "deliveryCity": "Ville de livraison",
+        "vehicleType": "Type de véhicule (optionnel)",
+        "basePrice": "Prix de base (MAD)",
+        "surcharges": "Suppléments contractuels",
+        "night": "Nuit",
+        "weekend": "Week-end",
+        "urgent": "Urgence",
+        "waiting": "Attente",
+        "customsZone": "Implique un passage en zone franche / douane",
+        "notes": "Notes"
+      }
+    }
+  },
+  "blTemplates": {
+    "card": {
+      "title": "Modèles de bordereau de livraison",
+      "subtitle": "Champs personnalisés exigés par ce client (PO, lot, quai, RDV, EDI…)",
+      "manage": "Gérer les modèles",
+      "empty": "Aucun modèle. Créez-en un pour adapter le BL aux exigences industrielles du client.",
+      "defaultBadge": "Par défaut"
+    },
+    "page": {
+      "title": "Modèles BL — {client}",
+      "subtitle": "Définissez les champs imprimés et capturés sur le bordereau de livraison de ce client.",
+      "backToContract": "Retour au contrat"
+    },
+    "manager": {
+      "templatesHeading": "Modèles",
+      "addTemplate": "Nouveau",
+      "noTemplates": "Aucun modèle pour ce client.",
+      "fieldCount": "{count, plural, =0 {Aucun champ} one {# champ} other {# champs}}",
+      "defaultBadge": "Défaut",
+      "pickTemplate": "Sélectionnez un modèle pour gérer ses champs.",
+      "firstTemplate": "Créer le premier modèle de {client}",
+      "fieldsHeading": "Champs du bordereau",
+      "addField": "Ajouter un champ",
+      "noFields": "Aucun champ. Ajoutez les références exigées par ce client (PO Number, Part Number, etc.).",
+      "setDefault": "Définir par défaut",
+      "isDefault": "Modèle par défaut",
+      "renameTemplate": "Renommer",
+      "deleteTemplate": "Supprimer",
+      "editField": "Modifier le champ",
+      "deleteField": "Supprimer le champ",
+      "moveUp": "Monter",
+      "moveDown": "Descendre",
+      "requiredBadge": "Requis",
+      "hiddenBadge": "Masqué",
+      "placeholderLabel": "Placeholder",
+      "optionsLabel": "Options",
+      "confirmDeleteTemplate": "Supprimer le modèle « {name} » et tous ses champs ?",
+      "confirmDeleteField": "Supprimer le champ « {label} » ?",
+      "templateDeleted": "Modèle supprimé",
+      "fieldDeleted": "Champ supprimé",
+      "defaultUpdated": "Modèle par défaut mis à jour"
+    },
+    "dialog": {
+      "newTemplate": "Nouveau modèle BL",
+      "editTemplate": "Modifier le modèle",
+      "templateName": "Nom du modèle",
+      "templateNamePlaceholder": "BL standard, BL export, …",
+      "notes": "Notes",
+      "isDefault": "Définir comme modèle par défaut pour ce client",
+      "isDefaultHint": "Le modèle par défaut est appliqué automatiquement à toute nouvelle expédition pour ce client.",
+      "nameRequired": "Nom requis",
+      "templateCreated": "Modèle créé",
+      "templateUpdated": "Modèle mis à jour",
+      "newField": "Nouveau champ",
+      "editField": "Modifier le champ",
+      "fieldLabel": "Libellé visible",
+      "fieldLabelPlaceholder": "N° de commande (PO)",
+      "fieldKey": "Clé technique",
+      "fieldKeyHint": "Identifiant interne stocké en base. Lettres minuscules, chiffres, tirets bas. Auto-généré depuis le libellé.",
+      "fieldType": "Type",
+      "placeholder": "Placeholder",
+      "defaultValue": "Valeur par défaut",
+      "selectOptions": "Options de la liste",
+      "selectOptionsPlaceholder": "Une option par ligne",
+      "selectOptionsHint": "Une option par ligne. Au moins une requise.",
+      "helpText": "Texte d'aide",
+      "isRequired": "Champ obligatoire",
+      "isVisible": "Visible sur le bordereau",
+      "labelRequired": "Libellé requis",
+      "keyInvalid": "Clé invalide. Lettres minuscules, chiffres et _ uniquement; doit commencer par une lettre.",
+      "keyDuplicate": "Cette clé existe déjà dans ce modèle.",
+      "optionsRequired": "Ajoutez au moins une option.",
+      "fieldCreated": "Champ ajouté",
+      "fieldUpdated": "Champ mis à jour"
+    },
+    "fieldType": {
+      "text": "Texte",
+      "number": "Nombre",
+      "date": "Date",
+      "time": "Heure",
+      "textarea": "Texte long",
+      "select": "Liste"
+    }
+  },
+  "recurring": {
+    "page": {
+      "title": "Programme récurrent",
+      "subtitle": "Planifiez les missions hebdomadaires (TESCA Lun/Mer/Ven, SAGE quotidien, etc.). Le cron du vendredi 18:00 crée automatiquement les expéditions de la semaine suivante.",
+      "cronInfo": "Cron : vendredi 18:00 → semaine suivante",
+      "automationActive": "Automatisation active",
+      "automationPaused": "Automatisation en pause"
+    },
+    "stats": {
+      "active": "Programmes actifs",
+      "activeOf": "sur {total}",
+      "weeklyMissions": "Missions / semaine",
+      "weeklyMissionsSubtitle": "{shipments, plural, =0 {aucune expédition} one {# expédition prévue} other {# expéditions prévues}}",
+      "nextGeneration": "Prochaine génération",
+      "nextGenerationDays": "{days, plural, =0 {aujourd'hui} one {dans # jour} other {dans # jours}}",
+      "lastGeneration": "Dernière génération",
+      "lastGenerationNever": "Jamais lancée",
+      "lastGenerationCount": "{count, plural, =0 {0 expédition} one {# expédition créée} other {# expéditions créées}}",
+      "covered": "Clients couverts",
+      "coveredSubtitle": "{count, plural, =0 {aucun client} one {# client} other {# clients}}",
+      "totalGenerated": "Total généré"
+    },
+    "filter": {
+      "all": "Tous",
+      "active": "Actifs",
+      "paused": "En pause",
+      "search": "Rechercher un programme..."
+    },
+    "preview": {
+      "title": "Aperçu de la semaine prochaine",
+      "subtitle": "Du {start} au {end} · {count, plural, =0 {aucune mission planifiée} one {# mission} other {# missions}}",
+      "noMission": "—",
+      "today": "Aujourd'hui",
+      "tomorrow": "Demain",
+      "moreCount": "+{count} de plus",
+      "totalDay": "{count, plural, =0 {0 mission} one {# mission} other {# missions}}",
+      "exportCsv": "Exporter (CSV)"
+    },
+    "list": {
+      "heading": "Programmes",
+      "newSchedule": "Nouveau programme",
+      "generateNow": "Générer la semaine prochaine",
+      "empty": "Aucun programme récurrent",
+      "emptyHint": "Créez un programme pour automatiser les missions répétitives (axes Tanger ↔ Kénitra, etc.).",
+      "emptyAction": "Créer le premier programme",
+      "lastGenerated": "Dernière génération : jusqu'au {date} · {count, plural, =0 {aucune mission créée} one {# mission créée} other {# missions créées}}",
+      "neverGenerated": "Jamais générée",
+      "validUntil": "Valide jusqu'au {date}",
+      "validForever": "Sans date de fin",
+      "schedulesPerWeek": "{count, plural, =0 {aucune mission} one {# mission/semaine} other {# missions/semaine}}",
+      "noResults": "Aucun programme ne correspond à votre recherche"
+    },
+    "card": {
+      "active": "Actif",
+      "paused": "En pause",
+      "everyWeek": "Chaque semaine",
+      "perWeek": "/sem",
+      "deliveryIn": "+{hours}h après chargement",
+      "noDeliveryTime": "Heure de livraison libre"
+    },
+    "badges": {
+      "paused": "En pause"
+    },
+    "actions": {
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "pause": "Mettre en pause",
+      "resume": "Réactiver"
+    },
+    "toast": {
+      "created": "Programme créé",
+      "updated": "Programme mis à jour",
+      "deleted": "Programme supprimé",
+      "activated": "Programme réactivé",
+      "deactivated": "Programme mis en pause",
+      "generated": "{count, plural, =0 {Aucune nouvelle expédition (déjà à jour)} one {# expédition créée} other {# expéditions créées}}"
+    },
+    "confirmDelete": "Supprimer le programme « {name} » ? Les missions déjà créées resteront intactes.",
+    "day": {
+      "mon": "Lun",
+      "tue": "Mar",
+      "wed": "Mer",
+      "thu": "Jeu",
+      "fri": "Ven",
+      "sat": "Sam",
+      "sun": "Dim"
+    },
+    "vehicleType": {
+      "motorcycle": "Moto",
+      "van": "Camionnette",
+      "pickup": "Pickup",
+      "truck": "Camion"
+    },
+    "dialog": {
+      "newTitle": "Nouveau programme récurrent",
+      "editTitle": "Modifier le programme",
+      "client": "Client",
+      "name": "Nom du programme",
+      "namePlaceholder": "TESCA Lun/Mer/Ven matin",
+      "days": "Jours de la semaine",
+      "pickupTime": "Heure de chargement",
+      "deliveryOffset": "Délai livraison (h)",
+      "deliveryOffsetHint": "Ex. 2.5 = +2h30. Vide = pas d'heure de livraison fixée.",
+      "vehicleType": "Type de véhicule (préférence)",
+      "pickup": "Chargement",
+      "delivery": "Livraison",
+      "address": "Adresse",
+      "city": "Ville",
+      "contactName": "Nom du contact",
+      "contactPhone": "Téléphone du contact",
+      "driver": "Chauffeur par défaut",
+      "driverNone": "Aucun (à affecter manuellement)",
+      "driverHint": "Si renseigné, l'expédition générée sera directement au statut « affectée ».",
+      "vehicle": "Véhicule par défaut",
+      "validFrom": "Valide à partir du",
+      "validTo": "Valide jusqu'au",
+      "validToHint": "Vide = sans date de fin",
+      "isActive": "Actif (génère des missions)",
+      "notes": "Notes",
+      "clientRequired": "Client requis",
+      "nameRequired": "Nom requis",
+      "daysRequired": "Sélectionnez au moins un jour",
+      "offsetInvalid": "Délai de livraison invalide"
+    }
+  },
+  "onboarding": {
+    "page": {
+      "title": "Mise en route",
+      "subtitle": "Configurez les essentiels de votre tenant — quelques étapes pour démarrer.",
+      "progress": "{done} / {total} étapes"
+    },
+    "progress": {
+      "label": "Avancement",
+      "allDone": "🎉 Configuration complète"
+    },
+    "step": {
+      "number": "Étape {n}",
+      "action": "Configurer",
+      "company": {
+        "title": "Informations entreprise",
+        "description": "Nom légal, adresse complète, ICE, slug — utilisés sur toutes les factures et CMR.",
+        "todo": "Compléter le profil",
+        "done": "Profil entreprise complet"
+      },
+      "drivers": {
+        "title": "Chauffeurs",
+        "description": "Ajoutez vos chauffeurs salariés et permanents.",
+        "todo": "Ajouter au moins 1 chauffeur",
+        "done": "{count, plural, one {# chauffeur} other {# chauffeurs}}"
+      },
+      "vehicles": {
+        "title": "Véhicules",
+        "description": "Camions et remorques de votre flotte.",
+        "todo": "Ajouter au moins 1 véhicule",
+        "done": "{count, plural, one {# véhicule} other {# véhicules}}"
+      },
+      "clients": {
+        "title": "Clients industriels",
+        "description": "TESCA, SAGE, ERT, COBA, DUTCHER — vos donneurs d'ordre.",
+        "todo": "Ajouter au moins 1 client",
+        "done": "{count, plural, one {# client} other {# clients}}"
+      },
+      "contracts": {
+        "title": "Contrats clients",
+        "description": "Tarification par client (forfaits, frais kilométriques, surcharges).",
+        "todo": "Créer au moins 1 contrat",
+        "done": "{count, plural, one {# contrat} other {# contrats}}"
+      },
+      "suppliers": {
+        "title": "Fournisseurs",
+        "description": "Carburant, garage, assurances, pneumatiques.",
+        "todo": "Ajouter vos fournisseurs réguliers",
+        "done": "{count, plural, one {# fournisseur} other {# fournisseurs}}"
+      },
+      "macarons": {
+        "title": "Macarons & péages (optionnel)",
+        "description": "Cartes Jawaz / Pass+ et vignettes véhicules.",
+        "todo": "Configurer si vous utilisez Jawaz",
+        "done": ""
+      }
+    },
+    "completed": {
+      "title": "Bravo, tout est configuré !",
+      "subtitle": "Votre tenant est prêt. Créez votre première mission depuis le tableau de bord.",
+      "cta": "Aller au tableau de bord"
+    }
+  },
+  "macaronsPeages": {
+    "page": {
+      "title": "Macarons & péages",
+      "subtitle": "Cartes Jawaz / Pass+, transactions de péage et vignettes annuelles.",
+      "lowBalance": "{count, plural, one {# carte sous le seuil} other {# cartes sous le seuil}}",
+      "expiringSoon": "{count, plural, one {# vignette à renouveler ≤ 30 j} other {# vignettes à renouveler ≤ 30 j}}"
+    },
+    "tabs": {
+      "passes": "Cartes ({count})",
+      "tolls": "Péages ({count})",
+      "vignettes": "Vignettes ({count})"
+    },
+    "actions": {
+      "newPass": "Nouvelle carte",
+      "newVignette": "Nouvelle vignette",
+      "recordToll": "Saisir"
+    },
+    "provider": {
+      "jawaz": "Jawaz",
+      "passplus": "Pass+",
+      "autre": "Autre"
+    },
+    "tollKind": {
+      "crossing": "Passage",
+      "top_up": "Recharge",
+      "adjustment": "Ajustement"
+    },
+    "vignetteKind": {
+      "annual": "Vignette annuelle",
+      "technical_inspection": "Visite technique",
+      "insurance": "Assurance",
+      "tax_disc": "Taxe",
+      "other": "Autre"
+    },
+    "passes": {
+      "empty": "Aucune carte enregistrée. Créez-en une pour démarrer.",
+      "lowBalanceLabel": "Sous le seuil ({threshold})"
+    },
+    "tolls": {
+      "empty": "Aucune transaction enregistrée.",
+      "col": {
+        "date": "Date",
+        "vehicle": "Véhicule",
+        "kind": "Type",
+        "station": "Station",
+        "amount": "Montant",
+        "reference": "Référence"
+      }
+    },
+    "vignettes": {
+      "empty": "Aucune vignette enregistrée.",
+      "expiresOn": "Expire le :",
+      "daysLeft": "{days, plural, =0 {expire aujourd'hui} one {expire dans # j} other {expire dans # j}}",
+      "expiredAgo": "Expirée depuis {days} j"
+    },
+    "passDialog": {
+      "titleNew": "Nouvelle carte",
+      "titleEdit": "Modifier la carte",
+      "field": {
+        "vehicle": "Véhicule",
+        "provider": "Fournisseur",
+        "tagNumber": "N° de tag",
+        "threshold": "Seuil bas (MAD)",
+        "isActive": "Carte active"
+      },
+      "toast": {
+        "created": "Carte créée",
+        "updated": "Carte mise à jour",
+        "failed": "Enregistrement impossible"
+      }
+    },
+    "tollDialog": {
+      "title": "Saisir une transaction",
+      "currentBalance": "Solde actuel",
+      "field": {
+        "kind": "Type",
+        "occurredAt": "Date / heure",
+        "amount": "Montant (MAD)",
+        "station": "Station / lieu",
+        "stationPlaceholder": "ex. Tit Mellil",
+        "reference": "Référence"
+      },
+      "actions": {
+        "confirm": "Enregistrer"
+      },
+      "toast": {
+        "recorded": "Transaction enregistrée",
+        "failed": "Échec"
+      }
+    },
+    "vignetteDialog": {
+      "titleNew": "Nouvelle vignette",
+      "titleEdit": "Modifier la vignette",
+      "field": {
+        "vehicle": "Véhicule",
+        "kind": "Type",
+        "issuedAt": "Date d'émission",
+        "expiresAt": "Date d'expiration",
+        "reference": "Référence",
+        "amount": "Montant (MAD)"
+      },
+      "toast": {
+        "created": "Vignette enregistrée",
+        "updated": "Vignette mise à jour",
+        "failed": "Enregistrement impossible"
+      }
+    }
+  },
+  "suppliers": {
+    "page": {
+      "title": "Hub fournisseurs",
+      "subtitle": "Annuaire fournisseurs (carburant, pièces, garage, assurances) et suivi des factures.",
+      "outstanding": "{count, plural, =0 {tout est réglé} one {# facture en attente · {total}} other {# factures en attente · {total}}}"
+    },
+    "tabs": {
+      "directory": "Annuaire ({count})",
+      "invoices": "Factures ({count})"
+    },
+    "categories": {
+      "fuel": "Carburant",
+      "parts": "Pièces",
+      "garage": "Garage / entretien",
+      "tires": "Pneumatiques",
+      "insurance": "Assurance",
+      "telecom": "Télécom",
+      "office": "Bureau",
+      "cleaning": "Nettoyage",
+      "other": "Autre"
+    },
+    "actions": {
+      "newSupplier": "Nouveau fournisseur",
+      "newInvoice": "Nouvelle facture",
+      "recordPayment": "Régler"
+    },
+    "directory": {
+      "empty": "Aucun fournisseur. Ajoutez-en un pour démarrer.",
+      "invoicesCount": "{count, plural, =0 {aucune facture} one {# facture} other {# factures}}"
+    },
+    "invoices": {
+      "empty": "Aucune facture fournisseur enregistrée.",
+      "col": {
+        "number": "N°",
+        "supplier": "Fournisseur",
+        "issued": "Émise",
+        "due": "Échéance",
+        "total": "TTC",
+        "balance": "Solde",
+        "status": "Statut"
+      },
+      "status": {
+        "unpaid": "Impayée",
+        "partially_paid": "Partiel",
+        "paid": "Payée",
+        "overdue": "En retard",
+        "cancelled": "Annulée"
+      }
+    },
+    "editor": {
+      "titleNew": "Nouveau fournisseur",
+      "titleEdit": "Modifier le fournisseur",
+      "field": {
+        "name": "Nom",
+        "category": "Catégorie",
+        "contactName": "Contact",
+        "contactPhone": "Téléphone",
+        "whatsapp": "WhatsApp",
+        "email": "Email",
+        "city": "Ville",
+        "ice": "ICE",
+        "paymentTerms": "Délai de paiement (jours)",
+        "isActive": "Fournisseur actif"
+      },
+      "toast": {
+        "created": "Fournisseur créé",
+        "updated": "Fournisseur mis à jour",
+        "failed": "Échec de l'enregistrement"
+      }
+    },
+    "invoiceEditor": {
+      "title": "Nouvelle facture fournisseur",
+      "field": {
+        "supplier": "Fournisseur",
+        "invoiceNumber": "N° facture",
+        "issuedAt": "Date d'émission",
+        "dueDate": "Date d'échéance",
+        "totalExclTax": "Total HT (MAD)",
+        "vatAmount": "TVA (MAD)"
+      },
+      "toast": {
+        "created": "Facture enregistrée",
+        "failed": "Enregistrement impossible"
+      }
+    },
+    "paymentDialog": {
+      "title": "Enregistrer un paiement",
+      "balanceDue": "Solde restant",
+      "field": {
+        "amount": "Montant (MAD)",
+        "paidAt": "Date du paiement",
+        "method": "Mode",
+        "reference": "Référence",
+        "referencePlaceholder": "ex. n° chèque, virement…"
+      },
+      "method": {
+        "cash": "Espèces",
+        "transfer": "Virement",
+        "check": "Chèque",
+        "card": "Carte"
+      },
+      "actions": {
+        "confirm": "Enregistrer le paiement"
+      },
+      "toast": {
+        "recorded": "Paiement enregistré",
+        "failed": "Échec de l'enregistrement"
+      }
+    }
+  },
+  "inbox": {
+    "page": {
+      "title": "Boîte de réception",
+      "subtitle": "Toutes les communications sortantes — WhatsApp, e-mails, notifications.",
+      "unreadBadge": "{count, plural, =0 {tout est lu} one {# non lu} other {# non lus}}"
+    },
+    "filters": {
+      "searchPlaceholder": "Rechercher destinataire, contenu…",
+      "kind": {
+        "all": "Tous",
+        "whatsapp_out": "WhatsApp",
+        "notification_out": "Notifications"
+      },
+      "audience": {
+        "all": "Tous",
+        "driver": "Chauffeur",
+        "client": "Client",
+        "subcontractor": "Sous-traitant",
+        "internal": "Interne"
+      },
+      "unreadOnly": "Non lus",
+      "shown": "{shown} / {total}"
+    },
+    "actions": {
+      "markAllRead": "Tout marquer comme lu"
+    },
+    "list": {
+      "empty": "Aucun message ne correspond aux filtres."
+    },
+    "detail": {
+      "empty": "Sélectionnez un message pour voir le détail.",
+      "occurredAt": "Envoyé :",
+      "status": "Statut :",
+      "errorTitle": "Échec d'envoi",
+      "viewShipment": "Voir mission",
+      "viewInvoice": "Voir facture",
+      "markingRead": "Marquage en cours…"
+    },
+    "status": {
+      "sent": "Envoyé",
+      "pending": "En attente",
+      "failed": "Échec",
+      "skipped": "Ignoré"
+    },
+    "error": {
+      "loadFailed": "Impossible de charger la boîte de réception"
+    },
+    "toast": {
+      "markFailed": "Marquage impossible",
+      "markAllFailed": "Marquage groupé impossible",
+      "markedAll": "{count} message(s) marqué(s) comme lus"
+    }
+  },
+  "whatsapp": {
+    "page": {
+      "title": "WhatsApp",
+      "subtitle": "Modèles de messages réutilisables et journal des envois.",
+      "templateCount": "{count, plural, =0 {aucun modèle actif} one {# modèle actif} other {# modèles actifs}}"
+    },
+    "tabs": {
+      "templates": "Modèles ({count})",
+      "log": "Journal ({count})"
+    },
+    "audience": {
+      "driver": "Chauffeur",
+      "client": "Client",
+      "subcontractor": "Sous-traitant",
+      "internal": "Interne"
+    },
+    "actions": {
+      "newTemplate": "Nouveau modèle"
+    },
+    "templates": {
+      "empty": "Aucun modèle. Créez-en un pour démarrer.",
+      "inactive": "Désactivé"
+    },
+    "log": {
+      "empty": "Aucun envoi enregistré.",
+      "viewShipment": "Voir mission",
+      "col": {
+        "sentAt": "Envoyé le",
+        "audience": "Audience",
+        "recipient": "Destinataire",
+        "template": "Modèle",
+        "sentBy": "Par",
+        "shipment": "Mission"
+      }
+    },
+    "button": {
+      "send": "WhatsApp"
+    },
+    "dialog": {
+      "title": "Envoyer un message WhatsApp",
+      "subtitle": "Audience : {audience}. Le message sera ouvert dans votre WhatsApp.",
+      "field": {
+        "template": "Modèle",
+        "phone": "Numéro destinataire",
+        "phoneInvalid": "Numéro trop court",
+        "recipientName": "Nom (optionnel)",
+        "recipientNamePlaceholder": "ex. M. Bennani",
+        "body": "Message",
+        "bodyPlaceholder": "Sélectionnez un modèle ou rédigez votre message…",
+        "bodyHint": "Les variables {{var}} non résolues restent telles quelles.",
+        "refreshFromTemplate": "Régénérer depuis le modèle"
+      },
+      "actions": {
+        "openWhatsapp": "Ouvrir WhatsApp",
+        "back": "Retour",
+        "confirmSent": "J'ai envoyé"
+      },
+      "confirm": {
+        "title": "Confirmation d'envoi",
+        "subtitle": "WhatsApp s'est ouvert dans un nouvel onglet. Confirmez l'envoi pour journaliser l'action.",
+        "toLabel": "À :"
+      },
+      "templates": {
+        "empty": "Aucun modèle disponible pour cette audience."
+      },
+      "toast": {
+        "sent": "Envoi enregistré",
+        "loadTemplatesFailed": "Échec du chargement des modèles",
+        "logFailed": "Échec de la journalisation"
+      },
+      "error": {
+        "renderFailed": "Échec de la génération du message"
+      }
+    },
+    "editor": {
+      "titleNew": "Nouveau modèle",
+      "titleEdit": "Modifier le modèle",
+      "subtitle": "Les variables {{var}} sont résolues à l'envoi.",
+      "field": {
+        "key": "Clé",
+        "keyHint": "Identifiant interne (a-z, 0-9, _).",
+        "name": "Nom",
+        "namePlaceholder": "ex. Alerte retard JIT",
+        "audience": "Audience",
+        "isActive": "Activation",
+        "active": "Actif",
+        "disabled": "Désactivé",
+        "body": "Corps du message",
+        "placeholders": "Variables disponibles :"
+      },
+      "confirmDelete": "Supprimer ce modèle ? Les envois passés restent journalisés.",
+      "toast": {
+        "created": "Modèle créé",
+        "updated": "Modèle mis à jour",
+        "deleted": "Modèle supprimé",
+        "saveFailed": "Enregistrement impossible",
+        "deleteFailed": "Suppression impossible"
+      }
+    }
+  },
+  "commandCenter": {
+    "page": {
+      "title": "Centre de commandement",
+      "subtitle": "Vue opérationnelle en temps réel : missions en cours, équipe en service, alertes critiques.",
+      "live": "EN DIRECT"
+    },
+    "pulse": {
+      "activeMissions": "En cours",
+      "onDuty": "En service",
+      "alerts": "Alertes",
+      "delivered": "Livrées aujourd'hui",
+      "lastRefresh": "Maj {ago}",
+      "live": "Direct",
+      "paused": "En pause",
+      "refresh": "Actualiser"
+    },
+    "alerts": {
+      "title": "Alertes critiques",
+      "late": "{count, plural, one {# mission en retard} other {# missions en retard}} · {exposure} d'exposition",
+      "critical": "{count, plural, one {# mission critique (≤1 h)} other {# missions critiques (≤1 h)}}",
+      "customs": "{count, plural, one {# dossier douanier incomplet} other {# dossiers douaniers incomplets}}"
+    },
+    "kanban": {
+      "assigned": "Assignées",
+      "picked_up": "Enlevées",
+      "in_transit": "En route",
+      "customs_clearance": "Dédouanement",
+      "deliveredToday": "Livrées aujourd'hui",
+      "empty": "Aucune mission",
+      "emptyDelivered": "Aucune livraison aujourd'hui"
+    },
+    "card": {
+      "noDriver": "Sans chauffeur",
+      "callDriver": "Appeler le chauffeur",
+      "whatsappDriver": "Envoyer un WhatsApp au chauffeur"
+    },
+    "deadline": {
+      "late": "Retard {mins} min",
+      "in": "Dans {mins} min"
+    },
+    "delivered": {
+      "lateBy": "+{mins} min",
+      "onTime": "À l'heure"
+    },
+    "drivers": {
+      "title": "Chauffeurs",
+      "viewAll": "Tous",
+      "empty": "Aucun chauffeur actif",
+      "onDutyIdle": "En service · libre",
+      "unavailable": "Indisponible",
+      "offDuty": "Hors service",
+      "call": "Appeler",
+      "whatsapp": "WhatsApp"
+    },
+    "activity": {
+      "title": "Dernière activité",
+      "empty": "Aucune activité récente"
+    },
+    "timeline": {
+      "title": "Programme de la journée",
+      "subtitle": "{count, plural, =0 {aucune mission planifiée} one {# mission} other {# missions}}",
+      "empty": "Aucune mission planifiée aujourd'hui",
+      "now": "Maintenant",
+      "legend": {
+        "scheduled": "Planifiée",
+        "past": "Échue",
+        "delivered": "Livrée",
+        "failed": "Échec"
+      }
+    },
+    "relative": {
+      "justNow": "à l'instant",
+      "minutesAgo": "il y a {n} min",
+      "hoursAgo": "il y a {n} h",
+      "daysAgo": "il y a {n} j"
+    }
+  },
+  "jit": {
+    "page": {
+      "title": "Flux tendu (JIT)",
+      "subtitle": "Suivez les missions JIT-strict (TESCA, SAGE) : compte à rebours en direct, exposition financière et historique des pénalités.",
+      "strictClients": "{count, plural, =0 {aucun client strict} one {# client strict} other {# clients stricts}}",
+      "exportExcel": "Exporter Excel"
+    },
+    "stats": {
+      "lateNow": "En retard maintenant",
+      "lateNowSubtitle": "Au-delà de l'heure deadline",
+      "critical": "Critiques + alertes",
+      "criticalSubtitle": "≤ 4 h avant deadline",
+      "exposureNow": "Exposition immédiate",
+      "exposureNowSubtitle": "Pénalités déjà encourues",
+      "exposureNowEmpty": "Aucune pénalité en cours",
+      "last30d": "Pénalités 30 j",
+      "last30dSubtitle": "Missions JIT livrées récemment"
+    },
+    "tabs": {
+      "atRisk": "À risque",
+      "recent": "Historique 30 j",
+      "clients": "Politiques clients"
+    },
+    "banner": {
+      "title": "{count, plural, =0 {Aucune mission en retard} one {# mission en retard !} other {# missions en retard !}}",
+      "subtitle": "Action immédiate : appeler le chauffeur, prévenir le client, négocier la pénalité avant la livraison."
+    },
+    "refreshInfo": "Actualisation automatique chaque minute",
+    "exposureSnapshot": "Exposition courante : {value}",
+    "table": {
+      "shipment": "Mission",
+      "client": "Client",
+      "deadline": "Deadline",
+      "actual": "Livraison réelle",
+      "countdown": "Statut deadline",
+      "exposure": "Exposition",
+      "penalty": "Pénalité",
+      "lateness": "Retard",
+      "minutesLate": "{count, plural, =0 {À l'heure} one {+# min} other {+# min}}",
+      "onTime": "À l'heure",
+      "totalPenalty30d": "Total 30 jours",
+      "policy": "Politique",
+      "penaltyRate": "{amount}/h",
+      "penaltyPerHour": "Pénalité / heure",
+      "tolerance": "Tolérance",
+      "minutesGrace": "{count, plural, =0 {0 min de grâce} one {# min de grâce} other {# min de grâce}}",
+      "strict": "Strict (JIT)",
+      "flexible": "Souple",
+      "status": "État"
+    },
+    "shipmentStatus": {
+      "created": "Créée",
+      "assigned": "Affectée",
+      "picked_up": "Chargée",
+      "in_transit": "En transit",
+      "customs_clearance": "Dédouanement",
+      "delivered": "Livrée",
+      "failed": "Échec",
+      "cancelled": "Annulée"
+    },
+    "countdown": {
+      "in": "Dans {delta}",
+      "late": "{delta} de retard",
+      "none": "—"
+    },
+    "actions": {
+      "editPolicy": "Modifier",
+      "save": "Enregistrer",
+      "cancel": "Annuler"
+    },
+    "toast": {
+      "clientUpdated": "Politique client mise à jour"
+    },
+    "empty": {
+      "atRiskTitle": "Aucune mission JIT à risque",
+      "atRiskSubtitle": "Tous les délais sont sous contrôle.",
+      "recent": "Aucune mission JIT livrée sur les 30 derniers jours."
+    },
+    "dialog": {
+      "title": "Politique JIT",
+      "strict": "Activer le mode strict (JIT)",
+      "strictHint": "Chaque expédition pour ce client capturera une deadline = heure de livraison prévue. Une pénalité s'applique automatiquement après la grâce.",
+      "penaltyPerHour": "Pénalité par heure (MAD)",
+      "tolerance": "Grâce (minutes)",
+      "snapshotNote": "Les expéditions déjà créées conservent leur snapshot — seules les nouvelles missions héritent de la nouvelle politique."
+    }
+  },
+  "freeZones": {
+    "page": {
+      "title": "Zones franches & douane",
+      "subtitle": "Gérez les procédures DUM, BAE, T1, EUR1, CMR pour Tanger Med, AFZ Kénitra, Mid Atlantic Logistics. Téléversez les pièces, suivez la conformité.",
+      "zonesCount": "{count, plural, =0 {aucune zone active} one {# zone active} other {# zones actives}}"
+    },
+    "stats": {
+      "zones": "Zones franches",
+      "zonesSubtitle": "Configurées pour ce tenant",
+      "shipmentsTouchingFz": "Missions liées",
+      "shipmentsTouchingFzSubtitle": "Au moins une zone (chargement / livraison)",
+      "compliant": "Missions conformes",
+      "compliantSubtitle": "Toutes les pièces requises sont déposées",
+      "incomplete": "Missions incomplètes",
+      "incompleteSubtitle": "{partial} partielles · {missing} sans aucune pièce"
+    },
+    "banner": {
+      "title": "{count, plural, =0 {Aucune mission incomplète} one {# mission avec dossier douanier incomplet} other {# missions avec dossier douanier incomplet}}",
+      "subtitle": "Téléversez les pièces manquantes (DUM, BAE, T1, EUR1, CMR) avant le passage en douane pour éviter blocage et amende."
+    },
+    "tabs": {
+      "shipments": "Missions",
+      "zones": "Référentiel zones",
+      "matrix": "Matrice obligatoire"
+    },
+    "compliance": {
+      "complete": "Dossier complet",
+      "partial": "Dossier partiel",
+      "missing": "Dossier vide",
+      "no_requirement": "Aucune exigence"
+    },
+    "zoneLabels": {
+      "pickup": "Chargement",
+      "delivery": "Livraison"
+    },
+    "noRequirement": "Aucune pièce requise pour cette zone.",
+    "requiredChecklist": "Pièces requises",
+    "customsOffice": "Bureau de douane",
+    "table": {
+      "zone": "Zone"
+    },
+    "actions": {
+      "upload": "Téléverser",
+      "view": "Voir",
+      "delete": "Supprimer",
+      "cancel": "Annuler",
+      "addRequirement": "Marquer comme requis",
+      "removeRequirement": "Ne plus exiger"
+    },
+    "toast": {
+      "uploaded": "Document téléversé",
+      "deleted": "Document supprimé",
+      "matrixUpdated": "Matrice mise à jour"
+    },
+    "confirmDelete": "Supprimer ce document ?",
+    "empty": {
+      "shipments": "Aucune mission ne traverse une zone franche pour l'instant.",
+      "zones": "Aucune zone franche configurée."
+    },
+    "dialog": {
+      "uploadTitle": "Téléverser {code}",
+      "file": "Fichier",
+      "fileHint": "PDF, JPG, PNG ou WEBP — 10 Mo maximum",
+      "documentNumber": "N° du document",
+      "documentDate": "Date du document",
+      "notes": "Notes"
+    }
+  },
+  "cmr": {
+    "page": {
+      "title": "Lettres de voiture CMR",
+      "subtitle": "Génération automatique des CMR à partir de vos missions internationales (Convention Genève 1956). 24 champs réglementaires, PDF officiel, archivage privé.",
+      "internationalEnabled": "Mode international activé",
+      "internationalDisabled": "Mode international désactivé"
+    },
+    "stats": {
+      "draft": "Brouillons",
+      "draftSubtitle": "À compléter et émettre",
+      "issued": "Émises",
+      "issuedSubtitle": "PDF généré, en attente de signature",
+      "signed": "Signées",
+      "signedSubtitle": "Validées par toutes les parties",
+      "eligible": "Missions éligibles",
+      "eligibleSubtitle": "Internationales sans CMR"
+    },
+    "flagDisabled": {
+      "title": "Mode international désactivé",
+      "subtitle": "Le module CMR est accessible mais le drapeau NEXT_PUBLIC_INTERNATIONAL_ENABLED est sur false. Les CMR existantes sont visibles ; pour activer le flux complet, basculez le drapeau dans .env.local."
+    },
+    "search": "Rechercher (n° CMR, expéditeur, destinataire, mission...)",
+    "filter": {
+      "all": "Toutes"
+    },
+    "status": {
+      "draft": "Brouillon",
+      "issued": "Émise",
+      "signed": "Signée",
+      "cancelled": "Annulée"
+    },
+    "table": {
+      "cmrNumber": "N° CMR",
+      "status": "Statut",
+      "shipment": "Mission",
+      "route": "Trajet",
+      "parties": "Parties",
+      "from": "De",
+      "to": "Vers",
+      "consigneeMissing": "À renseigner",
+      "charges": "Frais HT",
+      "actions": ""
+    },
+    "actions": {
+      "newCmr": "Nouvelle CMR",
+      "viewPdf": "Voir le PDF",
+      "generatePdf": "Émettre le PDF",
+      "cancel": "Annuler",
+      "create": "Créer la CMR",
+      "confirmCancel": "Confirmer l'annulation",
+      "close": "Fermer"
+    },
+    "toast": {
+      "created": "CMR {number} créée — pré-remplie depuis la mission",
+      "alreadyExists": "Une CMR existe déjà pour cette mission ({number})",
+      "pdfGenerated": "PDF émis — la CMR passe en statut « Émise »",
+      "cancelled": "CMR annulée"
+    },
+    "empty": {
+      "title": "Aucune CMR enregistrée",
+      "subtitle": "Sélectionnez une mission internationale pour générer la première CMR — les 24 cases sont pré-remplies depuis l'expédition, le client et l'entreprise.",
+      "filtered": "Aucun résultat",
+      "adjustFilters": "Élargissez les filtres ou changez le statut sélectionné."
+    },
+    "dialog": {
+      "createTitle": "Nouvelle lettre de voiture CMR",
+      "createDescription": "La CMR est pré-remplie automatiquement à partir de la mission, du client et de votre entreprise. Vous pourrez ajuster chaque case ensuite avant émission.",
+      "eligibleShipment": "Mission internationale",
+      "eligibleHint": "Seules les missions sans CMR existante sont listées. ⚠ = mission non marquée internationale.",
+      "cancelTitle": "Annuler la CMR {number}",
+      "cancelDescription": "Une CMR annulée est conservée pour audit mais n'est plus valable. Pour ré-émettre, créez une nouvelle CMR sur la même mission après annulation.",
+      "cancelReason": "Motif d'annulation",
+      "cancelReasonPlaceholder": "Ex. erreur destinataire, mission ré-affectée, etc."
+    }
+  },
+  "subcontracting": {
+    "page": {
+      "title": "Sous-traitance",
+      "subtitle": "Pilotez les missions confiées à vos transporteurs partenaires : ordres de mission, suivi de marge et statut.",
+      "partnerCount": "{count, plural, =0 {aucun partenaire actif} one {# partenaire actif} other {# partenaires actifs}}"
+    },
+    "tabs": {
+      "missions": "Missions sous-traitées",
+      "partners": "Partenaires"
+    },
+    "stats": {
+      "activePartners": "Partenaires actifs",
+      "outOfTotal": "sur {total}",
+      "openMissions": "Missions en cours",
+      "openMissionsSubtitle": "envoyées, acceptées ou en route",
+      "totalCost": "Coût sous-traitance",
+      "totalCostSubtitle": "{count, plural, =0 {0 mission} one {# mission} other {# missions}}",
+      "totalMargin": "Marge totale",
+      "totalMarginPct": "Marge moyenne {pct}%",
+      "totalMarginEmpty": "Aucune mission encore"
+    },
+    "search": "Rechercher...",
+    "table": {
+      "missionOrder": "N° Ordre de mission",
+      "shipment": "Expédition",
+      "partner": "Sous-traitant",
+      "cost": "Coût HT",
+      "sale": "Vente HT",
+      "margin": "Marge HT",
+      "status": "Statut",
+      "actions": "",
+      "sentOn": "Envoyé le {date}"
+    },
+    "status": {
+      "draft": "Brouillon",
+      "sent": "Envoyé",
+      "accepted": "Accepté",
+      "in_progress": "En route",
+      "completed": "Terminé",
+      "cancelled": "Annulé"
+    },
+    "actions": {
+      "newMission": "Nouvelle mission",
+      "newPartner": "Nouveau partenaire",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "send": "Envoyer",
+      "generatePdf": "Générer le PDF",
+      "viewPdf": "Voir le PDF",
+      "changeStatus": "Changer statut",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "create": "Créer la mission",
+      "close": "Fermer"
+    },
+    "toast": {
+      "partnerCreated": "Partenaire créé",
+      "partnerUpdated": "Partenaire mis à jour",
+      "partnerDeleted": "Partenaire supprimé",
+      "missionCreated": "Mission créée — Ordre {number}",
+      "missionUpdated": "Mission mise à jour",
+      "missionSent": "Ordre de mission envoyé",
+      "pdfGenerated": "PDF généré",
+      "status": {
+        "sent": "Mission marquée envoyée",
+        "accepted": "Mission acceptée",
+        "in_progress": "Mission en route",
+        "completed": "Mission terminée",
+        "cancelled": "Mission annulée"
+      }
+    },
+    "confirmDelete": "Supprimer le partenaire « {name} » ?",
+    "empty": {
+      "missions": "Aucune mission sous-traitée pour l'instant.",
+      "partners": "Aucun partenaire enregistré. Créez un sous-traitant pour pouvoir lui confier une mission."
+    },
+    "partner": {
+      "paymentTerms": "Paiement à {days} jours"
+    },
+    "vehicleType": {
+      "motorcycle": "Moto",
+      "van": "Camionnette",
+      "pickup": "Pickup",
+      "truck": "Camion"
+    },
+    "dialog": {
+      "newPartner": "Nouveau partenaire",
+      "editPartner": "Modifier le partenaire",
+      "newMission": "Nouvelle mission sous-traitée",
+      "editMission": "Modifier la mission {number}",
+      "editMissionShipment": "Expédition : {ref}",
+      "name": "Raison sociale",
+      "legalForm": "Forme juridique",
+      "ice": "ICE",
+      "iceHint": "15 chiffres",
+      "rcNumber": "N° RC",
+      "contactName": "Nom du contact",
+      "contactPhone": "Téléphone",
+      "contactEmail": "Email",
+      "whatsappPhone": "WhatsApp",
+      "address": "Adresse",
+      "city": "Ville",
+      "vehicleTypes": "Types de véhicules",
+      "serviceAreas": "Zones desservies",
+      "serviceAreasHint": "Séparées par des virgules",
+      "capacityKg": "Capacité (kg)",
+      "rating": "Note",
+      "paymentTermsDays": "Délai de paiement (jours)",
+      "bankName": "Banque",
+      "bankIban": "IBAN",
+      "notes": "Notes",
+      "internalNotes": "Notes internes",
+      "internalNotesHint": "Non incluses sur le PDF",
+      "notesHint": "Visibles sur l'ordre de mission",
+      "isActive": "Actif",
+      "shipment": "Expédition à sous-traiter",
+      "partner": "Sous-traitant",
+      "cost": "Coût HT (MAD)",
+      "salePrice": "Prix de vente HT",
+      "estimatedMargin": "Marge estimée",
+      "missionRequiredFields": "Sélectionnez une expédition et un sous-traitant.",
+      "noPartners": "Aucun partenaire actif. Créez d'abord un sous-traitant.",
+      "sendTitle": "Envoyer l'ordre {number}",
+      "sendDescription": "Le PDF est régénéré à partir des données actuelles, puis envoyé au sous-traitant. Le statut passe en « Envoyé ».",
+      "channel": "Canal",
+      "channelOptions": {
+        "email": "Email",
+        "whatsapp": "WhatsApp"
+      },
+      "emailRecipient": "Adresse email",
+      "whatsappRecipient": "Numéro WhatsApp",
+      "whatsappWarning": "L'envoi WhatsApp est désactivé en MVP — le message est journalisé. Activez WHATSAPP_ENABLED pour passer en mode réel."
+    }
+  },
+  "accounting": {
+    "page": {
+      "title": "Comptabilité",
+      "subtitle": "Justificatifs, TVA, paie et préparation du dossier mensuel"
+    },
+    "kpi": {
+      "documentsThisMonth": "Justificatifs ce mois",
+      "pendingCount": "{count, plural, one {# en attente} other {# en attente}}",
+      "allValidated": "Tout validé",
+      "treasury": "Trésorerie estimée",
+      "treasurySubtitle": "Encaissé {inflow} · Décaissé {outflow}",
+      "vatToPay": "TVA à payer",
+      "vatSubtitle": "Collectée {collected} · Déductible {deductible}",
+      "lastClosing": "Dernière clôture",
+      "lastClosingSubtitle": "Dossier mensuel envoyé",
+      "lastClosingSentTo": "Envoyé à {email}"
+    },
+    "pending": {
+      "title": "Justificatifs en attente de validation",
+      "empty": "Aucun justificatif en attente. Tout est à jour.",
+      "capturedBy": "Scanné par {name} {when}",
+      "unknown": "—"
+    },
+    "actions": {
+      "validate": "Valider",
+      "validated": "Justificatif validé",
+      "reject": "Rejeter",
+      "rejected": "Justificatif rejeté",
+      "complete": "Compléter",
+      "completed": "Justificatif complété"
+    },
+    "reject": {
+      "title": "Rejeter ce justificatif",
+      "subtitle": "Le motif sera envoyé à la personne qui a scanné le document.",
+      "placeholder": "Ex : photo illisible, montant incorrect, manque la facture en pièce jointe…"
+    },
+    "complete": {
+      "title": "Compléter le justificatif",
+      "amountHt": "Montant HT",
+      "vatAmount": "Montant TVA",
+      "vatRate": "Taux TVA (%)",
+      "supplierName": "Fournisseur",
+      "supplierIce": "ICE fournisseur",
+      "documentDate": "Date du document",
+      "paymentMethod": "Mode de paiement",
+      "notes": "Notes"
+    },
+    "paymentMethods": {
+      "cash": "Espèces",
+      "transfer": "Virement",
+      "check": "Chèque",
+      "card": "Carte"
+    },
+    "recap": {
+      "title": "Récap du mois en cours",
+      "subtitle": "Synthèse provisoire — sera figée à la clôture mensuelle.",
+      "expenses": "Charges",
+      "revenue": "Recettes",
+      "empty": "Aucune charge enregistrée ce mois.",
+      "docsCount": "{count, plural, one {# pièce} other {# pièces}}",
+      "totalExpenses": "Total décaissements",
+      "revenueExclTax": "CA HT facturé",
+      "vatCollected": "TVA collectée",
+      "revenueInclTax": "CA TTC facturé"
+    },
+    "audit": {
+      "title": "Activité comptable",
+      "subtitle": "Toutes les actions sont tracées",
+      "empty": "Aucune activité enregistrée pour le moment.",
+      "unknownActor": "Système",
+      "actions": {
+        "create": "a scanné",
+        "validate": "a validé",
+        "reject": "a rejeté",
+        "complete": "a complété",
+        "update": "a modifié",
+        "send": "a transmis",
+        "archive": "a archivé",
+        "delete": "a supprimé"
+      },
+      "entities": {
+        "accounting_document": "un justificatif",
+        "monthly_dossier": "un dossier mensuel",
+        "tax_declaration": "une déclaration",
+        "payroll_data": "une fiche de paie",
+        "accountant_profile": "le profil comptable",
+        "subcontracted_mission": "une mission sous-traitée",
+        "subcontractor": "un sous-traitant",
+        "client_jit_policy": "la politique JIT d'un client",
+        "shipment_customs_document": "une pièce douanière",
+        "free_zone": "une zone franche",
+        "customs_document_type": "un type de document douanier",
+        "recurring_schedule": "un programme récurrent"
+      },
+      "viewFullFeed": "Voir le journal complet"
+    },
+    "fab": {
+      "label": "Scanner un justificatif"
+    },
+    "quickAction": {
+      "tva": {
+        "title": "Préparer la déclaration TVA",
+        "subtitle": "Mensuel — échéance le 20 du mois suivant"
+      },
+      "cnssIr": {
+        "title": "CNSS et IR salariés",
+        "subtitle": "Bordereaux mensuels CNSS (9) + IR (fin du mois)"
+      },
+      "paie": {
+        "title": "Paie chauffeurs",
+        "subtitle": "Préparer et valider la paie mensuelle"
+      },
+      "dossiers": {
+        "title": "Dossiers mensuels",
+        "subtitle": "Récap PDF + envoi au comptable"
+      },
+      "accountant": {
+        "title": "Mon comptable",
+        "subtitle": "Coordonnées + mode de transmission préféré"
+      }
+    },
+    "dossiers": {
+      "title": "Dossiers comptables mensuels",
+      "subtitle": "Récap automatique de chaque mois pour transmission au comptable",
+      "empty": "Aucun dossier généré pour le moment",
+      "emptyHint": "Cliquez sur \"Générer\" pour produire le dossier du mois précédent.",
+      "generateButton": "Générer le dossier de {period}",
+      "summary": "{revenue} CA HT · {expenses} charges · {vat} TVA · {docs} pièces",
+      "sentInfo": "Envoyé à {email} {when}",
+      "backToList": "Retour à la liste",
+      "status": {
+        "in_progress": "En cours",
+        "ready": "Prêt à envoyer",
+        "sent": "Envoyé",
+        "closed_by_accountant": "Clôturé"
+      },
+      "method": {
+        "email": "Email",
+        "usb": "Clé USB",
+        "paper": "Papier",
+        "portal": "Portail"
+      },
+      "detail": {
+        "title": "Dossier {period}",
+        "generatedAt": "Généré {when}",
+        "notGenerated": "Pas encore généré",
+        "regenerate": "Régénérer",
+        "downloadPdf": "Télécharger PDF",
+        "sendByEmail": "Envoyer à {email}",
+        "resendByEmail": "Renvoyer par email",
+        "confirmResend": "Renvoyer ce dossier au comptable ?",
+        "configureAccountant": "Configurer un email comptable",
+        "sentTitle": "Dossier transmis",
+        "sentBody": "Envoyé à {email} le {date} ({method})",
+        "revenue": "CA HT",
+        "expenses": "Charges",
+        "margin": "Marge brute",
+        "vatToPay": "TVA à payer",
+        "estimated": "estimée",
+        "htShort": "HT",
+        "ttcShort": "TTC",
+        "payrollTitle": "Paie chauffeurs validée",
+        "payrollSubtitle": "Snapshot des fiches de paie incluses dans ce dossier",
+        "payrollGross": "Masse salariale brute",
+        "payrollNet": "Masse salariale nette",
+        "employerCost": "Coût employeur total",
+        "docsCount": "{count, plural, one {# justificatif inclus} other {# justificatifs inclus}}"
+      }
+    },
+    "settings": {
+      "title": "Mon comptable",
+      "subtitle": "Coordonnées du comptable externe et préférences de transmission",
+      "saved": "Configuration enregistrée",
+      "nameRequired": "Nom du comptable requis",
+      "fields": {
+        "accountantName": "Nom du comptable",
+        "cabinetName": "Cabinet",
+        "email": "Email",
+        "emailHint": "Utilisé pour la transmission automatique du dossier mensuel",
+        "phone": "Téléphone",
+        "whatsapp": "WhatsApp",
+        "method": "Mode de transmission préféré",
+        "billingTerms": "Conditions de facturation",
+        "billingTermsPlaceholder": "Ex : 1 500 MAD/mois forfait",
+        "notes": "Notes"
+      }
+    },
+    "paie": {
+      "title": "Paie chauffeurs",
+      "subtitle": "Période : {period}",
+      "loadError": "Impossible de charger la paie pour cette période.",
+      "noDrivers": "Aucun chauffeur actif. Ajoutez vos chauffeurs salariés pour préparer la paie.",
+      "advancesAuto": "Avances détectées : {amount}",
+      "saved": "Ligne enregistrée",
+      "saveLine": "Enregistrer cette ligne",
+      "validateAll": "Valider la paie du mois",
+      "validated": "{count, plural, one {# ligne validée} other {# lignes validées}}",
+      "confirmValidate": "Valider toutes les lignes en draft ? Les montants seront figés et inclus dans le dossier mensuel.",
+      "allValidated": "Paie déjà validée pour cette période.",
+      "status": {
+        "draft": "Brouillon",
+        "validated": "Validée",
+        "paid": "Payée"
+      },
+      "fields": {
+        "baseSalary": "Salaire de base (MAD)",
+        "bonuses": "Primes + heures sup (MAD)",
+        "deductions": "Déductions / avances (MAD)",
+        "overtimeHours": "Heures sup (h)",
+        "workingDays": "Jours travaillés"
+      },
+      "calc": {
+        "gross": "Brut total",
+        "cnssEmp": "CNSS salarié",
+        "amoEmp": "AMO salarié",
+        "ir": "IR",
+        "cnssEmployer": "CNSS patronal",
+        "amoEmployer": "AMO patronal",
+        "familyAllowance": "Allocations familiales",
+        "employerCost": "Coût employeur"
+      },
+      "totals": {
+        "title": "Totaux du mois",
+        "gross": "Total brut",
+        "cnss": "Total CNSS salarié",
+        "amo": "Total AMO salarié",
+        "ir": "Total IR retenu",
+        "deductions": "Total déductions",
+        "employerCost": "Total coût employeur",
+        "netToPay": "Total net à payer"
+      }
+    },
+    "cnssIr": {
+      "title": "CNSS et IR salariés",
+      "subtitle": "Période : {period}",
+      "noDrivers": "Aucun chauffeur actif. Ajoutez vos chauffeurs salariés pour préparer les déclarations.",
+      "provisionalNotice": "Calculs provisoires basés sur le salaire mensuel de référence des chauffeurs. Les montants définitifs proviendront de la paie validée (COMPTA-5).",
+      "driver": "Chauffeur",
+      "gross": "Brut",
+      "net": "Net",
+      "total": "Total",
+      "deadline": "Échéance : {date}",
+      "urgent": "Échéance dans {days, plural, one {# jour} other {# jours}}",
+      "overdue": "Déclaration en retard",
+      "cnss": {
+        "title": "CNSS — Sécurité sociale",
+        "subtitle": "Bordereau à télédéposer avant le 9 du mois suivant",
+        "employeeShare": "Part salariale",
+        "employerShare": "Part patronale",
+        "amoEmployee": "AMO salarié",
+        "amoEmployer": "AMO patronal",
+        "monthlyDue": "Total dû à la CNSS",
+        "markDeclared": "Marquer la CNSS comme déclarée",
+        "markDeclaredSubtitle": "Saisissez la référence CNSS une fois le bordereau télédéposé. Montant : {amount}."
+      },
+      "ir": {
+        "title": "IR salariés — Retenue à la source",
+        "subtitle": "À reverser au Trésor avant la fin du mois suivant",
+        "taxable": "Net imposable",
+        "amount": "IR retenu",
+        "monthlyDue": "Total IR à reverser",
+        "markDeclared": "Marquer l'IR comme déclaré",
+        "markDeclaredSubtitle": "Saisissez la référence DGI une fois reversé au Trésor. Montant : {amount}."
+      }
+    },
+    "tva": {
+      "title": "Déclaration TVA mensuelle",
+      "subtitle": "Période : {period}",
+      "backToAccounting": "Retour à la comptabilité",
+      "loadError": "Impossible de calculer la TVA pour cette période.",
+      "collected": "TVA collectée",
+      "deductible": "TVA déductible",
+      "toPay": "TVA à payer",
+      "collectedTitle": "TVA collectée — sur ventes",
+      "collectedSubtitle": "Toutes les factures émises ce mois (hors annulées)",
+      "deductibleTitle": "TVA déductible — sur achats",
+      "deductibleSubtitle": "Justificatifs validés des catégories récupérables",
+      "noInvoices": "Aucune facture émise sur cette période.",
+      "noDeductible": "Aucun justificatif validé déductible sur cette période.",
+      "invoiceRef": "Facture",
+      "client": "Client",
+      "amountHt": "HT",
+      "vatAmount": "TVA",
+      "ttc": "TTC",
+      "category": "Catégorie",
+      "docs": "Pièces",
+      "deadline": "Échéance DGI : {date}",
+      "deadlineWas": "Échéance dépassée le {date}",
+      "urgent": "Échéance dans {days, plural, one {# jour} other {# jours}}",
+      "overdue": "Déclaration en retard",
+      "markDeclared": "Marquer comme déclarée",
+      "markDeclaredSubtitle": "Saisissez la référence DGI une fois la déclaration télédéposée. Montant calculé : {amount}.",
+      "declarationRef": "Référence DGI",
+      "declarationDate": "Date de déclaration",
+      "amountPaid": "Montant payé (si payé)",
+      "paymentDate": "Date de paiement",
+      "notes": "Notes",
+      "refRequired": "Référence DGI requise.",
+      "declared": "Déclaration TVA enregistrée",
+      "declaredOn": "Déclarée le {date} · Réf : {ref}",
+      "status": {
+        "pending": "À déclarer",
+        "declared": "Déclarée — paiement à effectuer",
+        "paid": "Déclarée et payée",
+        "overdue": "En retard"
+      }
+    },
+    "dialog": {
+      "title": "Nouveau justificatif"
+    },
+    "takePhoto": "Prendre une photo",
+    "orPickFile": "ou choisir un fichier (JPEG, PNG, PDF)",
+    "save": "Enregistrer",
+    "captured": "Justificatif enregistré",
+    "quick": {
+      "tangerMed": "Péage Tanger Med",
+      "fuel": "Carburant"
+    },
+    "fields": {
+      "category": "Type",
+      "amountTtc": "Montant TTC",
+      "vehicle": "Véhicule concerné",
+      "vehicleNone": "Aucun véhicule"
+    },
+    "categories": {
+      "invoice_client": "Facture client",
+      "invoice_supplier": "Facture fournisseur",
+      "fuel_receipt": "Carburant",
+      "toll_receipt": "Péage",
+      "maintenance_receipt": "Maintenance",
+      "driver_advance": "Avance chauffeur",
+      "salary_slip": "Bulletin de paie",
+      "cnss_payment": "Paiement CNSS",
+      "ir_payment": "Paiement IR",
+      "phone_internet": "Télécom",
+      "office_rent": "Loyer bureau",
+      "insurance": "Assurance",
+      "bank_statement": "Relevé bancaire",
+      "bank_fee": "Frais bancaires",
+      "other": "Autre"
+    },
+    "errors": {
+      "fileRequired": "Veuillez joindre une photo ou un PDF du justificatif",
+      "categoryRequired": "Sélectionnez le type de justificatif",
+      "amountRequired": "Saisissez le montant TTC",
+      "fileTooLarge": "Fichier trop volumineux (max 10 Mo)",
+      "fileType": "Format non supporté. Utilisez JPEG, PNG, WebP ou PDF."
+    }
+  },
+  "viewAsBanner": {
+    "label": "Aperçu en tant que {role}",
+    "back": "Retourner à mon compte"
+  },
+  "workSessions": {
+    "page": {
+      "title": "Présence & journal de travail",
+      "description": "Check-in, check-out, retours et notes de chaque membre de l'équipe.",
+      "historyTitle": "Historique complet"
+    },
+    "checkIn": {
+      "title": "Commencez votre journée",
+      "subtitle": "Le check-in est réservé aux membres présents au bureau.",
+      "officeFallbackLabel": "Bureau",
+      "viewOnMap": "Voir",
+      "refresh": "Réactualiser",
+      "submit": "Check-in",
+      "submitting": "Enregistrement…",
+      "toastSuccess": "Check-in enregistré",
+      "toastSuccessDescription": "Bonne journée de travail !",
+      "toastError": "Impossible de faire le check-in"
+    },
+    "checkOut": {
+      "title": "Check-out — fin de journée",
+      "subtitle": "Évaluez votre journée avant de partir.",
+      "productivity": "Productivité",
+      "motivation": "Motivation",
+      "blockers": "Blocages rencontrés",
+      "blockersPlaceholder": "Rien à signaler…",
+      "notes": "Notes (facultatif)",
+      "submit": "Valider le check-out",
+      "submitting": "Enregistrement…",
+      "toastSuccess": "Check-out enregistré",
+      "toastSuccessDescription": "Bonne journée !",
+      "toastError": "Impossible de faire le check-out"
+    },
+    "widget": {
+      "title": "Check-out quotidien",
+      "subtitle": "Finalisez avant de quitter.",
+      "expandedHeader": "Fin de journée",
+      "cta": "Check-out",
+      "required": "Requis",
+      "beforeLeaving": "Avant de partir",
+      "collapse": "Réduire"
+    },
+    "geo": {
+      "locating": "Vérification de votre position…",
+      "denied": "Autorisez la géolocalisation pour pouvoir faire le check-in.",
+      "deniedTitle": "Géolocalisation refusée",
+      "unavailable": "Impossible de déterminer votre position.",
+      "unavailableTitle": "Position indisponible",
+      "unsupported": "La géolocalisation n'est pas supportée par ce navigateur.",
+      "insideTitle": "Vous êtes au bureau",
+      "insideDescription": "À {distance} m du point de référence · précision ±{accuracy} m.",
+      "outsideTitle": "Hors du bureau",
+      "outsideDescription": "Vous êtes à ~{distance} m du bureau. Le check-in n'est autorisé que dans un rayon de {radius} m.",
+      "geofenceMissingTitle": "Bureau non configuré",
+      "geofenceMissingDescription": "Demandez à un administrateur de définir la position du bureau dans les paramètres."
+    },
+    "presence": {
+      "title": "Présence — 24 dernières heures",
+      "subtitle": "Check-ins de l'équipe depuis hier",
+      "viewAll": "Historique complet",
+      "empty": "Aucun check-in sur les 24 dernières heures.",
+      "error": "Erreur : {message}",
+      "stats": {
+        "sessions": "Sessions",
+        "uniqueMembers": "{count, plural, =0 {aucun membre} one {# membre} other {# membres}}",
+        "activeNow": "Actifs maintenant",
+        "working": "en cours de travail",
+        "avgDuration": "Durée moy.",
+        "perSession": "par session",
+        "blockers": "Blocages",
+        "toReview": "à revoir"
+      },
+      "row": {
+        "unknown": "Membre",
+        "inProgress": "En cours",
+        "prod": "Prod",
+        "motiv": "Motiv",
+        "blocker": "Blocage",
+        "ok": "OK"
+      }
+    },
+    "admin": {
+      "empty": "Aucun check-in enregistré pour le moment.",
+      "error": "Erreur : {message}",
+      "memberCount": "{count, plural, =0 {aucun membre} one {# membre} other {# membres}}",
+      "cols": {
+        "member": "Membre",
+        "workHours": "Heures",
+        "feedback": "Retours",
+        "notes": "Notes",
+        "blockers": "Blocage"
+      },
+      "row": {
+        "unknown": "Membre",
+        "inProgress": "En cours",
+        "prod": "Prod",
+        "motiv": "Motiv",
+        "yes": "Oui",
+        "no": "Non"
+      }
+    }
+  },
+  "audit": {
+    "page": {
+      "title": "Activité comptable",
+      "subtitle": "Journal chronologique de toutes les actions financières — qui a fait quoi, quand, depuis où.",
+      "superAdminBadge": "Vue super_admin · toutes les entreprises",
+      "tenantScopedBadge": "Périmètre entreprise"
+    },
+    "stats": {
+      "today": "Aujourd'hui",
+      "last7d": "7 derniers jours",
+      "distinctActors": "Acteurs distincts",
+      "externalAccountant": "Comptable externe"
+    },
+    "filters": {
+      "title": "Filtres",
+      "all": "Tous",
+      "entity": "Entité",
+      "action": "Action",
+      "actor": "Acteur",
+      "from": "Du",
+      "to": "Au",
+      "apply": "Appliquer",
+      "reset": "Réinitialiser"
+    },
+    "actions": {
+      "create": "a créé",
+      "update": "a modifié",
+      "validate": "a validé",
+      "reject": "a rejeté",
+      "complete": "a complété",
+      "send": "a transmis",
+      "archive": "a archivé",
+      "delete": "a supprimé"
+    },
+    "entities": {
+      "accounting_document": "un justificatif",
+      "monthly_dossier": "un dossier mensuel",
+      "tax_declaration": "une déclaration",
+      "payroll_data": "une fiche de paie",
+      "accountant_profile": "le profil comptable",
+      "subcontracted_mission": "une mission sous-traitée",
+      "subcontractor": "un sous-traitant",
+      "client_jit_policy": "la politique JIT d'un client",
+      "shipment_customs_document": "une pièce douanière",
+      "free_zone": "une zone franche",
+      "customs_document_type": "un type de document douanier",
+      "recurring_schedule": "un programme récurrent"
+    },
+    "diff": {
+      "title": "Champs modifiés",
+      "noChanges": "Aucun champ modifié enregistré (action sans diff)."
+    },
+    "meta": {
+      "ip": "Adresse IP",
+      "userAgent": "Agent utilisateur",
+      "entityId": "Identifiant entité",
+      "auditId": "Identifiant audit"
+    },
+    "empty": {
+      "title": "Aucune activité enregistrée",
+      "subtitle": "Les actions comptables apparaîtront ici dès qu'un utilisateur en effectuera.",
+      "filtered": "Aucun résultat avec ces filtres — réinitialisez ou élargissez la période."
+    },
+    "unknownActor": "Système",
+    "rowsCap": "{count, plural, =0 {Aucune ligne} one {1 ligne} other {# lignes}} affichées · plafond 500 · onglet «{navAccountingLabel}»"
   }
 }

@@ -18,22 +18,29 @@ export default async function ClientInvoicesPage() {
 
   if (!user) return null
 
-  const { data: clientRecord } = await supabase
-    .from('clients')
-    .select('id, business_name')
-    .eq('user_id', user.id)
-    .eq('company_id', user.companyId)
-    .single()
+  const isAdminPreview = user.role !== 'client'
 
-  const { data: invoices } = clientRecord
-    ? await supabase
-        .from('invoices')
-        .select('id, invoice_number, issue_date, due_date, total_amount, amount_paid, status')
-        .eq('client_id', clientRecord.id)
+  const { data: clientRecord } = isAdminPreview
+    ? { data: null as { id: string; business_name: string } | null }
+    : await supabase
+        .from('clients')
+        .select('id, business_name')
+        .eq('user_id', user.id)
         .eq('company_id', user.companyId)
-        .order('issue_date', { ascending: false })
-        .limit(50)
-    : { data: [] }
+        .single()
+
+  const baseInvoices = supabase
+    .from('invoices')
+    .select('id, invoice_number, issue_date, due_date, total_amount, amount_paid, status')
+    .eq('company_id', user.companyId)
+    .order('issue_date', { ascending: false })
+    .limit(50)
+
+  const { data: invoices } = isAdminPreview
+    ? await baseInvoices
+    : clientRecord
+      ? await baseInvoices.eq('client_id', clientRecord.id)
+      : { data: [] }
 
   const today = new Date()
   const isOverdue = (dueDate: string, status: InvoiceStatus) =>

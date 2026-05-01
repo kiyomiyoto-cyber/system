@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
-import { Package, FileText } from 'lucide-react'
+import { ArrowLeft, Eye, FileText, Package } from 'lucide-react'
 import { getAuthenticatedUser } from '@/actions/auth'
 import { LanguageSwitcher } from '@/components/shared/language-switcher'
 import { UserNav } from '@/components/shared/user-nav'
@@ -16,23 +16,37 @@ export default async function ClientLayout({ children, params }: ClientLayoutPro
   const user = await getAuthenticatedUser()
 
   if (!user) redirect(`/${locale}/login`)
-  if (user.role !== 'client') {
-    if (['super_admin', 'company_admin', 'dispatcher'].includes(user.role)) {
+  const allowedRoles = ['client', 'super_admin', 'company_admin']
+  if (!allowedRoles.includes(user.role)) {
+    if (user.role === 'dispatcher' || user.role === 'comptable') {
       redirect(`/${locale}/dashboard`)
     }
     if (user.role === 'driver') redirect(`/${locale}/my-shipments`)
     redirect(`/${locale}/login`)
   }
+  const isAdminPreview = user.role !== 'client'
 
   const t = await getTranslations('client')
 
   const tabs = [
-    { href: `/${locale}/shipments`, label: t('myShipments'), icon: Package },
-    { href: `/${locale}/invoices`, label: t('myInvoices'), icon: FileText },
+    { href: `/${locale}/portal/shipments`, label: t('myShipments'), icon: Package },
+    { href: `/${locale}/portal/invoices`, label: t('myInvoices'), icon: FileText },
   ]
 
   return (
     <div className="flex h-screen flex-col bg-background">
+      {isAdminPreview && (
+        <div className="flex shrink-0 items-center justify-between gap-2 border-b border-amber-200 bg-amber-50 px-4 py-2 text-xs text-amber-900 sm:px-6">
+          <span className="inline-flex items-center gap-1.5">
+            <Eye className="h-3.5 w-3.5" />
+            Aperçu admin — vue client
+          </span>
+          <Link href={`/${locale}/dashboard`} className="inline-flex items-center gap-1 font-medium hover:underline">
+            <ArrowLeft className="h-3.5 w-3.5 rtl-flip" />
+            Tableau de bord
+          </Link>
+        </div>
+      )}
       {/* Top bar */}
       <header className="flex h-16 shrink-0 items-center justify-between border-b bg-background px-4 sm:px-6">
         <div className="flex items-center gap-3">

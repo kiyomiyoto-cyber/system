@@ -22,7 +22,9 @@ export default async function DeliveryPage({
     createClient(),
   ])
 
-  if (!user || user.role !== 'driver') return null
+  if (!user) return null
+  const isAdminPreview = user.role === 'super_admin' || user.role === 'company_admin'
+  if (!isAdminPreview && user.role !== 'driver') return null
 
   const { data: shipment } = await supabase
     .from('shipments')
@@ -34,14 +36,16 @@ export default async function DeliveryPage({
 
   if (!shipment) notFound()
 
-  // Verify driver
-  const { data: driver } = await supabase
-    .from('drivers')
-    .select('id')
-    .eq('user_id', user.id)
-    .single()
+  // Verify driver ownership when viewing as a driver; admins skip this check.
+  if (!isAdminPreview) {
+    const { data: driver } = await supabase
+      .from('drivers')
+      .select('id')
+      .eq('user_id', user.id)
+      .single()
 
-  if (!driver || shipment.driver_id !== driver.id) notFound()
+    if (!driver || shipment.driver_id !== driver.id) notFound()
+  }
 
   const client = shipment.client as { business_name: string; phone: string } | null
 

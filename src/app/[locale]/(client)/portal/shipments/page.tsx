@@ -74,7 +74,7 @@ export default async function ClientShipmentsPage({
         {statusFilters.map(({ value, label }) => (
           <Link
             key={value}
-            href={value === 'all' ? `/${locale}/shipments` : `/${locale}/shipments?status=${value}`}
+            href={value === 'all' ? `/${locale}/portal/shipments` : `/${locale}/portal/shipments?status=${value}`}
             className={`shrink-0 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
               activeFilter === value
                 ? 'bg-primary text-primary-foreground'

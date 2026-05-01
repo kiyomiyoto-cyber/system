@@ -7,6 +7,13 @@
 
 BEGIN;
 
+-- Helper functions reference tables (public.users, public.drivers,
+-- public.clients) that are defined later in this same migration. Postgres
+-- normally validates referenced relations when defining a function — turn
+-- that off for the duration of this migration so the file applies in
+-- author-order. This is scoped to the transaction.
+SET LOCAL check_function_bodies = off;
+
 -- ============================================================
 -- EXTENSIONS
 -- ============================================================
@@ -91,41 +98,6 @@ LANGUAGE sql STABLE SECURITY DEFINER SET search_path = public AS $$
 $$;
 
 -- ============================================================
--- SEQUENCE COUNTER TABLE
--- Provides race-condition-safe sequential references per company per year.
--- Used for shipment references (EXP-YY-NNNNN) and invoice numbers (FAC-YY-NNNNN).
--- ============================================================
-CREATE TABLE public.sequence_counters (
-  company_id  uuid      NOT NULL REFERENCES public.companies(id) ON DELETE CASCADE,
-  type        text      NOT NULL,  -- 'shipment' | 'invoice'
-  year        smallint  NOT NULL,
-  last_value  integer   NOT NULL DEFAULT 0,
-  PRIMARY KEY (company_id, type, year)
-);
-
--- Atomically increments and returns the next value for a given sequence.
--- Uses INSERT ... ON CONFLICT ... DO UPDATE which is fully atomic in Postgres.
-CREATE OR REPLACE FUNCTION public.next_sequence_value(
-  p_company_id  uuid,
-  p_type        text
-)
-RETURNS integer
-LANGUAGE plpgsql SECURITY DEFINER SET search_path = public AS $$
-DECLARE
-  v_year  smallint := EXTRACT(YEAR FROM CURRENT_DATE)::smallint;
-  v_next  integer;
-BEGIN
-  INSERT INTO public.sequence_counters (company_id, type, year, last_value)
-  VALUES (p_company_id, p_type, v_year, 1)
-  ON CONFLICT (company_id, type, year)
-  DO UPDATE SET last_value = sequence_counters.last_value + 1
-  RETURNING last_value INTO v_next;
-
-  RETURN v_next;
-END;
-$$;
-
--- ============================================================
 -- TABLE: companies
 -- Root of the multi-tenant hierarchy. Each row is an independent
 -- logistics company. All other tables reference this via company_id.
@@ -168,6 +140,42 @@ CREATE POLICY "companies_super_admin_all" ON public.companies
 CREATE POLICY "companies_self_select" ON public.companies
   FOR SELECT TO authenticated
   USING (id = public.current_company_id());
+
+-- ============================================================
+-- SEQUENCE COUNTER TABLE
+-- Provides race-condition-safe sequential references per company per year.
+-- Used for shipment references (EXP-YY-NNNNN) and invoice numbers (FAC-YY-NNNNN).
+-- Defined here (after companies) so the FK to public.companies(id) resolves.
+-- ============================================================
+CREATE TABLE public.sequence_counters (
+  company_id  uuid      NOT NULL REFERENCES public.companies(id) ON DELETE CASCADE,
+  type        text      NOT NULL,  -- 'shipment' | 'invoice'
+  year        smallint  NOT NULL,
+  last_value  integer   NOT NULL DEFAULT 0,
+  PRIMARY KEY (company_id, type, year)
+);
+
+-- Atomically increments and returns the next value for a given sequence.
+-- Uses INSERT ... ON CONFLICT ... DO UPDATE which is fully atomic in Postgres.
+CREATE OR REPLACE FUNCTION public.next_sequence_value(
+  p_company_id  uuid,
+  p_type        text
+)
+RETURNS integer
+LANGUAGE plpgsql SECURITY DEFINER SET search_path = public AS $$
+DECLARE
+  v_year  smallint := EXTRACT(YEAR FROM CURRENT_DATE)::smallint;
+  v_next  integer;
+BEGIN
+  INSERT INTO public.sequence_counters (company_id, type, year, last_value)
+  VALUES (p_company_id, p_type, v_year, 1)
+  ON CONFLICT (company_id, type, year)
+  DO UPDATE SET last_value = sequence_counters.last_value + 1
+  RETURNING last_value INTO v_next;
+
+  RETURN v_next;
+END;
+$$;
 
 -- ============================================================
 -- TABLE: users

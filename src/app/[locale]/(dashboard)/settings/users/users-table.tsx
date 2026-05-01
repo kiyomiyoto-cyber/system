@@ -23,6 +23,7 @@ const ROLE_COLORS: Record<UserRole, string> = {
   super_admin: 'bg-purple-100 text-purple-700',
   company_admin: 'bg-blue-100 text-blue-700',
   dispatcher: 'bg-cyan-100 text-cyan-700',
+  comptable: 'bg-emerald-100 text-emerald-700',
   driver: 'bg-amber-100 text-amber-700',
   client: 'bg-gray-100 text-gray-700',
 }

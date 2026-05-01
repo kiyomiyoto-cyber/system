@@ -14,7 +14,7 @@ const Schema = z.object({
   fullName: z.string().min(2),
   email: z.string().email(),
   phone: z.string().optional(),
-  role: z.enum(['company_admin', 'dispatcher', 'driver', 'client']),
+  role: z.enum(['company_admin', 'dispatcher', 'comptable', 'driver', 'client']),
   password: z.string().min(8),
 })
 
@@ -87,6 +87,7 @@ export function CreateUserDialog() {
                 <select className={inputClass} {...form.register('role')}>
                   <option value="dispatcher">{t('role.dispatcher')}</option>
                   <option value="company_admin">{t('role.company_admin')}</option>
+                  <option value="comptable">{t('role.comptable')}</option>
                   <option value="driver">{t('role.driver')}</option>
                   <option value="client">{t('role.client')}</option>
                 </select>
