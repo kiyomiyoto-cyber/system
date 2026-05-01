@@ -65,7 +65,7 @@ export async function computeVatForPeriod(
   const [invoicesResult, docsResult] = await Promise.all([
     supabase
       .from('invoices')
-      .select('id, invoice_number, total_excl_tax, total_tax, issued_at, status, client:clients(business_name)')
+      .select('id, invoice_number, subtotal_excl_tax, tax_amount, issued_at, status, client:clients(business_name)')
       .eq('company_id', input.companyId)
       .gte('issued_at', input.periodMonth)
       .lt('issued_at', periodEnd)
@@ -84,8 +84,8 @@ export async function computeVatForPeriod(
   type InvoiceRow = {
     id: string
     invoice_number: string
-    total_excl_tax: number | null
-    total_tax: number | null
+    subtotal_excl_tax: number | null
+    tax_amount: number | null
     issued_at: string | null
     client: { business_name: string } | null
   }
@@ -99,7 +99,7 @@ export async function computeVatForPeriod(
   const invoices = (invoicesResult.data ?? []) as unknown as InvoiceRow[]
   const docs = (docsResult.data ?? []) as unknown as DocRow[]
 
-  const vatCollected = invoices.reduce((s, i) => s + Number(i.total_tax ?? 0), 0)
+  const vatCollected = invoices.reduce((s, i) => s + Number(i.tax_amount ?? 0), 0)
 
   const byCategory = new Map<AccountingDocumentCategory, { count: number; vatTotal: number; ttcTotal: number; ids: string[] }>()
   for (const doc of docs) {
@@ -126,8 +126,8 @@ export async function computeVatForPeriod(
         id: i.id,
         reference: i.invoice_number,
         client: i.client?.business_name ?? null,
-        total_excl_tax: Number(i.total_excl_tax ?? 0),
-        total_tax: Number(i.total_tax ?? 0),
+        total_excl_tax: Number(i.subtotal_excl_tax ?? 0),
+        total_tax: Number(i.tax_amount ?? 0),
         issued_at: i.issued_at,
       })),
       deductibleByCategory: Array.from(byCategory.entries()).map(([category, c]) => ({

@@ -23,6 +23,7 @@ export default async function DriverLayout({ children, params }: DriverLayoutPro
       redirect(`/${locale}/dashboard`)
     }
     if (user.role === 'client') redirect(`/${locale}/portal/shipments`)
+    if (user.role === 'external_accountant') redirect(`/${locale}/accountant/dossiers`)
     redirect(`/${locale}/login`)
   }
   const isAdminPreview = user.role !== 'driver'

@@ -6,7 +6,7 @@ import { createClient } from '@/lib/supabase/server'
 import { getAuthenticatedUser } from '@/actions/auth'
 import { calculatePrice, isUrgentDelivery } from '@/lib/pricing/calculator'
 import { getRoute } from '@/lib/mapbox/geocoding'
-import type { ActionResult } from '@/types/app.types'
+import type { ActionResult, PricingRates } from '@/types/app.types'
 import type { TablesInsert, ShipmentStatus } from '@/types/database.types'
 
 const CreateShipmentSchema = z.object({
@@ -27,62 +27,84 @@ const CreateShipmentSchema = z.object({
 
 export type CreateShipmentData = z.infer<typeof CreateShipmentSchema>
 
-export async function createShipment(formData: CreateShipmentData): Promise<ActionResult<{ id: string; reference: string }>> {
+export async function createShipment(
+  formData: CreateShipmentData,
+): Promise<ActionResult<{ id: string; reference: string }>> {
   const user = await getAuthenticatedUser()
-  if (!user || !['super_admin', 'company_admin', 'dispatcher'].includes(user.role)) {
-    return { success: false, error: 'Unauthorized' }
+  if (!user || !user.companyId || !['super_admin', 'company_admin', 'dispatcher'].includes(user.role)) {
+    return { data: null, error: 'Unauthorized' }
   }
 
   const parsed = CreateShipmentSchema.safeParse(formData)
   if (!parsed.success) {
-    return { success: false, error: parsed.error.errors[0]?.message ?? 'Validation error' }
+    return { data: null, error: parsed.error.errors[0]?.message ?? 'Validation error' }
   }
 
   const data = parsed.data
   const supabase = await createClient()
 
-  // Fetch pricing rates — check client contract first, fallback to defaults
-  const { data: contract } = await supabase
+  // Resolve pricing: client contract first (may set base_fee/price_per_km/urgency_pct),
+  // pricing_defaults supplies vat_rate (always tenant-wide).
+  const today = new Date().toISOString().slice(0, 10)
+  const { data: contractRaw } = await supabase
     .from('client_pricing_contracts')
-    .select('*')
+    .select('id, base_fee, price_per_km, urgency_surcharge_pct, valid_from, valid_to, is_active')
     .eq('client_id', data.clientId)
     .eq('company_id', user.companyId)
-    .lte('effective_from', new Date().toISOString())
-    .or(`effective_until.is.null,effective_until.gte.${new Date().toISOString()}`)
-    .order('created_at', { ascending: false })
+    .eq('is_active', true)
+    .lte('valid_from', today)
+    .or(`valid_to.is.null,valid_to.gte.${today}`)
+    .order('valid_from', { ascending: false })
     .limit(1)
-    .single()
+    .maybeSingle()
 
-  const { data: defaults } = await supabase
+  const { data: defaultsRaw } = await supabase
     .from('pricing_defaults')
-    .select('*')
+    .select('base_fee, price_per_km, urgency_surcharge_pct, vat_rate')
     .eq('company_id', user.companyId)
-    .single()
+    .maybeSingle()
 
-  const rates = {
-    baseFee: contract?.base_fee ?? defaults?.base_fee ?? 100,
-    pricePerKm: contract?.price_per_km ?? defaults?.price_per_km ?? 5,
-    urgencySurchargePct: contract?.urgency_surcharge_pct ?? defaults?.urgency_surcharge_pct ?? 50,
-    vatRatePct: contract?.vat_rate_pct ?? defaults?.vat_rate_pct ?? 20,
-    paymentTermsDays: contract?.payment_terms_days ?? defaults?.payment_terms_days ?? 30,
+  type ContractRow = {
+    id: string
+    base_fee: number
+    price_per_km: number
+    urgency_surcharge_pct: number
+  } | null
+  type DefaultsRow = {
+    base_fee: number
+    price_per_km: number
+    urgency_surcharge_pct: number
+    vat_rate: number
+  } | null
+
+  const contract = contractRaw as unknown as ContractRow
+  const defaults = defaultsRaw as unknown as DefaultsRow
+
+  const rates: PricingRates = {
+    baseFee: Number(contract?.base_fee ?? defaults?.base_fee ?? 100),
+    pricePerKm: Number(contract?.price_per_km ?? defaults?.price_per_km ?? 5),
+    urgencySurchargePct: Number(
+      contract?.urgency_surcharge_pct ?? defaults?.urgency_surcharge_pct ?? 50,
+    ),
+    vatRate: Number(defaults?.vat_rate ?? 20),
+    contractId: contract?.id ?? null,
+    source: contract ? 'contract' : 'default',
   }
 
-  // Calculate distance via Mapbox
+  // Calculate distance via Mapbox.
   let distanceKm = 0
-  let routeGeometry: Record<string, unknown> | null = null
   const routeResult = await getRoute(
     [data.pickupLng, data.pickupLat],
-    [data.deliveryLng, data.deliveryLat]
+    [data.deliveryLng, data.deliveryLat],
   )
   if (routeResult) {
     distanceKm = routeResult.distanceKm
-    routeGeometry = routeResult.geometry as Record<string, unknown>
   }
 
   const urgent = isUrgentDelivery(data.deliveryScheduledAt)
   const breakdown = calculatePrice(distanceKm, rates, urgent)
 
-  // Generate reference via DB function
+  // Generate reference via DB function.
   const { data: seqData } = await supabase.rpc('next_sequence_value', {
     p_company_id: user.companyId,
     p_type: 'shipment',
@@ -95,11 +117,11 @@ export async function createShipment(formData: CreateShipmentData): Promise<Acti
     client_id: data.clientId,
     created_by: user.id,
     status: 'created',
-    pickup_address: data.pickupAddress,
+    pickup_street: data.pickupAddress,
     pickup_city: data.pickupCity,
     pickup_lng: data.pickupLng,
     pickup_lat: data.pickupLat,
-    delivery_address: data.deliveryAddress,
+    delivery_street: data.deliveryAddress,
     delivery_city: data.deliveryCity,
     delivery_lng: data.deliveryLng,
     delivery_lat: data.deliveryLat,
@@ -107,12 +129,11 @@ export async function createShipment(formData: CreateShipmentData): Promise<Acti
     distance_km: distanceKm,
     weight_kg: data.weightKg ?? null,
     volume_m3: data.volumeM3 ?? null,
-    notes: data.notes ?? null,
+    description: data.notes ?? null,
     price_excl_tax: breakdown.priceExclTax,
-    vat_amount: breakdown.vatAmount,
-    total_price: breakdown.totalPrice,
-    pricing_snapshot: breakdown as unknown as Record<string, unknown>,
-    route_geometry: routeGeometry,
+    tax_amount: breakdown.taxAmount,
+    price_incl_tax: breakdown.priceInclTax,
+    pricing_snapshot: breakdown as never,
   }
 
   const { data: shipment, error } = await supabase
@@ -121,42 +142,43 @@ export async function createShipment(formData: CreateShipmentData): Promise<Acti
     .select('id, reference')
     .single()
 
-  if (error) return { success: false, error: error.message }
+  if (error || !shipment) return { data: null, error: error?.message ?? 'Insert failed' }
 
   revalidatePath('/[locale]/(dashboard)/shipments', 'page')
   revalidatePath('/[locale]/(dashboard)/dashboard', 'page')
-  return { success: true, data: { id: shipment.id, reference: shipment.reference } }
+  return { data: { id: shipment.id, reference: shipment.reference }, error: null }
 }
 
 export async function assignDriver(
   shipmentId: string,
-  driverId: string
-): Promise<ActionResult<void>> {
+  driverId: string,
+): Promise<ActionResult<null>> {
   const user = await getAuthenticatedUser()
-  if (!user || !['super_admin', 'company_admin', 'dispatcher'].includes(user.role)) {
-    return { success: false, error: 'Unauthorized' }
+  if (!user || !user.companyId || !['super_admin', 'company_admin', 'dispatcher'].includes(user.role)) {
+    return { data: null, error: 'Unauthorized' }
   }
 
   const supabase = await createClient()
   const { error } = await supabase
     .from('shipments')
-    .update({ driver_id: driverId, status: 'assigned' })
+    .update({ assigned_driver_id: driverId, status: 'assigned' })
     .eq('id', shipmentId)
     .eq('company_id', user.companyId)
     .eq('status', 'created')
 
-  if (error) return { success: false, error: error.message }
+  if (error) return { data: null, error: error.message }
 
   revalidatePath('/[locale]/(dashboard)/shipments', 'page')
   revalidatePath(`/[locale]/(dashboard)/shipments/${shipmentId}`, 'page')
-  return { success: true, data: undefined }
+  return { data: null, error: null }
 }
 
 const VALID_TRANSITIONS: Record<ShipmentStatus, ShipmentStatus[]> = {
   created: ['assigned', 'cancelled'],
   assigned: ['picked_up', 'cancelled'],
   picked_up: ['in_transit', 'failed'],
-  in_transit: ['delivered', 'failed'],
+  in_transit: ['customs_clearance', 'delivered', 'failed'],
+  customs_clearance: ['delivered', 'failed'],
   delivered: [],
   failed: ['assigned'],
   cancelled: [],
@@ -165,77 +187,107 @@ const VALID_TRANSITIONS: Record<ShipmentStatus, ShipmentStatus[]> = {
 export async function updateShipmentStatus(
   shipmentId: string,
   newStatus: ShipmentStatus,
-  notes?: string
-): Promise<ActionResult<void>> {
+  notes?: string,
+): Promise<ActionResult<null>> {
   const user = await getAuthenticatedUser()
-  if (!user) return { success: false, error: 'Unauthorized' }
+  if (!user || !user.companyId) return { data: null, error: 'Unauthorized' }
 
   const supabase = await createClient()
 
-  const { data: shipment } = await supabase
+  const { data: shipmentRaw } = await supabase
     .from('shipments')
-    .select('status, company_id, driver_id')
+    .select('status, company_id, assigned_driver_id, description')
     .eq('id', shipmentId)
     .single()
 
-  if (!shipment) return { success: false, error: 'Shipment not found' }
+  type ShipmentRow = {
+    status: ShipmentStatus
+    company_id: string
+    assigned_driver_id: string | null
+    description: string | null
+  }
+  const shipment = shipmentRaw as unknown as ShipmentRow | null
+  if (!shipment) return { data: null, error: 'Shipment not found' }
 
-  // Drivers can only update their own shipments
+  // Drivers can only update their own shipments.
   if (user.role === 'driver') {
     const { data: driver } = await supabase
       .from('drivers')
       .select('id')
       .eq('user_id', user.id)
       .single()
-    if (!driver || shipment.driver_id !== driver.id) {
-      return { success: false, error: 'Unauthorized' }
+    if (!driver || shipment.assigned_driver_id !== driver.id) {
+      return { data: null, error: 'Unauthorized' }
     }
   }
 
-  const allowed = VALID_TRANSITIONS[shipment.status as ShipmentStatus] ?? []
+  const allowed = VALID_TRANSITIONS[shipment.status] ?? []
   if (!allowed.includes(newStatus)) {
-    return { success: false, error: `Cannot transition from ${shipment.status} to ${newStatus}` }
+    return { data: null, error: `Cannot transition from ${shipment.status} to ${newStatus}` }
   }
 
-  const updateData: Record<string, unknown> = { status: newStatus }
-  if (newStatus === 'picked_up') updateData.picked_up_at = new Date().toISOString()
-  if (newStatus === 'delivered') updateData.delivered_at = new Date().toISOString()
-  if (notes) updateData.notes = notes
+  const update: Record<string, unknown> = { status: newStatus }
+  if (newStatus === 'picked_up') update.pickup_actual_at = new Date().toISOString()
+  if (newStatus === 'delivered') update.delivery_actual_at = new Date().toISOString()
+  if (notes) update.description = notes
 
   const { error } = await supabase
     .from('shipments')
-    .update(updateData)
+    // Update is built dynamically from a narrow set of allowed fields; the
+    // strict generated `TablesUpdate<'shipments'>` shape would refuse the
+    // bag-style write — cast at this boundary only.
+    .update(update as never)
     .eq('id', shipmentId)
     .eq('company_id', user.companyId)
 
-  if (error) return { success: false, error: error.message }
+  if (error) return { data: null, error: error.message }
 
   revalidatePath('/[locale]/(dashboard)/shipments', 'page')
   revalidatePath(`/[locale]/(dashboard)/shipments/${shipmentId}`, 'page')
   revalidatePath('/[locale]/(driver)/my-shipments', 'page')
-  return { success: true, data: undefined }
+  return { data: null, error: null }
 }
 
-export async function cancelShipment(shipmentId: string, reason?: string): Promise<ActionResult<void>> {
+export async function cancelShipment(
+  shipmentId: string,
+  reason?: string,
+): Promise<ActionResult<null>> {
   const user = await getAuthenticatedUser()
-  if (!user || !['super_admin', 'company_admin', 'dispatcher'].includes(user.role)) {
-    return { success: false, error: 'Unauthorized' }
+  if (!user || !user.companyId || !['super_admin', 'company_admin', 'dispatcher'].includes(user.role)) {
+    return { data: null, error: 'Unauthorized' }
   }
 
   const supabase = await createClient()
+
+  // Append the cancellation reason to description (the schema has no
+  // dedicated `cancellation_reason` column).
+  const update: Record<string, unknown> = { status: 'cancelled' }
+  if (reason) {
+    const { data: shipmentRaw } = await supabase
+      .from('shipments')
+      .select('description')
+      .eq('id', shipmentId)
+      .eq('company_id', user.companyId)
+      .maybeSingle()
+    const existing = (shipmentRaw as { description: string | null } | null)?.description ?? null
+    update.description = existing
+      ? `${existing}\n\n[CANCELLED] ${reason}`
+      : `[CANCELLED] ${reason}`
+  }
+
   const { error } = await supabase
     .from('shipments')
-    .update({
-      status: 'cancelled',
-      cancellation_reason: reason ?? null,
-    })
+    // Update is built dynamically from a narrow set of allowed fields; the
+    // strict generated `TablesUpdate<'shipments'>` shape would refuse the
+    // bag-style write — cast at this boundary only.
+    .update(update as never)
     .eq('id', shipmentId)
     .eq('company_id', user.companyId)
     .in('status', ['created', 'assigned'])
 
-  if (error) return { success: false, error: error.message }
+  if (error) return { data: null, error: error.message }
 
   revalidatePath('/[locale]/(dashboard)/shipments', 'page')
   revalidatePath(`/[locale]/(dashboard)/shipments/${shipmentId}`, 'page')
-  return { success: true, data: undefined }
+  return { data: null, error: null }
 }

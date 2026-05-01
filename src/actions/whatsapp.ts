@@ -278,7 +278,7 @@ export async function renderWhatsappMessage(
     const { data: inv, error } = await supabase
       .from('invoices')
       .select(
-        'id, invoice_number, total_incl_tax, due_date, client_id, client:clients(id, business_name, contact_name, contact_phone, whatsapp_phone)',
+        'id, invoice_number, total_incl_tax, due_at, client_id, client:clients(id, business_name, contact_name, contact_phone, whatsapp_phone)',
       )
       .eq('id', context.invoiceId)
       .eq('company_id', auth.companyId)
@@ -288,7 +288,7 @@ export async function renderWhatsappMessage(
       id: string
       invoice_number: string
       total_incl_tax: number | string
-      due_date: string | null
+      due_at: string | null
       client_id: string | null
       client: {
         id: string
@@ -303,8 +303,8 @@ export async function renderWhatsappMessage(
 
     vars.invoice_number = i.invoice_number
     vars.invoice_amount = formatMAD(Number(i.total_incl_tax ?? 0))
-    vars.invoice_due_date = i.due_date
-      ? new Date(i.due_date).toLocaleDateString('fr-MA')
+    vars.invoice_due_date = i.due_at
+      ? new Date(i.due_at).toLocaleDateString('fr-MA')
       : ''
     vars.client_name = i.client?.business_name ?? ''
     vars.client_contact = i.client?.contact_name ?? i.client?.business_name ?? ''

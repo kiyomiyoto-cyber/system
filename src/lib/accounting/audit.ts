@@ -16,7 +16,7 @@ interface RecordAuditParams {
   afterState?: Record<string, unknown> | null
   notes?: string | null
   actor: {
-    userId: string
+    userId: string | null
     role: string
     name: string
   }
@@ -45,7 +45,7 @@ export async function recordAccountingAudit(params: RecordAuditParams): Promise<
     before_state: params.beforeState ?? null,
     after_state: params.afterState ?? null,
     notes: params.notes ?? null,
-    actor_user_id: params.actor.userId,
+    actor_user_id: params.actor.userId ?? undefined,
     actor_role: params.actor.role,
     actor_name: params.actor.name,
     ip_address: ip,

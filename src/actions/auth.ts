@@ -49,6 +49,7 @@ export async function requireAuth(allowedRoles?: string[]): Promise<AuthUser> {
     // Redirect to role-appropriate home
     if (user.role === 'driver') redirect('/fr/my-shipments')
     if (user.role === 'client') redirect('/fr/portal/shipments')
+    if (user.role === 'external_accountant') redirect('/fr/accountant/dossiers')
     redirect('/fr/login')
   }
 

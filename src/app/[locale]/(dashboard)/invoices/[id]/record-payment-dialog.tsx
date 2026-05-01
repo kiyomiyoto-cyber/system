@@ -14,7 +14,7 @@ import { formatMAD } from '@/lib/utils/formatters'
 const Schema = z.object({
   amount: z.coerce.number().positive(),
   paymentDate: z.string(),
-  paymentMethod: z.enum(['bank_transfer', 'cash', 'check', 'other']),
+  paymentMethod: z.enum(['bank_transfer', 'cash', 'check']),
   reference: z.string().optional(),
   notes: z.string().optional(),
 })
@@ -47,12 +47,12 @@ export function RecordPaymentDialog({ invoiceId, balance }: Props) {
   async function onSubmit(data: FormData) {
     setSubmitting(true)
     const result = await recordPayment(invoiceId, data)
-    if (result.success) {
+    if (result.error) {
+      toast.error(result.error)
+    } else {
       toast.success(t('paymentRecorded'))
       setOpen(false)
       router.refresh()
-    } else {
-      toast.error(result.error)
     }
     setSubmitting(false)
   }

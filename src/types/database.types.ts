@@ -4697,3 +4697,42 @@ export const Constants = {
     Enums: {},
   },
 } as const
+
+// ============================================================
+// Hand-written union types live in app.types.ts so they survive
+// `supabase gen types typescript --linked`. Re-exported here for
+// backward compatibility with existing imports.
+// ============================================================
+export type {
+  UserRole,
+  ShipmentStatus,
+  InvoiceStatus,
+  BillingMode,
+  VehicleType,
+  NotificationChannel,
+  NotificationStatus,
+  AccountantDeliveryMethod,
+  MonthlyDossierStatus,
+  AccountingDocumentCategory,
+  AccountingDocumentStatus,
+  AccountingFileType,
+  AccountingPaymentMethod,
+  AccountingAuditAction,
+  AccountingAuditEntity,
+  CmrStatus,
+  CmrPayer,
+  TaxDeclarationType,
+  TaxDeclarationStatus,
+  PayrollStatus,
+  ClientContractStatus,
+  ClientContractBillingMode,
+  BlFieldType,
+  RecurringScheduleVehicleType,
+  SubcontractedMissionStatus,
+  WhatsappAudience,
+  SupplierCategory,
+  SupplierInvoiceStatus,
+  PassProvider,
+  TollKind,
+  VignetteKind,
+} from './app.types'

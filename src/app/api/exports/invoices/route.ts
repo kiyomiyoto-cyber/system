@@ -17,9 +17,9 @@ interface InvoiceExportRow {
   invoice_number: string
   status: string
   issued_at: string | null
-  due_date: string | null
-  total_excl_tax: number | string | null
-  vat_amount: number | string | null
+  due_at: string | null
+  subtotal_excl_tax: number | string | null
+  tax_amount: number | string | null
   total_incl_tax: number | string | null
   amount_paid: number | string | null
   client: { business_name: string; tax_id: string | null } | null
@@ -44,7 +44,7 @@ export async function GET(request: Request) {
   let query = supabase
     .from('invoices')
     .select(
-      'invoice_number, status, issued_at, due_date, total_excl_tax, vat_amount, total_incl_tax, amount_paid, client:clients(business_name, tax_id)',
+      'invoice_number, status, issued_at, due_at, subtotal_excl_tax, tax_amount, total_incl_tax, amount_paid, client:clients(business_name, tax_id)',
     )
     .eq('company_id', user.companyId)
     .order('issued_at', { ascending: false })
@@ -87,7 +87,7 @@ export async function GET(request: Request) {
       header: 'Échéance',
       width: 14,
       numFmt: FMT.DATE,
-      value: (r) => (r.due_date ? new Date(r.due_date) : null),
+      value: (r) => (r.due_at ? new Date(r.due_at) : null),
     },
     { header: 'Client', width: 28, value: (r) => r.client?.business_name ?? '' },
     { header: 'ICE client', width: 18, value: (r) => r.client?.tax_id ?? '' },
@@ -96,14 +96,14 @@ export async function GET(request: Request) {
       width: 14,
       numFmt: FMT.MAD,
       align: 'right',
-      value: (r) => (r.total_excl_tax == null ? null : Number(r.total_excl_tax)),
+      value: (r) => (r.subtotal_excl_tax == null ? null : Number(r.subtotal_excl_tax)),
     },
     {
       header: 'TVA',
       width: 12,
       numFmt: FMT.MAD,
       align: 'right',
-      value: (r) => (r.vat_amount == null ? null : Number(r.vat_amount)),
+      value: (r) => (r.tax_amount == null ? null : Number(r.tax_amount)),
     },
     {
       header: 'TTC',
@@ -136,8 +136,8 @@ export async function GET(request: Request) {
   let sumPaid = 0
   let sumBalance = 0
   for (const r of rows) {
-    sumHt += Number(r.total_excl_tax ?? 0)
-    sumTva += Number(r.vat_amount ?? 0)
+    sumHt += Number(r.subtotal_excl_tax ?? 0)
+    sumTva += Number(r.tax_amount ?? 0)
     sumTtc += Number(r.total_incl_tax ?? 0)
     sumPaid += Number(r.amount_paid ?? 0)
     sumBalance += Number(r.total_incl_tax ?? 0) - Number(r.amount_paid ?? 0)

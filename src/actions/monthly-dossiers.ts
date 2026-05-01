@@ -66,6 +66,23 @@ function periodFolder(periodMonth: string): string {
   return periodMonth.slice(0, 7) // YYYY-MM
 }
 
+type DbClient = Awaited<ReturnType<typeof createClient>>
+
+interface DossierActor {
+  userId: string | null
+  role: string
+  name: string
+}
+
+interface RunDossierGenerationParams {
+  companyId: string
+  periodMonth: string
+  actor: DossierActor
+  db: DbClient
+  service: DbClient
+  revalidate: boolean
+}
+
 export async function generateMonthlyDossier(
   periodMonth: string,
 ): Promise<ActionResult<{ dossierId: string }>> {
@@ -76,37 +93,78 @@ export async function generateMonthlyDossier(
     return { data: null, error: 'Période invalide (attendu YYYY-MM-01).' }
   }
 
-  const supabase = await createClient()
+  const db = await createClient()
   const service = await createServiceClient()
+
+  return _runDossierGeneration({
+    companyId: auth.companyId,
+    periodMonth,
+    actor: { userId: auth.user.id, role: auth.user.role, name: auth.user.fullName },
+    db,
+    service,
+    revalidate: true,
+  })
+}
+
+// Cron-mode entry point: no session, runs as the system actor with the
+// service-role client throughout. Used by /api/cron/generate-monthly-dossiers.
+export async function generateMonthlyDossierAsSystem(
+  companyId: string,
+  periodMonth: string,
+): Promise<ActionResult<{ dossierId: string }>> {
+  if (!/^\d{4}-\d{2}-01$/.test(periodMonth)) {
+    return { data: null, error: 'Période invalide (attendu YYYY-MM-01).' }
+  }
+
+  const service = await createServiceClient()
+
+  return _runDossierGeneration({
+    companyId,
+    periodMonth,
+    actor: { userId: null, role: 'system', name: 'Cron — auto-génération' },
+    db: service,
+    service,
+    revalidate: false,
+  })
+}
+
+async function _runDossierGeneration({
+  companyId,
+  periodMonth,
+  actor,
+  db,
+  service,
+  revalidate,
+}: RunDossierGenerationParams): Promise<ActionResult<{ dossierId: string }>> {
   const periodEnd = nextMonthIso(periodMonth)
 
   const [companyResult, invoicesResult, docsResult, payrollResult] = await Promise.all([
-    supabase
+    db
       .from('companies')
       .select('name, address, city, tax_id')
-      .eq('id', auth.companyId)
+      .eq('id', companyId)
       .maybeSingle(),
-    supabase
+    db
       .from('invoices')
-      .select('id, invoice_number, total_excl_tax, total_tax, total_incl_tax, issued_at, status, client:clients(business_name)')
-      .eq('company_id', auth.companyId)
+      .select('id, invoice_number, subtotal_excl_tax, tax_amount, total_incl_tax, issued_at, status, client:clients(business_name)')
+      .eq('company_id', companyId)
       .gte('issued_at', periodMonth)
       .lt('issued_at', periodEnd)
       .neq('status', 'cancelled')
       .is('deleted_at', null)
       .order('issued_at', { ascending: true }),
-    supabase
+    db
       .from('accounting_documents')
       .select('id, document_category, amount_ttc, vat_amount, document_date, supplier_name, status')
-      .eq('company_id', auth.companyId)
+      .eq('company_id', companyId)
       .gte('captured_at', periodMonth)
       .lt('captured_at', periodEnd)
       .is('deleted_at', null)
       .order('document_date', { ascending: true, nullsFirst: false }),
-    supabase
+    db
       .from('payroll_data_export')
       .select('id, driver_id, gross_salary_mad, bonuses_mad, cnss_employee_part, cnss_employer_part, amo_employee_part, amo_employer_part, family_allowance, vocational_training, ir_amount, net_salary_mad, status, driver:drivers(full_name)')
-      .eq('company_id', auth.companyId)
+      .eq('company_id', companyId)
       .eq('period_month', periodMonth)
       .in('status', ['validated', 'paid'])
       .is('deleted_at', null),
@@ -116,8 +174,8 @@ export async function generateMonthlyDossier(
   type InvRow = {
     id: string
     invoice_number: string
-    total_excl_tax: number | null
-    total_tax: number | null
+    subtotal_excl_tax: number | null
+    tax_amount: number | null
     total_incl_tax: number | null
     issued_at: string | null
     status: string | null
@@ -160,8 +218,8 @@ export async function generateMonthlyDossier(
     reference: i.invoice_number,
     client: i.client?.business_name ?? '—',
     issuedAt: i.issued_at,
-    ht: Number(i.total_excl_tax ?? 0),
-    tax: Number(i.total_tax ?? 0),
+    ht: Number(i.subtotal_excl_tax ?? 0),
+    tax: Number(i.tax_amount ?? 0),
     ttc: Number(i.total_incl_tax ?? 0),
     status: i.status,
   }))
@@ -264,15 +322,15 @@ export async function generateMonthlyDossier(
   } catch (err) {
     logger.error('dossier.pdf_failed', {
       action: 'generateMonthlyDossier',
-      userId: auth.user.id,
-      companyId: auth.companyId,
+      userId: actor.userId ?? undefined,
+      companyId,
       error: err instanceof Error ? err.message : String(err),
     })
     return { data: null, error: 'Échec de la génération du PDF.' }
   }
 
   // Upload to Storage
-  const pdfPath = `${auth.companyId}/${periodFolder(periodMonth)}/recap.pdf`
+  const pdfPath = `${companyId}/${periodFolder(periodMonth)}/recap.pdf`
   const { error: uploadError } = await service.storage
     .from('monthly-dossiers')
     .upload(pdfPath, pdfBuffer, {
@@ -282,18 +340,18 @@ export async function generateMonthlyDossier(
   if (uploadError) {
     logger.error('dossier.pdf_upload_failed', {
       action: 'generateMonthlyDossier',
-      userId: auth.user.id,
-      companyId: auth.companyId,
+      userId: actor.userId ?? undefined,
+      companyId,
       error: uploadError.message,
     })
     return { data: null, error: 'Échec du téléversement du PDF.' }
   }
 
   // Upsert dossier row
-  const { data: existing } = await supabase
+  const { data: existing } = await db
     .from('monthly_dossiers')
     .select('id')
-    .eq('company_id', auth.companyId)
+    .eq('company_id', companyId)
     .eq('period_month', periodMonth)
     .is('deleted_at', null)
     .maybeSingle()
@@ -313,28 +371,28 @@ export async function generateMonthlyDossier(
     pdf_summary_path: pdfPath,
     computed_snapshot: pdfData as never,
     generated_at: generatedAt,
-    generated_by_user_id: auth.user.id,
+    generated_by_user_id: actor.userId ?? undefined,
   }
 
   let dossierId: string
   if (existing) {
     dossierId = existing.id
-    const { error: updateError } = await supabase
+    const { error: updateError } = await db
       .from('monthly_dossiers')
       .update(payload)
       .eq('id', dossierId)
-      .eq('company_id', auth.companyId)
+      .eq('company_id', companyId)
     if (updateError) {
       logger.error('dossier.update_failed', { error: updateError.message })
       return { data: null, error: 'Échec de la mise à jour du dossier.' }
     }
   } else {
     dossierId = crypto.randomUUID()
-    const { error: insertError } = await supabase
+    const { error: insertError } = await db
       .from('monthly_dossiers')
       .insert({
         id: dossierId,
-        company_id: auth.companyId,
+        company_id: companyId,
         period_month: periodMonth,
         ...payload,
       })
@@ -347,15 +405,15 @@ export async function generateMonthlyDossier(
   // Link all included accounting_documents to this dossier (idempotent)
   const ids = validDocs.map((d) => d.id)
   if (ids.length > 0) {
-    await supabase
+    await db
       .from('accounting_documents')
       .update({ monthly_dossier_id: dossierId })
       .in('id', ids)
-      .eq('company_id', auth.companyId)
+      .eq('company_id', companyId)
   }
 
   await recordAccountingAudit({
-    companyId: auth.companyId,
+    companyId,
     entityType: 'monthly_dossier',
     entityId: dossierId,
     action: existing ? 'update' : 'create',
@@ -366,11 +424,13 @@ export async function generateMonthlyDossier(
       total_expenses_mad: totalExpenses,
       vat_to_pay_mad: vatToPay,
     },
-    actor: { userId: auth.user.id, role: auth.user.role, name: auth.user.fullName },
+    actor,
   })
 
-  revalidatePath('/[locale]/(dashboard)/comptabilite', 'page')
-  revalidatePath('/[locale]/(dashboard)/comptabilite/dossiers', 'page')
+  if (revalidate) {
+    revalidatePath('/[locale]/(dashboard)/comptabilite', 'page')
+    revalidatePath('/[locale]/(dashboard)/comptabilite/dossiers', 'page')
+  }
   return { data: { dossierId }, error: null }
 }
 
@@ -640,6 +700,138 @@ export async function getSignedDossierUrl(
 
   if (!dossier?.pdf_summary_path) return { data: null, error: 'PDF introuvable.' }
 
+  const service = await createServiceClient()
+  const { data, error } = await service.storage
+    .from('monthly-dossiers')
+    .createSignedUrl(dossier.pdf_summary_path, 60 * 60)
+
+  if (error || !data) return { data: null, error: error?.message ?? 'Lien non disponible.' }
+  return { data: { url: data.signedUrl }, error: null }
+}
+
+// ============================================================
+// External-accountant write path (Mode D — portal).
+// The cabinet can close a dossier they received and attach
+// optional notes. RLS enforces row-level access; this action
+// just enforces the column-level rule (only notes + close-state
+// can change) and writes the audit trail.
+// ============================================================
+
+const closeDossierSchema = z.object({
+  dossierId: z.string().uuid(),
+  notes: z
+    .string()
+    .trim()
+    .max(2000)
+    .optional()
+    .transform((v) => (v && v.length > 0 ? v : null)),
+})
+
+export type CloseDossierInput = z.input<typeof closeDossierSchema>
+
+export async function closeDossierByAccountant(
+  rawInput: CloseDossierInput,
+): Promise<ActionResult<{ id: string }>> {
+  const user = await getAuthenticatedUser()
+  if (!user) return { data: null, error: 'Non autorisé.' }
+  if (user.role !== 'external_accountant') {
+    return { data: null, error: 'Réservé au comptable externe.' }
+  }
+
+  const parsed = closeDossierSchema.safeParse(rawInput)
+  if (!parsed.success) {
+    return { data: null, error: parsed.error.errors[0]?.message ?? 'Données invalides.' }
+  }
+  const { dossierId, notes } = parsed.data
+
+  const supabase = await createClient()
+
+  // RLS limits SELECT to dossiers of the linked company with status sent /
+  // closed_by_accountant — so a hit here proves authorization.
+  const { data: existingRaw } = await supabase
+    .from('monthly_dossiers')
+    .select('id, company_id, status, closed_at, notes_from_accountant')
+    .eq('id', dossierId)
+    .is('deleted_at', null)
+    .maybeSingle()
+
+  const existing = existingRaw as unknown as
+    | {
+        id: string
+        company_id: string
+        status: string
+        closed_at: string | null
+        notes_from_accountant: string | null
+      }
+    | null
+
+  if (!existing) return { data: null, error: 'Dossier introuvable ou déjà clôturé hors période.' }
+  if (existing.status !== 'sent') {
+    return { data: null, error: 'Ce dossier ne peut plus être clôturé.' }
+  }
+
+  const closedAt = new Date().toISOString()
+  const { error: updateError } = await supabase
+    .from('monthly_dossiers')
+    .update({
+      status: 'closed_by_accountant',
+      closed_at: closedAt,
+      notes_from_accountant: notes,
+    })
+    .eq('id', dossierId)
+    .eq('status', 'sent')
+
+  if (updateError) {
+    logger.error('dossier.close_by_accountant_failed', {
+      action: 'closeDossierByAccountant',
+      userId: user.id,
+      dossierId,
+      error: updateError.message,
+    })
+    return { data: null, error: 'Échec de la clôture du dossier.' }
+  }
+
+  await recordAccountingAudit({
+    companyId: existing.company_id,
+    entityType: 'external_accountant_action',
+    entityId: dossierId,
+    action: 'complete',
+    beforeState: { status: existing.status, closed_at: existing.closed_at },
+    afterState: { status: 'closed_by_accountant', closed_at: closedAt, notes_from_accountant: notes },
+    notes: notes ?? null,
+    actor: { userId: user.id, role: user.role, name: user.fullName },
+  })
+
+  revalidatePath('/[locale]/(accountant)/accountant/dossiers', 'page')
+  revalidatePath(`/[locale]/(accountant)/accountant/dossiers/${dossierId}`, 'page')
+  return { data: { id: dossierId }, error: null }
+}
+
+export async function getSignedDossierUrlForAccountant(
+  dossierId: string,
+): Promise<ActionResult<{ url: string }>> {
+  const user = await getAuthenticatedUser()
+  if (!user) return { data: null, error: 'Non autorisé.' }
+  if (user.role !== 'external_accountant') {
+    return { data: null, error: 'Réservé au comptable externe.' }
+  }
+
+  if (!z.string().uuid().safeParse(dossierId).success) {
+    return { data: null, error: 'Identifiant invalide.' }
+  }
+
+  const supabase = await createClient()
+  // RLS guarantees this only returns dossiers the accountant can read.
+  const { data: dossier } = await supabase
+    .from('monthly_dossiers')
+    .select('pdf_summary_path, zip_archive_path, excel_export_path')
+    .eq('id', dossierId)
+    .is('deleted_at', null)
+    .maybeSingle()
+
+  if (!dossier?.pdf_summary_path) return { data: null, error: 'PDF introuvable.' }
+
+  // Use service client for signing — RLS already gated the existence check.
   const service = await createServiceClient()
   const { data, error } = await service.storage
     .from('monthly-dossiers')

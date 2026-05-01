@@ -2336,5 +2336,78 @@
     },
     "unknownActor": "النظام",
     "rowsCap": "{count, plural, =0 {لا أسطر} one {سطر واحد} other {# أسطر}} معروضة · حد أقصى 500 · علامة «{navAccountingLabel}»"
+  },
+  "accountant": {
+    "portal": {
+      "title": "بوابة المحاسب",
+      "nav": {
+        "dossiers": "الملفات الشهرية"
+      },
+      "footer": {
+        "notice": "فضاء مخصص لمكتب المحاسبة — وصول للقراءة فقط على الملفات المرسلة. روابط التحميل موقّعة وتنتهي صلاحيتها بعد ساعة."
+      }
+    },
+    "dossiersList": {
+      "title": "ملفاتي",
+      "subtitle": "ملخصات محاسبية أرسلها لك العميل. اضغط على الملف للاطلاع، تحميل الوثائق، وإغلاقه بعد المعالجة.",
+      "pendingCount": "{count, plural, =0 {لا شيء قيد المعالجة} one {ملف واحد قيد المعالجة} other {# ملفات قيد المعالجة}}",
+      "closedCount": "{count, plural, =0 {لا شيء مُغلق} one {ملف مُغلق} other {# ملفات مُغلقة}}",
+      "documentsCount": "{count, plural, =0 {لا وثائق إثبات} one {وثيقة إثبات واحدة} other {# وثائق إثبات}}",
+      "revenue": "رقم المعاملات (دون ض.ق.م)",
+      "expenses": "المصاريف",
+      "vat": "ض.ق.م",
+      "sentOn": "وصل في {date}",
+      "open": "فتح",
+      "empty": {
+        "title": "لم يصل أي ملف بعد",
+        "subtitle": "ستظهر الملخصات هنا بمجرد أن يرسلها لك العميل."
+      },
+      "status": {
+        "in_progress": "قيد الإعداد",
+        "ready": "جاهز",
+        "sent": "للمعالجة",
+        "closed_by_accountant": "مُغلق"
+      }
+    },
+    "dossierDetail": {
+      "back": "العودة إلى الملفات",
+      "title": "ملف — {period}",
+      "subtitleSent": "وصل {when}",
+      "subtitleNotSent": "لم يُرسل بعد",
+      "downloadPdf": "تحميل الملخص (PDF)",
+      "downloadZip": "أرشيف الوثائق (ZIP)",
+      "downloadXlsx": "تصدير Excel",
+      "noPdf": "لا يتوفر PDF",
+      "sentTo": "أُرسل إلى {email}",
+      "revenue": "رقم المعاملات",
+      "expenses": "المصاريف",
+      "margin": "الهامش",
+      "marginEstimate": "تقدير دون ض.ق.م",
+      "vatToPay": "ض.ق.م مُستحقة",
+      "htShort": "دون ض.ق.م",
+      "ttcShort": "بكل الضرائب",
+      "vatBreakdown": "محصّلة {collected} · قابلة للخصم {deductible}",
+      "payrollTitle": "الأجور",
+      "payrollSubtitle": "اشتراكات CNSS، AMO والضريبة على الدخل المقتطعة.",
+      "payrollGross": "الأجر الإجمالي",
+      "payrollNet": "الأجر الصافي",
+      "employerCost": "تكلفة المُشغّل",
+      "docsCount": "{count, plural, =0 {لا وثائق إثبات مدرجة} one {وثيقة إثبات واحدة مدرجة} other {# وثائق إثبات مدرجة}}",
+      "generatedAt": "أُنشئ {when}",
+      "notesTitle": "ملاحظاتك",
+      "closedBannerTitle": "تم إغلاق الملف",
+      "closedBannerBody": "أكدت معالجة هذا الملف بتاريخ {when}.",
+      "closedBannerBodyNoDate": "أكدت معالجة هذا الملف.",
+      "closeForm": {
+        "title": "إغلاق الملف",
+        "subtitle": "بعد الإغلاق، يبقى الملف قابلاً للاطلاع لكنه غير قابل للتعديل. هذا الإجراء يُخطر عميلك بأن المحاسبة قد تمت.",
+        "notesLabel": "ملاحظات لعميلك (اختياري)",
+        "notesPlaceholder": "مثال: تصريح ض.ق.م مُودع بتاريخ 20/05، الضريبة على الأجور مدفوعة. وثيقة وقود ناقصة — للمراجعة.",
+        "notesHint": "الحد الأقصى 2000 حرفاً.",
+        "submit": "وضع علامة كمعالَج",
+        "submitting": "جاري الإغلاق…",
+        "confirm": "تأكيد إغلاق الملف؟ هذا الإجراء نهائي."
+      }
+    }
   }
 }

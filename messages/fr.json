@@ -2337,5 +2337,78 @@
     },
     "unknownActor": "Système",
     "rowsCap": "{count, plural, =0 {Aucune ligne} one {1 ligne} other {# lignes}} affichées · plafond 500 · onglet «{navAccountingLabel}»"
+  },
+  "accountant": {
+    "portal": {
+      "title": "Portail comptable",
+      "nav": {
+        "dossiers": "Dossiers mensuels"
+      },
+      "footer": {
+        "notice": "Espace dédié au cabinet comptable — accès lecture seule sur les dossiers transmis. Les téléchargements sont signés et expirent au bout d'1 heure."
+      }
+    },
+    "dossiersList": {
+      "title": "Mes dossiers",
+      "subtitle": "Récapitulatifs comptables transmis par votre client. Cliquez sur un dossier pour le consulter, télécharger les pièces et le clôturer une fois traité.",
+      "pendingCount": "{count, plural, =0 {Aucun à traiter} one {1 à traiter} other {# à traiter}}",
+      "closedCount": "{count, plural, =0 {Aucun clôturé} one {1 clôturé} other {# clôturés}}",
+      "documentsCount": "{count, plural, =0 {Aucun justificatif} one {1 justificatif} other {# justificatifs}}",
+      "revenue": "CA HT",
+      "expenses": "Charges",
+      "vat": "TVA",
+      "sentOn": "Reçu le {date}",
+      "open": "Ouvrir",
+      "empty": {
+        "title": "Aucun dossier reçu",
+        "subtitle": "Les récapitulatifs apparaîtront ici dès que votre client les aura transmis."
+      },
+      "status": {
+        "in_progress": "En cours",
+        "ready": "Prêt",
+        "sent": "À traiter",
+        "closed_by_accountant": "Clôturé"
+      }
+    },
+    "dossierDetail": {
+      "back": "Retour aux dossiers",
+      "title": "Dossier — {period}",
+      "subtitleSent": "Reçu {when}",
+      "subtitleNotSent": "Pas encore transmis",
+      "downloadPdf": "Télécharger le récapitulatif (PDF)",
+      "downloadZip": "Archive ZIP des justificatifs",
+      "downloadXlsx": "Export Excel",
+      "noPdf": "Aucun PDF disponible",
+      "sentTo": "Transmis à {email}",
+      "revenue": "Chiffre d'affaires",
+      "expenses": "Charges",
+      "margin": "Marge",
+      "marginEstimate": "Estimation HT − TTC",
+      "vatToPay": "TVA à payer",
+      "htShort": "Hors taxes",
+      "ttcShort": "Toutes taxes",
+      "vatBreakdown": "Collectée {collected} · Déductible {deductible}",
+      "payrollTitle": "Paie",
+      "payrollSubtitle": "Cotisations CNSS, AMO et IR retenus à la source.",
+      "payrollGross": "Brut total",
+      "payrollNet": "Net versé",
+      "employerCost": "Coût employeur",
+      "docsCount": "{count, plural, =0 {Aucun justificatif inclus} one {1 justificatif inclus} other {# justificatifs inclus}}",
+      "generatedAt": "Généré {when}",
+      "notesTitle": "Vos notes",
+      "closedBannerTitle": "Dossier clôturé",
+      "closedBannerBody": "Vous avez confirmé le traitement de ce dossier le {when}.",
+      "closedBannerBodyNoDate": "Vous avez confirmé le traitement de ce dossier.",
+      "closeForm": {
+        "title": "Clôturer le dossier",
+        "subtitle": "Une fois clôturé, le dossier reste consultable mais n'est plus modifiable. Cette action notifie votre client que la comptabilité est faite.",
+        "notesLabel": "Notes pour votre client (optionnel)",
+        "notesPlaceholder": "Ex. : déclaration TVA déposée le 20/05, IR salaires versé. Une pièce manquante côté carburant — à rapprocher.",
+        "notesHint": "Maximum 2000 caractères.",
+        "submit": "Marquer comme traité",
+        "submitting": "Clôture en cours…",
+        "confirm": "Confirmer la clôture du dossier ? Cette action est définitive."
+      }
+    }
   }
 }

@@ -26,6 +26,7 @@ const ROLE_REDIRECTS: Record<string, string> = {
   comptable: '/dashboard',
   driver: '/my-shipments',
   client: '/portal/shipments',
+  external_accountant: '/accountant/dossiers',
 }
 
 const ease = [0.22, 1, 0.36, 1] as const

@@ -29,6 +29,7 @@ export default async function DashboardLayout({ children, params }: DashboardLay
   if (!['super_admin', 'company_admin', 'dispatcher', 'comptable'].includes(user.role)) {
     if (user.role === 'driver') redirect(`/${locale}/my-shipments`)
     if (user.role === 'client') redirect(`/${locale}/portal/shipments`)
+    if (user.role === 'external_accountant') redirect(`/${locale}/accountant/dossiers`)
     redirect(`/${locale}/login`)
   }
 

@@ -144,9 +144,9 @@ export default async function ShipmentDetailPage({
             </dl>
             <div className="mt-4 border-t pt-4">
               <dl className="space-y-2 text-sm">
-                <div className="flex justify-between"><dt className="text-muted-foreground">{t('subtotal')}</dt><dd>{formatMAD(shipment.price_excl_tax ?? 0)}</dd></div>
-                <div className="flex justify-between"><dt className="text-muted-foreground">{t('vat')}</dt><dd>{formatMAD(shipment.vat_amount ?? 0)}</dd></div>
-                <div className="flex justify-between border-t pt-2 text-base"><dt className="font-semibold">{t('total')}</dt><dd className="font-bold text-primary">{formatMAD(shipment.total_price ?? 0)}</dd></div>
+                <div className="flex justify-between"><dt className="text-muted-foreground">{t('subtotal')}</dt><dd>{formatMAD(Number(shipment.price_excl_tax ?? 0))}</dd></div>
+                <div className="flex justify-between"><dt className="text-muted-foreground">{t('vat')}</dt><dd>{formatMAD(Number(shipment.tax_amount ?? 0))}</dd></div>
+                <div className="flex justify-between border-t pt-2 text-base"><dt className="font-semibold">{t('total')}</dt><dd className="font-bold text-primary">{formatMAD(Number(shipment.price_incl_tax ?? 0))}</dd></div>
               </dl>
             </div>
           </div>

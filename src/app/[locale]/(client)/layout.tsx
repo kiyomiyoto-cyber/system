@@ -22,6 +22,7 @@ export default async function ClientLayout({ children, params }: ClientLayoutPro
       redirect(`/${locale}/dashboard`)
     }
     if (user.role === 'driver') redirect(`/${locale}/my-shipments`)
+    if (user.role === 'external_accountant') redirect(`/${locale}/accountant/dossiers`)
     redirect(`/${locale}/login`)
   }
   const isAdminPreview = user.role !== 'client'

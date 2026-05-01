@@ -118,12 +118,12 @@ export default async function ComptabilitePage() {
       .limit(1),
     supabase
       .from('invoice_payments')
-      .select('amount_paid, paid_at')
+      .select('amount, payment_date')
       .eq('company_id', companyId)
-      .gte('paid_at', monthStart),
+      .gte('payment_date', monthStart),
     supabase
       .from('invoices')
-      .select('total_excl_tax, total_tax, issued_at, status')
+      .select('subtotal_excl_tax, tax_amount, issued_at, status')
       .eq('company_id', companyId)
       .gte('issued_at', monthStart),
     supabase
@@ -166,16 +166,16 @@ export default async function ComptabilitePage() {
     )
     .reduce((sum, d) => sum + Number(d.vat_amount), 0)
 
-  const invoices = (invoicesResult.data ?? []) as Array<{ total_excl_tax: number | null; total_tax: number | null; status: string | null }>
+  const invoices = (invoicesResult.data ?? []) as Array<{ subtotal_excl_tax: number | null; tax_amount: number | null; status: string | null }>
   const vatCollected = invoices
     .filter((i) => i.status !== 'cancelled')
-    .reduce((sum, i) => sum + Number(i.total_tax ?? 0), 0)
+    .reduce((sum, i) => sum + Number(i.tax_amount ?? 0), 0)
   const revenueExclTaxThisMonth = invoices
     .filter((i) => i.status !== 'cancelled')
-    .reduce((sum, i) => sum + Number(i.total_excl_tax ?? 0), 0)
+    .reduce((sum, i) => sum + Number(i.subtotal_excl_tax ?? 0), 0)
 
-  const payments = (paymentsResult.data ?? []) as Array<{ amount_paid: number | null }>
-  const cashIn = payments.reduce((sum, p) => sum + Number(p.amount_paid ?? 0), 0)
+  const payments = (paymentsResult.data ?? []) as Array<{ amount: number | null }>
+  const cashIn = payments.reduce((sum, p) => sum + Number(p.amount ?? 0), 0)
   const treasuryEstimate = cashIn - expensesThisMonth
   const vatToPay = vatCollected - vatDeductible
 

@@ -16,8 +16,9 @@ export default async function ClientInvoicesPage() {
     createClient(),
   ])
 
-  if (!user) return null
+  if (!user || !user.companyId) return null
 
+  const companyId = user.companyId
   const isAdminPreview = user.role !== 'client'
 
   const { data: clientRecord } = isAdminPreview
@@ -26,14 +27,14 @@ export default async function ClientInvoicesPage() {
         .from('clients')
         .select('id, business_name')
         .eq('user_id', user.id)
-        .eq('company_id', user.companyId)
+        .eq('company_id', companyId)
         .single()
 
   const baseInvoices = supabase
     .from('invoices')
-    .select('id, invoice_number, issue_date, due_date, total_amount, amount_paid, status')
-    .eq('company_id', user.companyId)
-    .order('issue_date', { ascending: false })
+    .select('id, invoice_number, issued_at, due_at, total_incl_tax, amount_paid, status')
+    .eq('company_id', companyId)
+    .order('issued_at', { ascending: false })
     .limit(50)
 
   const { data: invoices } = isAdminPreview
@@ -56,8 +57,8 @@ export default async function ClientInvoicesPage() {
       {invoices && invoices.length > 0 ? (
         <ul className="space-y-3">
           {invoices.map((inv) => {
-            const balance = inv.total_amount - (inv.amount_paid ?? 0)
-            const overdue = isOverdue(inv.due_date, inv.status as InvoiceStatus)
+            const balance = Number(inv.total_incl_tax) - Number(inv.amount_paid ?? 0)
+            const overdue = isOverdue(inv.due_at, inv.status as InvoiceStatus)
             return (
               <li key={inv.id} className="rounded-xl border bg-card p-4 shadow-sm">
                 <div className="flex items-start justify-between gap-3">
@@ -67,14 +68,14 @@ export default async function ClientInvoicesPage() {
                       <InvoiceStatusBadge status={inv.status as InvoiceStatus} size="sm" />
                     </div>
                     <p className="mt-1 text-xs text-muted-foreground">
-                      {formatDate(inv.issue_date)} · {t('dueDate')}: {' '}
+                      {formatDate(inv.issued_at)} · {t('dueDate')}: {' '}
                       <span className={overdue ? 'font-semibold text-destructive' : ''}>
                         {overdue && <AlertTriangle className="inline h-3 w-3 me-1" />}
-                        {formatDate(inv.due_date)}
+                        {formatDate(inv.due_at)}
                       </span>
                     </p>
                     <div className="mt-2 flex items-baseline gap-3">
-                      <span className="text-base font-bold">{formatMAD(inv.total_amount)}</span>
+                      <span className="text-base font-bold">{formatMAD(Number(inv.total_incl_tax))}</span>
                       {balance > 0 && (
                         <span className="text-xs text-destructive">{t('balance')}: {formatMAD(balance)}</span>
                       )}

@@ -38,7 +38,7 @@ export default async function ClientDetailPage({
   const [{ data: shipments }, { data: invoices }] = await Promise.all([
     supabase
       .from('shipments')
-      .select('id, reference, status, pickup_city, delivery_city, total_price, created_at')
+      .select('id, reference, status, pickup_city, delivery_city, price_incl_tax, created_at')
       .eq('client_id', id)
       .eq('company_id', user.companyId)
       .is('deleted_at', null)
@@ -46,10 +46,10 @@ export default async function ClientDetailPage({
       .limit(10),
     supabase
       .from('invoices')
-      .select('id, invoice_number, issue_date, due_date, total_amount, amount_paid, status')
+      .select('id, invoice_number, issued_at, due_at, total_incl_tax, amount_paid, status')
       .eq('client_id', id)
       .eq('company_id', user.companyId)
-      .order('issue_date', { ascending: false })
+      .order('issued_at', { ascending: false })
       .limit(10),
   ])
 
@@ -85,15 +85,15 @@ export default async function ClientDetailPage({
               <Phone className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
               <div>
                 <dt className="text-xs text-muted-foreground">{t('phone')}</dt>
-                <dd className="font-medium">{client.phone}</dd>
+                <dd className="font-medium">{client.contact_phone}</dd>
               </div>
             </div>
-            {client.email && (
+            {client.contact_email && (
               <div className="flex items-start gap-3">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
                 <div>
                   <dt className="text-xs text-muted-foreground">{t('email')}</dt>
-                  <dd className="font-medium break-all">{client.email}</dd>
+                  <dd className="font-medium break-all">{client.contact_email}</dd>
                 </div>
               </div>
             )}
@@ -105,12 +105,12 @@ export default async function ClientDetailPage({
                 {client.address && <p className="text-xs text-muted-foreground mt-0.5">{client.address}</p>}
               </div>
             </div>
-            {client.ice && (
+            {client.tax_id && (
               <div className="flex items-start gap-3">
                 <FileText className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
                 <div>
                   <dt className="text-xs text-muted-foreground">ICE</dt>
-                  <dd className="font-mono text-xs">{client.ice}</dd>
+                  <dd className="font-mono text-xs">{client.tax_id}</dd>
                 </div>
               </div>
             )}
@@ -154,7 +154,7 @@ export default async function ClientDetailPage({
                   >
                     <span className="font-mono text-xs font-semibold text-primary">{s.reference}</span>
                     <span className="flex-1 text-sm text-muted-foreground">{s.pickup_city} → {s.delivery_city}</span>
-                    <span className="text-sm font-medium">{formatMAD(s.total_price ?? 0)}</span>
+                    <span className="text-sm font-medium">{formatMAD(Number(s.price_incl_tax ?? 0))}</span>
                     <ShipmentStatusBadge status={s.status as ShipmentStatus} size="sm" />
                   </Link>
                 ))}
@@ -186,8 +186,8 @@ export default async function ClientDetailPage({
                     className="flex items-center gap-4 px-5 py-3 hover:bg-muted/30 transition-colors"
                   >
                     <span className="font-mono text-xs font-semibold text-primary">{inv.invoice_number}</span>
-                    <span className="flex-1 text-xs text-muted-foreground">{formatDate(inv.issue_date)}</span>
-                    <span className="text-sm font-medium">{formatMAD(inv.total_amount)}</span>
+                    <span className="flex-1 text-xs text-muted-foreground">{formatDate(inv.issued_at)}</span>
+                    <span className="text-sm font-medium">{formatMAD(Number(inv.total_incl_tax))}</span>
                     <InvoiceStatusBadge status={inv.status as InvoiceStatus} size="sm" />
                   </Link>
                 ))}
